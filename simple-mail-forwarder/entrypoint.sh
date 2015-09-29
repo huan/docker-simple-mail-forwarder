@@ -67,12 +67,14 @@ echo ">> setting up postfix for: $HOSTNAME"
 postconf -e myhostname="$HOSTNAME"
 postconf -e mydestination="$HOSTNAME"
 echo "$HOSTNAME" > /etc/mailname
+echo "$HOSTNAME" > /etc/hostname
+hostname "$HOSTNAME"
 
 
 #
 # Set virtual user maping
 #
-if [ "SMF_CONFIG" == "" ]; then
+if [ "$SMF_CONFIG" = "" ]; then
     if [[ "$1" =~ [a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\. ]]; then                                                                          
         SMF_CONFIG=$1
     else

@@ -1,24 +1,26 @@
 #!/bin/bash
 
-if [ ! "$SMF_DOMAIN" ]
+if [ "" == "$SMF_DOMAIN" ]
 then
     echo ">> ENV SMF_DOMAIN not set."
 else
     echo ">> END SMF_DOMAIN found. value:[$SMF_DOMAIN]"
 fi
 
-if [ ! "SMF_CONFIG" ]
+if [ "" == "$SMF_CONFIG" ]
 then
     echo ">> END SMF_CONFIG not set."
 else
     echo ">> ENV SMF_CONFIG found. value:[$SMF_CONFIG]"
 fi
 
-if [ ! "$@" ]
+ARGV=$@
+
+if [ "" == "$ARGV" ]
 then
     echo ">> ARGV arguments not set."
 else
-    echo ">> ARGV arguments found. value:[$@]"
+    echo ">> ARGV arguments found. value:[$ARGV]"
 fi
 
 function print_help {
@@ -152,20 +154,29 @@ echo "$HOSTNAME" > /etc/hostname
 
 # starting services
 echo ">> starting the services"
-postfix start
+service syslog start
+service postfix start
 
 
 # TEST
 
 ## test settings
+echo ">> Start self-testing..."
 bats test
 
 [ $? -eq 0 ] || {
-    echo ">> test failed!"
-#    exit 1
+    echo ">> test FAILED!"
+    echo ">> please FIX it before use me. exited."
+    exit 1
 }
 
 
+echo 
+echo ">> CONGRATULATIONS! System UP and You are SET!"
+echo ">> Powered by SMF - a Simple Mail Forwarder"
+echo ">> View on DockerHub: https://hub.docker.com/r/zixia/simple-mail-forwarder"
+echo 
+
 # print logs
-echo ">> printing the logs"
-tail -F /var/log/mail.*
+echo ">> Printing the logs"
+tail -F /var/log/*

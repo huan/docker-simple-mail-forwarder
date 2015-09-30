@@ -11,7 +11,7 @@
     [ -f /app/SMF_DOMAIN.env ]
     . /app/SMF_DOMAIN.env
     [ "$SMF_DOMAIN" != "" ]
-    [[ "$SMF_DOMAIN" =~ ^[a-zA-Z0-9_-]+\.[a-zA-Z]{2,}$ ]]
+    [[ "$SMF_DOMAIN" =~ [a-zA-Z0-9_-]+\.[a-zA-Z]{2,}$ ]]
 }
 
 @test "virtual maping source is set" {
@@ -42,7 +42,7 @@
 
 @test "system hostname FQDN resolvable" {
     hostname=`cat /etc/hostname`
-    [[ $hostname =~ ^[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]{2,}$ ]]
+    [[ $hostname =~ [a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]{2,}$ ]]
 
     run nslookup $hostname
     [ $status = 0 ]

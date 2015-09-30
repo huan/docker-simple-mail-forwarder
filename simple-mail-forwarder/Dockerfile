@@ -46,6 +46,9 @@ RUN chmod a+x /app/entrypoint.sh
 
 WORKDIR /app
 
+# Mail Queue
+VOLUME ["/var/spool/postfix"]
+
 # SMTP Ports
 EXPOSE 25
 

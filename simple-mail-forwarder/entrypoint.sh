@@ -54,6 +54,9 @@ if [ "-h" == "$1" ] || [ "--help" == "$1" ] || [ ! "$1" -a ! "$SMF_CONFIG" ]
 then
     print_help
     exit 0
+elif [ "test" == "$1" ]
+then
+    exec bats test/$2
 fi
 
 if [ ! -f /app/entrypoint.sh ]

@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 @test "confirm hostname pretend to work." {
-    run hostname any-domain-name
+    run service hostname start
     [ $status = 0 ]
 }
 

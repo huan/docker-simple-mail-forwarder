@@ -1,3 +1,3 @@
 sut:
     build: .
-    command: bats test/after_build.bats
+    command: test after_build.bats

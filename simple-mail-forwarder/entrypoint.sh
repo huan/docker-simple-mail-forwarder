@@ -1,5 +1,26 @@
 #!/bin/bash
 
+if [ ! "$SMF_DOMAIN" ]
+then
+    echo ">> ENV SMF_DOMAIN not set."
+else
+    echo ">> END SMF_DOMAIN found. value:[$SMF_DOMAIN]"
+fi
+
+if [ ! "SMF_CONFIG" ]
+then
+    echo ">> END SMF_CONFIG not set."
+else
+    echo ">> ENV SMF_CONFIG found. value:[$SMF_CONFIG]"
+fi
+
+if [ ! "$@" ]
+then
+    echo ">> ARGV arguments not set."
+else
+    echo ">> ARGV arguments found. value:[$@]"
+fi
+
 function print_help {
 cat <<EOF
         Docker - Simple Mail Forwarder
@@ -27,7 +48,7 @@ by zixia
 EOF
 }
 
-if [ "-h" == "$1" ] || [ "--help" == "$1" ] || [ "" == "$1" -a "" == "$SMF_CONFIG" ]
+if [ "-h" == "$1" ] || [ "--help" == "$1" ] || [ ! "$1" -a ! "$SMF_CONFIG" ]
 then
     print_help
     exit 0
@@ -114,7 +135,7 @@ else
     HOSTNAME=`hostname`
 fi
 
-echo "SMF_DOMAIN='$SMF_DOMAIN'" > SMF_DOMAIN.env
+echo "SMF_DOMAIN='$HOSTNAME'" > SMF_DOMAIN.env
 
 echo ">> setting up postfix for: $HOSTNAME"
 

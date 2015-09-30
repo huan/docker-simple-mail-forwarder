@@ -42,4 +42,3 @@ EXPOSE 25
 
 # Docker startup
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["-h"]

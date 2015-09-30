@@ -38,6 +38,7 @@ RUN postconf -e smtpd_banner="\$myhostname ESMTP" \
     && postconf -e smtpd_recipient_restrictions="permit_mynetworks reject_unauth_destination" \
     && postconf -e smtpd_helo_restrictions="permit_mynetworks, reject_invalid_hostname, reject_unauth_pipelining, reject_non_fqdn_hostname" \
     \
+    && cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname
 
 ## FINISHED

@@ -14,12 +14,7 @@ RUN apk add --update \
     && rc-update add postfix \
     && rc-status \
     && touch /run/openrc/softlevel \
-    \
-    && /etc/init.d/postfix start \
-    && /etc/init.d/postfix stop \
-    && /etc/init.d/syslog start \
-    && /etc/init.d/syslog stop \
-    \
+   \
     && curl -o "/tmp/v${BATS_VERSION}.tar.gz" -L \
         "https://github.com/sstephenson/bats/archive/v${BATS_VERSION}.tar.gz" \
     && tar -xzf "/tmp/v${BATS_VERSION}.tar.gz" -C /tmp/ \

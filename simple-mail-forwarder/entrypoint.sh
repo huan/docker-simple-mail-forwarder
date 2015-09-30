@@ -27,7 +27,7 @@ by zixia
 EOF
 }
 
-if [ "-h" == "$1" ] || [ "--help" == "$1" ] || [ -z $1 ] || [ "" == "$1" ]
+if [ "-h" == "$1" ] || [ "--help" == "$1" ] || [ "" == "$1" -a "" == "$SMF_CONFIG" ]
 then
     print_help
     exit 0
@@ -39,38 +39,6 @@ then
     exit 1;
 fi
 
-
-#
-# Set HOSTNAME to right Domain
-#
-if [ "$SMF_DOMAIN" != "" ] ; then   
-    # Defined by User
-    HOSTNAME="$SMF_DOMAIN"
-
-elif [ "$TUTUM_CONTAINER_FQDN" != "" ] ; then
-    # Defined by Tutum.co
-    HOSTNAME="$TUTUM_CONTAINER_FQDN"
-
-elif [ "$TUTUM_NODE_FQDN" != "" ] ; then
-    HOSTNAME="$TUTUM_NODE_FQDN"
-
-else
-    # Defined by Docker
-    HOSTNAME=`hostname`
-
-fi
-
-echo ">> setting up postfix for: $HOSTNAME"
-
-
-# add domain
-postconf -e myhostname="$HOSTNAME"
-postconf -e mydestination="$HOSTNAME"
-echo "$HOSTNAME" > /etc/mailname
-echo "$HOSTNAME" > /etc/hostname
-hostname "$HOSTNAME"
-
-
 #
 # Set virtual user maping
 #
@@ -81,7 +49,11 @@ if [ "$SMF_CONFIG" = "" ]; then
         echo ">> SMF_CONFIG not found. format: fromUser@fromDomain.com:toUser@toDomain.com;..."
         exit
     fi
+else
+	echo ">> SMF_CONFIG found in ENV. use this settings for forward maps."
 fi
+
+echo "SMF_CONFIG='$SMF_CONFIG'" > SMF_CONFIG.env
 
 NEWLINE=$'\n'
 
@@ -90,19 +62,19 @@ virtualDomains=""
 virtualUsers=""
 
 for forward in "${forwardList[@]}"; do
-        emailPair=(${forward//:/ })
+    emailPair=(${forward//:/ })
 
-        emailFrom=${emailPair[0]}
-        emailTo=${emailPair[1]}
+    emailFrom=${emailPair[0]}
+    emailTo=${emailPair[1]}
 
-        line=$(printf '%s\t%s' $emailFrom $emailTo)
-        virtualUsers="$virtualUsers$line$NEWLINE"
+    line=$(printf '%s\t%s' $emailFrom $emailTo)
+    virtualUsers="$virtualUsers$line$NEWLINE"
 
-        domainFrom=${emailFrom##*@}
+    domainFrom=${emailFrom##*@}
 
-        [[ $virtualDomains =~ $domainFrom ]] || {
-                virtualDomains="$virtualDomains $domainFrom"
-        }
+    [[ $virtualDomains =~ $domainFrom ]] || {
+        virtualDomains="$virtualDomains $domainFrom"
+    }
 done
 
 echo "$virtualUsers"  > /etc/postfix/virtual
@@ -110,17 +82,69 @@ echo "$virtualUsers"  > /etc/postfix/virtual
 postconf -e virtual_alias_domains="$virtualDomains"
 postconf -e virtual_alias_maps="hash:/etc/postfix/virtual"
 
-
 # initial user database
 postmap /etc/postfix/virtual
-postfix reload
+
+
+#
+# Set HOSTNAME to right Domain
+#
+if [ "$SMF_DOMAIN" != "" ]
+then
+    # get from user setting
+    HOSTNAME="$SMF_DOMAIN"
+elif [ "$TUTUM_CONTAINER_FQDN" != "" ]
+then
+    # use tutum.co FQDN for this container
+    HOSTNAME="$TUTUM_CONTAINER_FQDN"
+elif [ "$TUTUM_NODE_FQDN" != "" ]
+then
+    # use tutum.co FQDN for this node
+    HOSTNAME="$TUTUM_NODE_FQDN"
+elif [ "$domainFrom" != "" ]
+then
+    # use the last virtual domain name
+    HOSTNAME=$domainFrom
+elif [[ "`hostname`" =~ ^[a-zA-Z0-9_.]+\.[a-zA-Z0-9_.]+ ]]
+then
+    # this docker has a valid FQDN hostname!
+    HOSTNAME=`hostname`
+else
+    # bad! whatever get from Docker
+    HOSTNAME=`hostname`
+fi
+
+echo "SMF_DOMAIN='$SMF_DOMAIN'" > SMF_DOMAIN.env
+
+echo ">> setting up postfix for: $HOSTNAME"
+
+
+# add domain
+postconf -e myhostname="$HOSTNAME"
+postconf -e mydestination="localhost"
+echo "$HOSTNAME" > /etc/mailname
+echo "$HOSTNAME" > /etc/hostname
+
+# XXX permition denied in docker? - zixia 20150930
+#hostname "$HOSTNAME"
+
 
 # starting services
 echo ">> starting the services"
-service postfix start
+postfix start
+
+
+# TEST
+
+## test settings
+bats test
+
+[ $? -eq 0 ] || {
+    echo ">> test failed!"
+#    exit 1
+}
+
 
 # print logs
 echo ">> printing the logs"
-touch /var/log/mail.log /var/log/mail.err /var/log/mail.warn
-chmod a+rw /var/log/mail.*
 tail -F /var/log/mail.*

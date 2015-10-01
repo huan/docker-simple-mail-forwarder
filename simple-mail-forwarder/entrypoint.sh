@@ -61,7 +61,11 @@ then
     exit 0
 elif [ "test" == "$1" ]
 then
-    exec bats test/$2
+    exec bats test/$2.bats
+elif [ "sh" == "$1" ] || [ "bash" == "$1" ]
+then
+    exec /bin/bash
+    exit 1
 fi
 
 if [ ! -f /app/entrypoint.sh ]

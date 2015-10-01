@@ -1,5 +1,9 @@
 #!/bin/bash
 
+. /app/BUILD.env
+
+echo ">> SMF Build on $SMF_BUILD_DATE by $SMF_BUILD_HOST"
+
 if [ "" == "$SMF_DOMAIN" ]
 then
     echo ">> ENV SMF_DOMAIN not set."
@@ -22,6 +26,7 @@ then
 else
     echo ">> ARGV arguments found. value:[$ARGV]"
 fi
+
 
 function print_help {
 cat <<EOF
@@ -174,11 +179,13 @@ bats test
 }
 
 
-echo 
-echo ">> CONGRATULATIONS! System UP and You are SET!"
+echo
+echo
+echo ">> CONGRATULATIONS! System is UP and You are SET!"
 echo ">> Powered by SMF - a Simple Mail Forwarder"
 echo ">> View on DockerHub: https://hub.docker.com/r/zixia/simple-mail-forwarder"
-echo 
+echo
+echo
 
 # print logs
 echo ">> Printing the logs"

@@ -36,13 +36,17 @@ RUN postconf -e smtpd_banner="\$myhostname ESMTP" \
     && cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname
 
-## FINISHED
 
 # COPY Configuration Files
 COPY entrypoint.sh  /app/entrypoint.sh
 COPY test           /app/test
 
 RUN chmod a+x /app/entrypoint.sh
+
+RUN echo "SMF_BUILD_DATE='`date`'" > /app/BUILD.env \
+    && echo "SMF_BUILD_HOST='`hostname`'" >> /app/BUILD.env
+
+## FINISHED
 
 WORKDIR /app
 

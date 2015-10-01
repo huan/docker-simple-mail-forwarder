@@ -61,9 +61,23 @@ then
     exit 0
 elif [ "test" == "$1" ]
 then
-    exec bats test/$2.bats
-elif [ "sh" == "$1" ] || [ "bash" == "$1" ]
+    opts="test"
+
+    if [ "" != "$2" ]
+    then
+        if [[ "$2" =~ \.bats$ ]]
+        then
+            opts="$opts/$2"
+        else
+            opts="$opts/$2.bats"
+        fi
+    fi
+
+    exec bats $opts
+
+elif [ "sh" == "$1" ] || [ "bash" == "$1" ] || [ "shell" == "$1" ]
 then
+    echo ">> Enter shell mode."
     exec /bin/bash
     exit 1
 fi
@@ -82,6 +96,7 @@ if [ "$SMF_CONFIG" = "" ]; then
         SMF_CONFIG=$1
     else
         echo ">> SMF_CONFIG not found. format: fromUser@fromDomain.com:toUser@toDomain.com;..."
+        echo ">> I don't know how to do. So I quit."
         exit
     fi
 else

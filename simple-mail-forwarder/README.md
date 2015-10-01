@@ -10,5 +10,7 @@ some dns provider provide free email forwarding service, for their customers. so
 
 then you need this docker: simple mail forwarder. deploy this docker online, set your email address and the forward address, get the docker's ip(or domain name from service), set your domain mx record to docker's ip(domain), you are set.
 
+## Test
+- docker rm smf > /dev/null 2>&1 ; docker run -ti --rm --name smf -v `pwd`:/docker --entrypoint /bin/bash zixia/simple-mail-forwarder sh
 ## Author
 zixia

@@ -1,3 +1,8 @@
 sut:
     build: .
     command: test after-build
+    environment:
+        - GIT_BRANCH
+        - GIT_TAG
+        - GIT_SHA1
+        - IMAGE_NAME

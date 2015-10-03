@@ -1,5 +1,5 @@
 FROM alpine:3.2
-MAINTAINER "LI Zhuohuan" <zixia@zixia.net>
+MAINTAINER LI Zhuohuan <zixia@zixia.net> https://github.com/zixia
 
 ENV BATS_VERSION 0.4.0
 
@@ -15,7 +15,7 @@ RUN apk add --update \
     && rc-status \
     && touch /run/openrc/softlevel \
    \
-    && curl -o "/tmp/v${BATS_VERSION}.tar.gz" -L \
+    && curl -s -o "/tmp/v${BATS_VERSION}.tar.gz" -L \
         "https://github.com/sstephenson/bats/archive/v${BATS_VERSION}.tar.gz" \
     && tar -xzf "/tmp/v${BATS_VERSION}.tar.gz" -C /tmp/ \
     && bash "/tmp/bats-${BATS_VERSION}/install.sh" /usr/local \
@@ -43,9 +43,6 @@ COPY test           /app/test
 
 RUN chmod a+x /app/entrypoint.sh
 
-RUN echo "SMF_BUILD_DATE='`date`'" > /app/BUILD.env \
-    && echo "SMF_BUILD_HOST='`hostname`'" >> /app/BUILD.env
-
 ## FINISHED
 
 WORKDIR /app
@@ -58,3 +55,13 @@ EXPOSE 25
 
 # Docker Entrypoint
 ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["--help"]
+
+# Log Build Environment
+RUN echo "SMF_BUILD_DATE='`date`'" > /app/BUILD.env \
+    && echo "SMF_BUILD_HOST='`hostname`'" >> /app/BUILD.env \
+    \
+    && echo "GIT_BRANCH='$GIT_BRANCH'" >> /app/BUILD.env \
+    && echo "GIT_TAG='GIT_TAG'" >> /app/BUILD.env \
+    && echo "GIT_SHA1='GIT_SHA1'" >> /app/BUILD.env \
+    && echo "IMAGE_NAME='IMAGE_NAME'" >> /app/BUILD.env

@@ -1,8 +1,11 @@
 #!/bin/bash
 
-. /app/BUILD.env
+. BUILD.env
 
+echo
 echo ">> SMF Build on $SMF_BUILD_DATE by $SMF_BUILD_HOST"
+echo ">> SMF $GIT_BRANCH/$GIT_TAG/$GIT_SHA1/$IMAGE_NAME"
+echo
 
 if [ "" == "$SMF_DOMAIN" ]
 then
@@ -73,16 +76,28 @@ then
         fi
     fi
 
+    echo ">> exec bats $opts"
     exec bats $opts
 
 elif [ "sh" == "$1" ] || [ "bash" == "$1" ] || [ "shell" == "$1" ]
 then
-    echo ">> Enter shell mode."
-    exec /bin/bash
-    exit 1
+    tty=$(tty)
+    if [ $? -eq 0 ]
+    then
+        echo ">> You are on TTY $tty."
+        echo ">> Enter shell mode."
+        exec /bin/bash
+        echo ">> Ahh!... Enter shell mode FAILED!"
+        exit 1
+    else
+        echo ">> Ahh!... Enter shell mode FAILED!"
+        echo ">> You need TTY to do this."
+        echo ">> By add --interactive --tty (or -ti) to Docker run params."
+        exit 1
+    fi
 fi
 
-if [ ! -f /app/entrypoint.sh ]
+if [ ! -f entrypoint.sh ]
 then
     >&2 echo ">> you're not inside a valid docker container"
     exit 1;

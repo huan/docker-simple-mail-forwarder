@@ -1,5 +1,5 @@
 FROM alpine:3.2
-MAINTAINER LI Zhuohuan <zixia@zixia.net> https://github.com/zixia
+MAINTAINER LI Zhuohuan <zixia@zixia.net>
 
 ENV BATS_VERSION 0.4.0
 

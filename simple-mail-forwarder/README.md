@@ -1,5 +1,7 @@
 # docker-simple-mail-forwarder
 [![](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')
+![Docker Puuls](https://img.shields.io/docker/pulls/zixia/simple-mail-forwarder.svg)
+
 
 a very simple and easy to setup email forward service based on docker cloud.
 

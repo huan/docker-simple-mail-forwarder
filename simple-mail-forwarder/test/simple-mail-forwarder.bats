@@ -53,7 +53,6 @@
     [ $status = 0 ]
     [[ "${lines[0]}" =~ ^myhostname ]]
 
-
     myhostname=${lines[0]##* = }
     run nslookup $myhostname
     [ $status = 0 ]
@@ -64,7 +63,7 @@
 }
 
 @test "confirm postfix is running" {
-    processNum=$(ps | grep -v grep | grep postfix | wc -l)
+    processNum=$(ps | grep -v grep | grep /usr/lib/postfix/master | wc -l)
     [ $processNum -gt 0 ]
 }
 

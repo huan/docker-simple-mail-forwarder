@@ -34,11 +34,11 @@ RUN postconf -e smtpd_banner="\$myhostname ESMTP" \
     && postconf -e smtpd_helo_restrictions="permit_mynetworks, reject_invalid_hostname, reject_unauth_pipelining, reject_non_fqdn_hostname" \
     \
     && cat /dev/null > /etc/postfix/aliases && newaliases \
-    && echo simple-mail-forwarder.com > /etc/hostname
+    && echo simple-mail-forwarder.com > /etc/hostname \
     \
-    && touch /run/openrc/softlevel \
+    && mkdir /run/openrc && touch /run/openrc/softlevel \
     && rc-update add postfix \
-    && rc_add -k postfix \
+#    && rc_add -k postfix \
     && rc-status \
     && service postfix start \
     && service postfix stop
@@ -48,12 +48,14 @@ RUN postconf -e smtpd_banner="\$myhostname ESMTP" \
 
 WORKDIR /app
 
-COPY entrypoint.sh  /entrypoint.sh
-COPY test           /app/test
+COPY entrypoint.sh /entrypoint.sh
+RUN bash -n /entrypoint.sh
+
+COPY test /app/test
 
 RUN chmod a+x /entrypoint.sh
 
-VOLUME ["/var/spool/postfix"]
+VOLUME /var/spool/postfix
 
 EXPOSE 25
 

@@ -1,9 +1,9 @@
 #!/bin/bash
 
 NAME="zixia/simple-mail-forwarder"
-TAG=''
+TAG='' && [ -n "$1" ] && TAG=":$1" && shift
 
-[ -n "$1" ] && TAG=":$1" && shift
+CMD="docker run $NAME$TAG $@"
 
-echo "docker run -it $NAME$TAG $@"
-docker run -it $NAME$TAG $@
+echo ">> $CMD"
+$CMD

@@ -1,5 +1,5 @@
 FROM debian:latest
-MAINTAINER LI Zhuohuan <zixia@zixia.net>
+MAINTAINER Zhuohuan LI <zixia@zixia.net>
 
 RUN apt-get update && apt-get install --yes \
         file \

@@ -25,7 +25,8 @@ RUN apk add --update \
 
 ## System Configure
 
-RUN postconf -e smtpd_banner="\$myhostname ESMTP" \
+RUN mkdir /run/openrc && touch /run/openrc/softlevel \
+    && postconf -e smtpd_banner="\$myhostname ESMTP" \
     && postconf -e mail_spool_directory="/var/spool/mail/" \
     && postconf -e mailbox_command="" \
     && postconf -e smtputf8_enable="no" \
@@ -36,10 +37,9 @@ RUN postconf -e smtpd_banner="\$myhostname ESMTP" \
     && cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
     \
-    && mkdir /run/openrc && touch /run/openrc/softlevel \
     && rc-update add postfix \
-#    && rc_add -k postfix \
     && rc-status \
+    \
     && service postfix start \
     && service postfix stop
  

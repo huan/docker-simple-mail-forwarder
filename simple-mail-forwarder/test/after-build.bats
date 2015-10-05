@@ -15,7 +15,7 @@
 
     run service postfix start
     [ $status = 0 ]
-    [[ ${lines[0]} =~ "Starting postfix  ..." ]]
+    [[ $output =~ "Starting postfix  ..." ]]
 
     run service postfix start
     [ $status = 0 ]
@@ -39,7 +39,7 @@
     # we keep postfix start at the end
     run service postfix start
     [ $status = 0 ]
-    [[ ${lines[0]} =~ "Starting postfix  ..." ]]
+    [[ $output =~ "Starting postfix  ..." ]]
 }
 
 @test "service syslog could start/stop right." {

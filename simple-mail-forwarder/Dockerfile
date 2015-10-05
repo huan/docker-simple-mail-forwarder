@@ -1,20 +1,19 @@
 FROM alpine:3.2
-MAINTAINER LI Zhuohuan <zixia@zixia.net>
+MAINTAINER Zhuohuan LI <zixia@zixia.net>
 
 ENV BATS_VERSION 0.4.0
 
-# Install
+## System Install
+
 RUN apk add --update \
-        postfix bash curl \
+        bash \
+        curl \
+        postfix \
     \
     && mkdir -p /lib/modules \
     && sed -i 's/^\(\s*\)hostname/#\1hostname/g' /etc/init.d/hostname \
     && rm /sbin/hwclock && echo "#/bin/sh\nexit 0" > /sbin/hwclock && chmod +x /sbin/hwclock \
     \
-    && rc-update add postfix \
-    && rc-status \
-    && touch /run/openrc/softlevel \
-   \
     && curl -s -o "/tmp/v${BATS_VERSION}.tar.gz" -L \
         "https://github.com/sstephenson/bats/archive/v${BATS_VERSION}.tar.gz" \
     && tar -xzf "/tmp/v${BATS_VERSION}.tar.gz" -C /tmp/ \
@@ -23,7 +22,8 @@ RUN apk add --update \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 
-## Configure Postfix
+
+## System Configure
 
 RUN postconf -e smtpd_banner="\$myhostname ESMTP" \
     && postconf -e mail_spool_directory="/var/spool/mail/" \
@@ -35,33 +35,38 @@ RUN postconf -e smtpd_banner="\$myhostname ESMTP" \
     \
     && cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname
+    \
+    && touch /run/openrc/softlevel \
+    && rc-update add postfix \
+    && rc_add -k postfix \
+    && rc-status \
+    && service postfix start \
+    && service postfix stop
+ 
 
-
-# COPY Configuration Files
-COPY entrypoint.sh  /app/entrypoint.sh
-COPY test           /app/test
-
-RUN chmod a+x /app/entrypoint.sh
-
-## FINISHED
+## App Install
 
 WORKDIR /app
 
-# Mail Queue
+COPY entrypoint.sh  /entrypoint.sh
+COPY test           /app/test
+
+RUN chmod a+x /entrypoint.sh
+
 VOLUME ["/var/spool/postfix"]
 
-# SMTP Ports
 EXPOSE 25
 
-# Docker Entrypoint
-ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["--help"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["start"]
 
-# Log Build Environment
+
+## Log Build Environment
+
 RUN echo "SMF_BUILD_DATE='`date`'" > /app/BUILD.env \
     && echo "SMF_BUILD_HOST='`hostname`'" >> /app/BUILD.env \
     \
     && echo "GIT_BRANCH='$GIT_BRANCH'" >> /app/BUILD.env \
-    && echo "GIT_TAG='GIT_TAG'" >> /app/BUILD.env \
-    && echo "GIT_SHA1='GIT_SHA1'" >> /app/BUILD.env \
-    && echo "IMAGE_NAME='IMAGE_NAME'" >> /app/BUILD.env
+    && echo "GIT_TAG='$GIT_TAG'" >> /app/BUILD.env \
+    && echo "GIT_SHA1='$GIT_SHA1'" >> /app/BUILD.env \
+    && echo "IMAGE_NAME='$IMAGE_NAME'" >> /app/BUILD.env

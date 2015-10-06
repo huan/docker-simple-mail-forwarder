@@ -31,6 +31,11 @@ EOF
 #
 function start_postfix {
     #
+    # OpenSSL Init
+    #
+    bash /app/init.sh
+
+    #
     # Set virtual user maping
     #
     if [ "$SMF_CONFIG" = "" ]; then
@@ -58,6 +63,15 @@ function start_postfix {
 
         emailFrom=${emailPair[0]}
         emailTo=${emailPair[1]}
+        password=${emailPair[2]}
+
+        if [ -z "$password" ]
+        then
+            password=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1 | tr '[:upper:]' '[:lower:]')
+        fi
+
+        echo ">> Setting password [ $password ] for user $emailFrom ..."
+        echo $password | saslpasswd2 $emailFrom
 
         line=$(printf '%s\t%s' $emailFrom $emailTo)
         virtualUsers="$virtualUsers$line$NEWLINE"
@@ -215,7 +229,7 @@ then
     fi
 
     # Dummy test data
-    SMF_CONFIG="test@test.com:tset@tset.com"
+    SMF_CONFIG="test@test.com:tset@tset.com:test-tset-password;testo@testo.com:testi@testi.com:testo-testi-password"
     echo ">> Start mail server by test data: SMF_CONFIG=$SMF_CONFIG"
     start_postfix
 

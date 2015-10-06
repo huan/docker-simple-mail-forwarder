@@ -9,6 +9,7 @@ RUN apk add --update \
         bash \
         curl \
         postfix \
+        cyrus-sasl \
     \
     && mkdir -p /lib/modules \
     && sed -i 's/^\(\s*\)hostname/#\1hostname/g' /etc/init.d/hostname \
@@ -23,39 +24,35 @@ RUN apk add --update \
     && rm -rf /tmp/*
 
 
-## System Configure
+## Service Configure
+
+COPY install/main.dist.cf /etc/postfix/main.cf
+COPY install/master.dist.cf /etc/postfix/master.cf
 
 RUN mkdir /run/openrc && touch /run/openrc/softlevel \
-    && postconf -e smtpd_banner="\$myhostname ESMTP" \
-    && postconf -e mail_spool_directory="/var/spool/mail/" \
-    && postconf -e mailbox_command="" \
-    && postconf -e smtputf8_enable="no" \
-    \
-    && postconf -e smtpd_recipient_restrictions="permit_mynetworks reject_unauth_destination" \
-    && postconf -e smtpd_helo_restrictions="permit_mynetworks, reject_invalid_hostname, reject_unauth_pipelining, reject_non_fqdn_hostname" \
-    \
     && cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
-    \
     && rc-update add postfix \
-    && rc-status \
-    \
-    && service postfix start \
-    && service postfix stop
- 
+    && rc-status 
+
+RUN echo test | saslpasswd2 -p test@test.com \
+    && chown postfix /etc/sasldb2 \
+    && saslpasswd2 -d test@test.com
+
+COPY install/init.sh /app/init.sh
+RUN bash -n /app/init.sh && chmod +x /app/init.sh
+
 
 ## App Install
 
 WORKDIR /app
 
 COPY entrypoint.sh /entrypoint.sh
-RUN bash -n /entrypoint.sh
+RUN bash -n /entrypoint.sh && chmod a+x /entrypoint.sh
 
 COPY test /app/test
 
-RUN chmod a+x /entrypoint.sh
-
-VOLUME /var/spool/postfix
+VOLUME ["/etc", "/var/spool/postfix"]
 
 EXPOSE 25
 

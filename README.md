@@ -21,10 +21,20 @@ I was about to pay for xxx (xx) but the cheapest plan is $10 per 10 mails/month.
  - https://www.cloudmailin.com/plans
  - 
 
-## Environment variables
+## Environment Variables and Defaults
 
  - SMF_CONFIG
+    * MUST be defined. no default setting.
+
  - SMF_DOMAIN
+    * Optional. 
+    * Default: Domain from user email address.
+    * Name the following:
+        * Hostname
+        * Mailname
+        * SMTP Greeting
+        * Mail Header
+        * etc.
 
 ## Test
 - docker rm smf > /dev/null 2>&1 ; docker run -ti --rm --name smf -v `pwd`:/docker --entrypoint /bin/bash zixia/simple-mail-forwarder sh

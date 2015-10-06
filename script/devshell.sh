@@ -6,7 +6,7 @@
 NAME="zixia/simple-mail-forwarder"
 
 [ -n "$1" ] || {
-    echo "Dev Shell must specify a TAG"
+    echo ">> ERROR: Dev Shell must specify a TAG"
     exit 1
 }
 

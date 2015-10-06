@@ -1,15 +1,21 @@
 #!/bin/bash
+#
+# maintainer: Zhuohuan LI <zixia@zixia.net>
+#
 
-NAME="zixia/simple-mail-forwarder"
+OWNER="zixia"
+NAME="simple-mail-forwarder"
+IMAGENAME="$OWNER/$NAME"
+
 TAG='' && [ -n "$1" ] && TAG=":$1" && shift
 
-CMD1="docker build -t $NAME$TAG ."
-CMD2="docker run $NAME$TAG test"
+CMD1="docker build -t ${IMAGENAME}${TAG} ."
+CMD2="docker run --rm --name $NAME ${IMAGENAME}${TAG} test"
 
-echo ">> $CMD1"
+echo ">> Run $CMD1"
 $CMD1
 
 [ $? -eq 0 ] && {
-    echo ">> $CMD2"
+    echo ">> Run $CMD2"
     $CMD2
 }

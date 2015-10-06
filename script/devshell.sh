@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# maintainer: Zhuohuan LI <zixia@zixia.net>
+#
 
 NAME="zixia/simple-mail-forwarder"
 
@@ -9,6 +12,6 @@ NAME="zixia/simple-mail-forwarder"
 
 TAG=":$1" && shift
 
-CMD="docker run --rm -it --entrypoint /bin/bash -v `pwd`:/app.out $NAME$TAG"
+CMD="docker run --rm --name simple-mail-forwarder -it --entrypoint /bin/bash -v `pwd`:/app.out $NAME$TAG"
 
 echo $CMD && exec $CMD

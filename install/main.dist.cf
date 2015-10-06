@@ -591,7 +591,7 @@ unknown_local_recipient_reject_code = 550
 # logging level when an SMTP client or server host name or address
 # matches a pattern in the debug_peer_list parameter.
 #
-debug_peer_level = 2
+debug_peer_level = 0
 
 # The debug_peer_list parameter specifies an optional list of domain
 # or network patterns, /file/name patterns or type:name tables. When
@@ -692,7 +692,7 @@ broken_sasl_auth_clients = yes
 smtpd_recipient_restrictions =
    permit_sasl_authenticated,
    permit_mynetworks,
-   check_relay_domains
+   reject_unauth_destination
 
 ### TLS ###
 
@@ -715,7 +715,7 @@ smtpd_tls_key_file = /etc/postfix/cert/smtp.key
 tls_random_source = dev:/dev/urandom
 
 # TLS related logging (set to 2 for debugging)
-smtpd_tls_loglevel = 2
+smtpd_tls_loglevel = 0
 
 # Avoid Denial-Of-Service-Attacks
 smtpd_client_new_tls_session_rate_limit = 10

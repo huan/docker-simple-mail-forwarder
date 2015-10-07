@@ -150,9 +150,9 @@ function start_postfix {
 
     # starting services
     echo ">> Starting the services"
-    service syslog start
-    service cron start
-    service postfix start
+    service syslog  stop > /dev/null 2>&1;  service syslog  start
+    service cron    stop > /dev/null 2>&1;  service cron    start
+    service postfix stop > /dev/null 2>&1;  service postfix start
 }
 
 #
@@ -246,6 +246,7 @@ then
     SMF_CONFIG="test@test.com:tset@tset.com:test-tset-testo-testi;testo@testo.com:testi@testi.com"
     echo ">> Start mail server by test data: SMF_CONFIG=$SMF_CONFIG"
     start_postfix
+    sleep 3
 
     echo ">> exec bats $opts"
     exec bats $opts

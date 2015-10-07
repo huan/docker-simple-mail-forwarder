@@ -111,7 +111,7 @@
     # # perl -MMIME::Base64 -e 'print encode_base64("testi\@testo.com\0testi\@testo.com\0test");'
     # dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0
     #
-    output=$(echo -e 'ehlo test.com\nAUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0' | openssl s_client -starttls smtp -crlf -connect 127.0.0.1:25)
+    output=$(echo -e 'ehlo test.com\nAUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0' | 2>&1 openssl s_client -starttls smtp -crlf -connect 127.0.0.1:25)
 
     [[ $output =~ "235 2.7.0 Authentication successful" ]]
 }

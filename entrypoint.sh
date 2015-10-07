@@ -54,7 +54,9 @@ function start_postfix {
 
     NEWLINE=$'\n'
 
+    # seperated by ;, or "\n" also supported(for config file in the furture).
     forwardList=(${SMF_CONFIG//;/ })
+
     virtualDomains=""
     virtualUsers=""
 
@@ -149,6 +151,7 @@ function start_postfix {
     # starting services
     echo ">> Starting the services"
     service syslog start
+    service cron start
     service postfix start
 }
 

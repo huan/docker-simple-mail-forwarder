@@ -41,28 +41,3 @@
     [ $status = 0 ]
     [[ $output =~ "Starting postfix  ..." ]]
 }
-
-@test "service syslog could start/stop right." {
-    run service syslog stop
-
-    run service syslog start
-    [ $status = 0 ]
-    [[ $output =~ "Starting busybox syslog" ]]
-
-    run service syslog start
-    [ $status = 0 ]
-    [[ ${lines[0]} =~ "WARNING: syslog has already been started" ]]
-
-    run service syslog stop
-    [ $status = 0 ]
-    [[ $output =~ "Stopping busybox syslog" ]]
-
-    run service syslog stop
-    [ $status = 0 ]
-    [[ $output =~ "WARNING: syslog is already stopped" ]]
-
-    # we keep syslog running at the end
-    run service syslog start
-    [ $status = 0 ]
-    [[ $output =~ "Starting busybox syslog" ]]
-}

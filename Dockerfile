@@ -8,6 +8,7 @@ ENV BATS_VERSION 0.4.0
 RUN apk add --update \
         bash \
         curl \
+	logrotate \
         postfix \
         cyrus-sasl \
     \

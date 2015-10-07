@@ -72,3 +72,40 @@
     [ $status = 0 ]
     [[ $output =~ ":25 " ]]
 }
+
+@test "crond is running" {
+    read cronPid < /var/run/crond.pid
+    processNum=$(ps | grep $cronPid | grep crond | wc -l)
+
+    [ $processNum -eq 1 ]
+}
+
+@test "ESMTP STATTLS supported" {
+    output=$(echo ehlo simple.com | nc 127.0.0.1 25)
+
+    [[ $output =~ STARTTLS ]]
+}
+
+@test "ESMTP AUTH supported" {
+    output=$(echo ehlo simple.com | nc 127.0.0.1 25)
+
+    [[ $output =~ AUTH ]]
+    [[ $output =~ PLAIN ]]
+    [[ $output =~ LOGIN ]]
+}
+
+@test "create user testi@testo.com by password test" {
+    echo test | saslpasswd2 -p testi@testo.com
+
+    [ $? -eq 0 ]
+}
+
+@test "smtp auth by testi@testo.com/test" {
+    #
+    # # perl -MMIME::Base64 -e 'print encode_base64("testi\@testo.com\0testi\@testo.com\0test");'
+    # dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0
+    #
+    output=$(echo -e 'ehlo test.com\nAUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0' | nc 127.0.0.1 25)
+
+    [[ $output =~ "235 2.7.0 Authentication successful" ]]
+}

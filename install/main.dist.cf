@@ -700,7 +700,7 @@ smtpd_recipient_restrictions =
 smtpd_tls_security_level = may
 
 # Only offer SASL in a TLS session
-smtpd_tls_auth_only = yes
+smtpd_tls_auth_only = no
 
 # Certification Authority
 # smtpd_tls_CAfile = /etc/postfix/cert/example-cacert.pem
@@ -735,6 +735,6 @@ smtpd_tls_exclude_ciphers =
 # Can be created with:
 # openssl dhparam -2 -out dh_512.pem 512
 # openssl dhparam -2 -out dh_1024.pem 1024
-smtpd_tls_dh512_param_file = ${config_directory}/cert/dh_512.pem
-smtpd_tls_dh1024_param_file = ${config_directory}/cert/dh_1024.pem
+#smtpd_tls_dh512_param_file = ${config_directory}/cert/dh_512.pem
+#smtpd_tls_dh1024_param_file = ${config_directory}/cert/dh_1024.pem
 

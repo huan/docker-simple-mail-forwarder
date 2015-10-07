@@ -3,12 +3,12 @@ MAINTAINER Zhuohuan LI <zixia@zixia.net>
 
 ENV BATS_VERSION 0.4.0
 
-## System Install
+## Install System
 
 RUN apk add --update \
         bash \
         curl \
-	logrotate \
+        logrotate \
         postfix \
         cyrus-sasl \
     \
@@ -25,7 +25,7 @@ RUN apk add --update \
     && rm -rf /tmp/*
 
 
-## Service Configure
+## Configure Service
 
 COPY install/main.dist.cf /etc/postfix/main.cf
 COPY install/master.dist.cf /etc/postfix/master.cf
@@ -44,13 +44,14 @@ COPY install/init.sh /app/init.sh
 RUN bash -n /app/init.sh && chmod +x /app/init.sh
 
 
-## App Install
+## Copy App
 
 WORKDIR /app
 
 COPY entrypoint.sh /entrypoint.sh
 RUN bash -n /entrypoint.sh && chmod a+x /entrypoint.sh
 
+COPY BANNER /app/BANNER
 COPY test /app/test
 
 VOLUME ["/etc", "/var/spool/postfix"]
@@ -61,7 +62,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 CMD ["start"]
 
 
-## Log Build Environment
+## Log Environment (in Builder)
 
 RUN echo "SMF_BUILD_DATE='`date`'" > /app/BUILD.env \
     && echo "SMF_BUILD_HOST='`hostname`'" >> /app/BUILD.env \
@@ -69,4 +70,6 @@ RUN echo "SMF_BUILD_DATE='`date`'" > /app/BUILD.env \
     && echo "GIT_BRANCH='$GIT_BRANCH'" >> /app/BUILD.env \
     && echo "GIT_TAG='$GIT_TAG'" >> /app/BUILD.env \
     && echo "GIT_SHA1='$GIT_SHA1'" >> /app/BUILD.env \
-    && echo "IMAGE_NAME='$IMAGE_NAME'" >> /app/BUILD.env
+    && echo "IMAGE_NAME='$IMAGE_NAME'" >> /app/BUILD.env \
+    \
+    && git show | head -6 >> /app/BANNER.git

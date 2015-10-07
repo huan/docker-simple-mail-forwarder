@@ -58,17 +58,28 @@ function start_postfix {
     virtualDomains=""
     virtualUsers=""
 
+    password='' # global variable for save password in the next for loop.
+
     for forward in "${forwardList[@]}"; do
         emailPair=(${forward//:/ })
 
         emailFrom=${emailPair[0]}
         emailTo=${emailPair[1]}
-        password=${emailPair[2]}
+        tryPassword=${emailPair[2]}
 
-        if [ -z "$password" ]
+        # 1. if user has no password, then use the last seen password from other users.
+        # 2. if there's no password defined at all, random generate one for the first time.
+        if [ -z "$tryPassword" ]
         then
-            password=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1 | tr '[:upper:]' '[:lower:]')
+            if [ -z "$password" ]
+            then
+                # random generate password
+                password=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1 | tr '[:upper:]' '[:lower:]')
+            fi
+            tryPassword=$password
         fi
+
+        password=$tryPassword
 
         echo ">> Setting password [ $password ] for user $emailFrom ..."
         echo $password | saslpasswd2 $emailFrom
@@ -229,7 +240,7 @@ then
     fi
 
     # Dummy test data
-    SMF_CONFIG="test@test.com:tset@tset.com:test-tset-password;testo@testo.com:testi@testi.com:testo-testi-password"
+    SMF_CONFIG="test@test.com:tset@tset.com:test-tset-testo-testi;testo@testo.com:testi@testi.com"
     echo ">> Start mail server by test data: SMF_CONFIG=$SMF_CONFIG"
     start_postfix
 

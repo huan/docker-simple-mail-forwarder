@@ -21,6 +21,7 @@ RUN apk add --update \
     && tar -xzf "/tmp/v${BATS_VERSION}.tar.gz" -C /tmp/ \
     && bash "/tmp/bats-${BATS_VERSION}/install.sh" /usr/local \
     \
+    && touch /var/log/messages \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 

@@ -6,7 +6,7 @@ Simple Mail Forwarder (SMF) Docker
 
 Simplest, Easist and Smallest Email Forward Service based on Docker.
 
-1. Config by **one variable**
+1. Config only **one variable**
 1. Run by **docker start**
 1. Image Size only **20MB**
 
@@ -16,10 +16,10 @@ Quick Start (TL;DR)
 -------------------
 Just set `SMF_CONFIG` and run:
 ```bash
-$ export SMF_CONFIG='from@testi.com:to@testo.com:test'
+$ export SMF_CONFIG='testi@testo.com:test@test.com:test'
 $ docker run -p 25:25 zixia/simple-mail-forwarder
 ```
-> Don't forget to modify the MX record of your domain. (in this example, it's _testi.com_)
+> Don't forget to modify the DNS MX record of your domain. (in this example, it's _testi.com_)
 
 See? There is nothing easier. 
 
@@ -40,12 +40,14 @@ quit
 > 221 2.0.0 Bye
 > Connection closed by foreign host
 ```
-> _dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0_  
+> "dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0"  
 > stands for  
-> _testi@testo.com\0testi@testo.com\0test_  
-> which is base64 encoded. 
+> <pre>"testi@testo.com\0testi@testo.com\0test"</pre>,  
+> which is base64 encoded.  
+> Useful article about SMTP Authentication: http://www.fehcom.de/qmail/smtpauth.html
 
 You are set! :-]
+
 
 Who need this docker
 --------------------
@@ -63,9 +65,9 @@ I was about to pay for xxx (xx) but the cheapest plan is $10 per 10 mails/month.
 
 Environment Variables and Defaults
 ----------------------------------
-- `SMF_CONFIG`
+* `SMF_CONFIG`
     * MUST be defined. no default setting.  
-- `SMF_DOMAIN`
+* `SMF_DOMAIN`
     * Optional. 
     * Default: Domain from user email address.
     * Affect the following settings:
@@ -75,29 +77,29 @@ Environment Variables and Defaults
         * Mail Header
         * etc.
 
-### `SMF_CONFIG` Examples
-Here's how to config the only parameter of SMF Docker:
+###`SMF_CONFIG` Examples
+Here's how to config the only environment parameter of SMF Docker:
 
-#### 1. Basic
-Forward one email address to another:
+####1. Basic
+Forward all email received by testi@testo.com, to test@test.com:
 ```bash
-$ export SMF_CONFIG='from@testi.com:to@testo.com'
+$ export SMF_CONFIG='testi@testo.com:test@test.com'
 ```
 > You could get the ESMTP AUTH password for your on your docker log. It's random generated.
 
-#### 2. Advanced
-Forward one email address to another, with ESMTP AUTH login password:
+####2. Advanced
+Add ESMTP AUTH password:
 ```bash
 $ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword'
 ```
-> All passwords will print on the docker log.
+> Password will print on the docker log.
 
-#### 3. Hardcore
-Forward as many email you wantseperated by semicolons(newline supported well):
+####3. Hardcore
+Add as many email as you want. Seperated by semicolons or newline:
 ```bash
-$ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword;testi@from.com:testo@to.com:AnotherPassword'
+$ export SMF_CONFIG='testi@testo.com:test@test.com:ThisIsPassword;testo@testi.com:test@test.com:AnotherPassword'
 ```
-> Tips: if you only provide the first password, and omit followings, then the passwords of all users will be the same as the first one. This is a feature.
+> Tips: if you only provide the first password, and omit followings, then the passwords of all users will be the same as the password last seen. This is a feature.
  
 Test
 ----
@@ -133,7 +135,7 @@ ok 20 ESMTP TLS AUTH by testi@testo.com/test
 ```
 
 Other Helper Scripts
---------------
+--------------------
 1. Build from source.
 ```bash
 ./script/build.sh latest

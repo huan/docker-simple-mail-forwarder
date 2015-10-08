@@ -14,15 +14,15 @@ View on Github - https://github.com/zixia/docker-simple-mail-forwarder
 
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------
-If you have a domain name, only want to have a(or a few) email address from this domain, but forward all the emails to gmail(etc). SMF is exactly what you need. (with [Docker](http://docker.com)
+If you have a domain name, only want to have a(or a few) email address from this domain, but forward all the emails to gmail(etc). SMF is exactly what you need. (with [Docker](http://docker.com))
 
-This docker was built for maximum **simple** & **easy** to use because of this reason. I had many domains and need email address of them(for fun/work), and I'd love to zero config. Some dns provider provide free email forwarding service for their own domain. some not. And some email forwarding service is not free. So I decided to make it myself(thanks docker).
+This docker was built for maximum **simple** & **easy** to use because of this reason. I had many domains and need email address of them(for fun/work), and I hate config mail server. Some dns provider provide free email forwarding service for their own domain. some not. And some email forwarding service is not free. So I decided to make it myself(thanks docker).
 
 ### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
-- [https://www.cloudmailin.com/plans](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
+- [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
 
-I was about to pay $10/year maybe, but the cheapest plan is $9 per month. Having a $10 USD machine with unlimited mail&domains/month is an amazing idea! And of couse you also could put other dockers in the machine. :-D
+I was about to pay $10/year maybe, but the cheapest plan is $9 per month. Having a $10 USD machine with unlimited mail&domains/month is an amazing idea! And of couse you also could put other dockers in this machine. :-D
 
 Quick Start (TL;DR)
 -------------------

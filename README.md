@@ -1,6 +1,7 @@
 # docker-simple-mail-forwarder
 [![](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')
 ![Docker Puuls](https://img.shields.io/docker/pulls/zixia/simple-mail-forwarder.svg)
+[ ![CircleCI Status](https://circleci.com/gh/zixia/docker-simple-mail-forwarder.svg?&style=shield&circle-token=2cd2ae335cca6a4caf6237df8bb5753380065689)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder)
 
 
 a very simple and easy to setup email forward service based on docker cloud.
@@ -37,7 +38,21 @@ I was about to pay for xxx (xx) but the cheapest plan is $10 per 10 mails/month.
         * etc.
 
 ## Test
-- docker rm smf > /dev/null 2>&1 ; docker run -ti --rm --name smf -v `pwd`:/docker --entrypoint /bin/bash zixia/simple-mail-forwarder sh
+
+Build from source:
+```bash
+./script/build.sh latest
+```
+
+Run a self-test for SMF inside docker:
+```bash
+./script/run.sh latest test
+```
+
+Get a shell of SMF enviroment inside docker:
+```bash
+./script/devshell.sh latest
+```
 
 ## Author
- - Zhuohuan LI <zixia@zixia.net> https://github.com/zixia
+ - Zhuohuan LI <zixia@zixia.net>

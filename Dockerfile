@@ -71,6 +71,4 @@ RUN echo "SMF_BUILD_DATE='`date`'" > /app/BUILD.env \
     && echo "GIT_BRANCH='$GIT_BRANCH'" >> /app/BUILD.env \
     && echo "GIT_TAG='$GIT_TAG'" >> /app/BUILD.env \
     && echo "GIT_SHA1='$GIT_SHA1'" >> /app/BUILD.env \
-    && echo "IMAGE_NAME='$IMAGE_NAME'" >> /app/BUILD.env \
-    \
-    && git show | head -6 >> /app/BANNER.git
+    && echo "IMAGE_NAME='$IMAGE_NAME'" >> /app/BUILD.env 

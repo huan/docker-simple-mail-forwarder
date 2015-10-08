@@ -1,0 +1,16 @@
+machine:
+  services:
+    - docker
+  environment:
+      SMF_CONFIG: from@testi.com:to@testo.com:ThisIsPassword
+
+dependencies:
+  post:
+
+test:
+  override:
+    - ./script/build.sh latest
+
+notify:
+  webhooks:
+    - url: http://zixia.net/~zixia/git/pushme.php

@@ -5,34 +5,43 @@ Simple Mail Forwarder (SMF) Docker
 [![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=shield)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
 
 Simplest, Easist and Smallest Email Forward Service based on Docker.
-- Config by **one variable**
-- Run by **docker start**
-- Image Size only **20MB**
+1. Config by **one variable**
+1. Run by **docker start**
+1. Image Size only **20MB**
+
+See? There is nothing easier. 
 
 Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Quick Start (TL;DR)
 -------------------
-Just set **SMF_CONFIG** and run. You are set. :-]
+Just set `SMF_CONFIG` and run:
 ```bash
-# export SMF_CONFIG='from@testi.com:to@testo.com:test'
-# docker run -p 25:25 zixia/simple-mail-forwarder
+$ export SMF_CONFIG='from@testi.com:to@testo.com:test'
+$ docker run -p 25:25 zixia/simple-mail-forwarder
+```
+> Don't forget to modify the MX record of your domain. (in this example, it's _testi.com_)
 
-# telnet 127.0.0.1 25
+Quick Test
+----------
+```bash
+$ telnet 127.0.0.1 25
 > 220 testo.com ESMTP
 ehlo test.com
 > 250-testo.com
 > 250-STARTTLS
 > 250-AUTH PLAIN LOGIN
-*auth plain*
+auth plain
 > 334
 dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0
 > 235 2.7.0 Authentication successful
-*quit*
+quit
 > 221 2.0.0 Bye
 > Connection closed by foreign host
 ```
-> Don't forget to modify the MX record of your domain. (in this example, it's _testi.com_)
+> _dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0_ stands for _testi@testo.com\0testi@testo.com\0test_, base64 encoded. 
+
+You are set! :-]
 
 Who need this docker
 --------------------
@@ -86,15 +95,49 @@ $ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword;testi@from.com:t
  
 Test
 ----
-1. **Build from source.**
+Done with [bats](https://github.com/sstephenson/bats). Useful articles:
+* https://blog.engineyard.com/2014/bats-test-command-line-tools
+* http://blog.spike.cx/post/60548255435/testing-bash-scripts-with-bats
+
+How to run tests (in docker):
+```bash
+$ pwd
+/app
+
+$ bats test/
+1..20
+ok 1 confirm hostname pretend to work.
+ok 2 confirm hwclock pretend to work.
+ok 3 service postfix could start/stop right.
+ok 4 SMF_CONFIG exist
+ok 5 SMF_DOMAIN exist
+ok 6 virtual maping source is set
+ok 7 virtual maping data is set
+ok 8 virtual maping db is set
+ok 9 system hostname FQDN resolvable
+ok 10 postfix myhostname FQDN & resolvable
+ok 11 check other hostname setting
+ok 12 confirm postfix is running
+ok 13 confirm port 25 is open
+ok 14 crond is running
+ok 15 ESMTP STATTLS supported
+ok 16 ESMTP AUTH supported
+ok 17 ESMTP STARTTLS supported
+ok 18 create user testi@testo.com by password test
+ok 19 ESMTP AUTH by testi@testo.com/test
+ok 20 ESMTP TLS AUTH by testi@testo.com/test
+```
+
+Helper Scripts
+--------------
+1. Build from source.
   ```bash
   ./script/build.sh latest
   ```
-1. **Run a self-test for SMF inside docker.**
+1. Run a self-test for SMF inside docker.
   ```bash
   ./script/run.sh latest test
   ```
-
 1. Get a shell of SMF enviroment inside docker.
   ```bash
   ./script/devshell.sh latest

@@ -10,7 +10,13 @@ IMAGENAME="$OWNER/$NAME"
 TAG='' && [ -n "$1" ] && TAG=":$1" && shift
 
 CMD1="docker build -t ${IMAGENAME}${TAG} ."
-CMD2="docker run --rm --name $NAME ${IMAGENAME}${TAG} test"
+
+if [ -n "$CIRCLECI" ]
+then
+    CMD2="docker run ${IMAGENAME}${TAG} test"
+else
+    CMD2="docker run --rm --name $NAME ${IMAGENAME}${TAG} test"
+fi
 
 echo ">> Run $CMD1"
 $CMD1

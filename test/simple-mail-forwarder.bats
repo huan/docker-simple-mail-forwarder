@@ -125,8 +125,8 @@
     # dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0
     #
     output=$(2>&1 openssl s_client -starttls smtp -crlf -connect 127.0.0.1:25 \
-        <<< `sleep 2; echo 'EHLO test.com'` \
-        <<< `sleep 2; echo 'AUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0'` \
+        <<<'EHLO test.com' \
+        <<<'AUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0' \
         )
 
     [[ $output =~ "235 2.7.0 Authentication successful" ]]

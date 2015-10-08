@@ -13,10 +13,24 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Quick Start (TL;DR)
 -------------------
-Just set **SMF_CONFIG** and run. You are SET.
+Just set **SMF_CONFIG** and run. You are set. :-]
 ```bash
-$ export SMF_CONFIG='from@testi.com:to@testo.com'
-$ sudo docker run -p 25:25 zixia/simple-mail-forwarder
+# export SMF_CONFIG='from@testi.com:to@testo.com:test'
+# docker run -p 25:25 zixia/simple-mail-forwarder
+
+# telnet 127.0.0.1 25
+> 220 testo.com ESMTP
+ehlo test.com
+> 250-testo.com
+> 250-STARTTLS
+> 250-AUTH PLAIN LOGIN
+*auth plain*
+> 334
+dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0
+> 235 2.7.0 Authentication successful
+*quit*
+> 221 2.0.0 Bye
+> Connection closed by foreign host
 ```
 > Don't forget to modify the MX record of your domain. (in this example, it's _testi.com_)
 

@@ -1,18 +1,21 @@
-# docker-simple-mail-forwarder
+# Simple Mail Forwarder (SMF) Docker
 [![](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')
 ![Docker Puuls](https://img.shields.io/docker/pulls/zixia/simple-mail-forwarder.svg)
 [![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=shield)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
 
-a very simple and easy to setup email forward service based on docker cloud.
+Simplest, Easist and Smallest Email Forward Service based on Docker.
+- Config by _set one variable_
+- Run by _docker start_
+- Image Size less than _20MB_
 
-docker-simple-mail-forwarder project home - https://github.com/zixia/docker/simple-mail-forwarder
+Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 ## Quick Start (TL;DR)
+Just set SMF_CONFIG and run. You are SET.
 ```bash
 $ export SMF_CONFIG='from@testi.com:to@testo.com'
 $ sudo docker run -p 25:25 zixia/simple-mail-forwarder
 ```
-Just set SMF_CONFIG and run. You are SET.
 > Don't forget to modify the MX record of your domain. (in this example, it's _testi.com_)
 
 ## Who will need this docker
@@ -44,43 +47,43 @@ I was about to pay for xxx (xx) but the cheapest plan is $10 per 10 mails/month.
 
 ### SMF_CONFIG Examples
 
-#### Basic
+#### 1. Basic
+**Forward one email address to another.**
 ```bash
 $ export SMF_CONFIG='from@testi.com:to@testo.com'
 ```
-Forward one email address to another. 
 > You could get the ESMTP AUTH password for your on your docker log. It's random generated.
 
-#### Advanced
+#### 1. Advanced
+**Forward one email address to another**, with ESMTP AUTH login password.
 ```bash
 $ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword'
 ```
-Forward one email address to another, with ESMTP AUTH login password.
-> All password will print on the docker log.
+> All passwords will print on the docker log.
 
-#### Hardcore
+#### 1. Hardcore
+**Forward as many email you want**, seperated by semicolons(newline supported well).
 ```bash
 $ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword;testi@from.com:testo@to.com:AnotherPassword'
 ```
-Forward as many email you want, seperated by semicolons(newline supported well).
-> Tips: if you only provide the first password, and omit followings. Then the password of all users will be same as the first one. It's a feature.
+> Tips: if you only provide the first password, and omit followings, then the passwords of all users will be the same as the first one. This is a feature.
  
 ## Test
 
+1. **Build from source.**
 ```bash
 ./script/build.sh latest
 ```
-Build from source.
 
+1. **Run a self-test for SMF inside docker.**
 ```bash
 ./script/run.sh latest test
 ```
-Run a self-test for SMF inside docker.
 
+1. Get a shell of SMF enviroment inside docker.
 ```bash
 ./script/devshell.sh latest
 ```
-Get a shell of SMF enviroment inside docker.
 
 ## Author
-- Zhuohuan LI <zixia@zixia.net>
+Zhuohuan LI <zixia@zixia.net> http://linkedin.com/in/zixia

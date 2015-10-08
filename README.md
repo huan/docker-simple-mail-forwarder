@@ -72,18 +72,9 @@ ok 20 ESMTP TLS AUTH by testi@testo.com/test
 
 You are set! :-]
 
-Environment Variables and Defaults
+Environment Variable and Default
 ----------------------------------
-* `SMF_CONFIG`
-    * MUST be defined. no default setting.  
-* `SMF_DOMAIN` (optional)
-    * default: Domain from user email address.
-    * affect the following settings:
-        * hostname
-        * mailname
-        * SMTP greeting
-        * mail header
-        * etc.
+`SMF_CONFIG`: MUST be defined. no default setting. (set me! I'm the only parameter~)
 
 ### `SMF_CONFIG` Examples
 Here's how to config the only environment parameter of SMF Docker:
@@ -109,7 +100,7 @@ $ export SMF_CONFIG='testi@testo.com:test@test.com:ThisIsPassword;testo@testi.co
 ```
 > Tips: if you only provide the first password, and omit followings, then the passwords of all users will be the same as the password last seen. This is a feature.
  
-Other Helper Scripts
+Helper Scripts
 --------------------
 1. Build from source.
 ```bash

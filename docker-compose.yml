@@ -4,4 +4,3 @@ smf:
         - "25:25"
     environment:
         - SMF_CONFIG=testi@testo.com:test@test.com:test
-        - SMF_DOMAIN=testo.com

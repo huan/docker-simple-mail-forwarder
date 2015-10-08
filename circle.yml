@@ -13,4 +13,4 @@ test:
 
 notify:
   webhooks:
-    - url: http://zixia.net/~zixia/git/pushme.php
+      - url: https://registry.hub.docker.com/u/zixia/simple-mail-forwarder/trigger/96341199-7538-4646-9961-fa753b013a72/

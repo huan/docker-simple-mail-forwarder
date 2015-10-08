@@ -3,6 +3,8 @@ Simple Mail Forwarder (SMF) Docker
 [![](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')
 ![Docker Puuls](https://img.shields.io/docker/pulls/zixia/simple-mail-forwarder.svg)
 [![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=shield)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
+[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/zixia/docker-simple-mail-forwarder)
+
 
 Simplest, Easist and Smallest Email Forward Service based on Docker.
 
@@ -16,7 +18,7 @@ What is SMF? (Simple Mail Forwarder)
 ------------------------------------
 If you have a domain name, only want to have a(or a few) email address from this domain, but forward all the emails to gmail(etc). SMF is exactly what you need. (with [Docker](http://docker.com))
 
-This docker was built for maximum **simple** & **easy** to use because of this reason. I had many domains and need email address of them(for fun/work), and I hate config mail server. Some dns provider provide free email forwarding service for their own domain. some not. And some email forwarding service is not free. So I decided to make it myself(thanks docker).
+This docker was built for maximum **simple** & **easy** to use because of this reason. I had many domains and need email address of them(for fun/work), and I hate config mail server. Some dns provider provide free email forwarding service for their own domain. some not. And almose all email forwarding service is not free. So I decided to make it myself(thanks docker).
 
 ### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
@@ -167,7 +169,7 @@ Cloud Requirement
 * A Cloud Service that could host docker is required.
   * DigitalOcean.com
 * A Docker management platform is recommanded.
-  * Tutum.co
+  * Tutum.co [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/zixia/docker-simple-mail-forwarder)
 * Docker is required.
   * Docker.com
 

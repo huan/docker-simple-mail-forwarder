@@ -8,9 +8,9 @@ Simple Mail Forwarder (SMF) Docker
 
 Simplest, Easist and Smallest Email Forward Service based on Docker.
 
-1. Config by **one line**
-1. Run as **docker start**
-1. Image Size **10MB**
+1. Config by [**one line**](#smf_config-examples)
+1. Run as [**docker start**](#quick-start-tldr)
+1. Image Size [**10MB**](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 View on Github - https://github.com/zixia/docker-simple-mail-forwarder
 

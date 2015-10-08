@@ -8,9 +8,22 @@ Simplest, Easist and Smallest Email Forward Service based on Docker.
 
 1. Config only **one variable**
 1. Run by **docker start**
-1. Image Size only **20MB**
+1. Image Size less than **10MB**
 
-Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
+View on Github - https://github.com/zixia/docker-simple-mail-forwarder
+
+What is SMF? (Simple Mail Forwarder)
+------------------------------------
+If you have a domain name, only want to have email address from this domain, but forward all the emails to gmail(or other). SMF is exactly what you need. (Of couse, you are able to put docker online, right?)
+
+This docker built for maximum **simple** & **easy** to use because of this reason. I love to have many domains and get email address from them. Some dns provider provide free email forwarding service for their own domain. some not. And some email forwarding service is not free. So I decided to make it myself.
+
+Related Services
+----------------
+- [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
+- [https://www.cloudmailin.com/plans](https://www.cloudmailin.com/plans) From $9/month, not for human. 
+
+I was about to pay but the cheapest plan is $9 per month. Having a $10 USD machine with unlimited mail&domains/month is an amazing idea! And of couse you also could put other dockers in it. :-D
 
 Quick Start (TL;DR)
 -------------------
@@ -21,93 +34,15 @@ $ docker run -p 25:25 zixia/simple-mail-forwarder
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testi.com_)
 
+This will forward all email received by testi@testo.com, to test@test.com.
+
 See? There is nothing easier. 
 
 Quick Test
 ----------
-```bash
-$ telnet 127.0.0.1 25
-> 220 testo.com ESMTP
-ehlo test.com
-> 250-testo.com
-> 250-STARTTLS
-> 250-AUTH PLAIN LOGIN
-auth plain
-> 334
-dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0
-> 235 2.7.0 Authentication successful
-quit
-> 221 2.0.0 Bye
-> Connection closed by foreign host
-```
-> "dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0"  
-> stands for  
-> <pre>"testi@testo.com\0testi@testo.com\0test"</pre>,  
-> which is base64 encoded.  
-> Useful article about SMTP Authentication: http://www.fehcom.de/qmail/smtpauth.html
+Done with [BATS(Bash Automated Testing System)](https://github.com/sstephenson/bats), a bash implementation of [TAP(Test Anything Protol)]( http://testanything.org)
 
-You are set! :-]
-
-
-Who need this docker
---------------------
-if you have a domain name, let's say: cool-domain.com. and you want your own email address from this domain, let's say: cool-user@cool-domain.com, maybe some friends else. you need a simplest way to host your domain for email address. what will you do?
-
-some dns provider provide free email forwarding service, for their customers. some not. and some email forwarding service is not free.
-
-then you need this docker: simple mail forwarder. deploy this docker online, set your email address and the forward address, get the docker's ip(or domain name from service), set your domain mx record to docker's ip(domain), you are set.
-
-Related Services
-----------------
-I was about to pay for xxx (xx) but the cheapest plan is $10 per 10 mails/month. Having a $5 USD machine with unlimited mail&domains/month is an amazing idea!
-
-- https://www.cloudmailin.com/plans
-
-Environment Variables and Defaults
-----------------------------------
-* `SMF_CONFIG`
-    * MUST be defined. no default setting.  
-* `SMF_DOMAIN`
-    * Optional. 
-    * Default: Domain from user email address.
-    * Affect the following settings:
-        * Hostname
-        * Mailname
-        * SMTP Greeting
-        * Mail Header
-        * etc.
-
-###`SMF_CONFIG` Examples
-Here's how to config the only environment parameter of SMF Docker:
-
-####1. Basic
-Forward all email received by testi@testo.com, to test@test.com:
-```bash
-$ export SMF_CONFIG='testi@testo.com:test@test.com'
-```
-> You could get the ESMTP AUTH password for your on your docker log. It's random generated.
-
-####2. Advanced
-Add ESMTP AUTH password:
-```bash
-$ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword'
-```
-> Password will print on the docker log.
-
-####3. Hardcore
-Add as many email as you want. Seperated by semicolons or newline:
-```bash
-$ export SMF_CONFIG='testi@testo.com:test@test.com:ThisIsPassword;testo@testi.com:test@test.com:AnotherPassword'
-```
-> Tips: if you only provide the first password, and omit followings, then the passwords of all users will be the same as the password last seen. This is a feature.
- 
-Test
-----
-Done with [bats](https://github.com/sstephenson/bats). Useful articles:
-* https://blog.engineyard.com/2014/bats-test-command-line-tools
-* http://blog.spike.cx/post/60548255435/testing-bash-scripts-with-bats
-
-How to run tests:
+How to run:
 ```bash
 $ docker run zixia/simple-mail-forwarder test
 >> exec bats test
@@ -134,21 +69,112 @@ ok 19 ESMTP AUTH by testi@testo.com/test
 ok 20 ESMTP TLS AUTH by testi@testo.com/test
 ```
 
+You are set! :-]
+
+Installation
+------------
+* Docker is required.
+  * docker.com
+* A Cloud Service that could host docker is required.
+  * tutum.co
+
+Environment Variables and Defaults
+----------------------------------
+* `SMF_CONFIG`
+    * MUST be defined. no default setting.  
+* `SMF_DOMAIN` (optional)
+    * default: Domain from user email address.
+    * affect the following settings:
+        * hostname
+        * mailname
+        * SMTP greeting
+        * mail header
+        * etc.
+
+### `SMF_CONFIG` Examples
+Here's how to config the only environment parameter of SMF Docker:
+
+#### 1. Basic
+Forward all email received by testi@testo.com, to test@test.com:
+```bash
+$ export SMF_CONFIG='testi@testo.com:test@test.com'
+```
+> You could get the ESMTP AUTH password for your on your docker log. It's random generated if you do not provide one.
+
+#### 2. Advanced
+Add ESMTP AUTH password:
+```bash
+$ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword'
+```
+> Password will print on the docker log.
+
+#### 3. Hardcore
+Add as many email as you want, with or without password. Seperated by semicolons or newline:
+```bash
+$ export SMF_CONFIG='testi@testo.com:test@test.com:ThisIsPassword;testo@testi.com:test@test.com:AnotherPassword'
+```
+> Tips: if you only provide the first password, and omit followings, then the passwords of all users will be the same as the password last seen. This is a feature.
+ 
 Other Helper Scripts
 --------------------
 1. Build from source.
 ```bash
-./script/build.sh latest
+$ ./script/build.sh latest
 ```
 1. Run a self-test for SMF inside docker.
 ```bash
-./script/run.sh latest test
+$ ./script/run.sh latest test
 ```
 1. Get a shell of SMF enviroment inside docker.
 ```bash
-./script/devshell.sh latest
+$ ./script/devshell.sh latest
 ```
 
-Author
-------
+Test by Hand
+------------
+```bash
+$ telnet 127.0.0.1 25
+> 220 testo.com ESMTP
+ehlo test.com
+> 250-testo.com
+> 250-STARTTLS
+> 250-AUTH PLAIN LOGIN
+auth plain
+> 334
+dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0
+> 235 2.7.0 Authentication successful
+quit
+> 221 2.0.0 Bye
+> Connection closed by foreign host
+```
+
+P.S. The magic string `dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0` stands for `testi@testo.com\0test@testo.com\0test` in base64 encode, required by AUTH PLAIN.
+
+> Useful article about SMTP Authentication: http://www.fehcom.de/qmail/smtpauth.html
+
+Bug
+---
+Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
+
+Changelog
+---------
+### v0.2.0
+* supported specify user password
+* supported ESMTP TLS
+* [docker image size: 7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+
+### v0.1.0
+* dockerized
+* basic forward function
+* self-testing
+* [docker image size: 6MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+
+Author & License
+-----------------
 Zhuohuan LI <zixia@zixia.net> (http://linkedin.com/in/zixia)
+
+Copyright & License
+-------------------
+* Code & Documentation 2015© zixia
+* Code released under the Apache 2.0 license
+* Docs released under Creative Commons

@@ -2,7 +2,7 @@ machine:
   services:
     - docker
   environment:
-      SMF_CONFIG: from@testi.com:to@testo.com:ThisIsPassword
+      SMF_CONFIG: testi@testo.com:test@test.com:test
 
 dependencies:
   post:

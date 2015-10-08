@@ -5,11 +5,10 @@ Simple Mail Forwarder (SMF) Docker
 [![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=shield)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
 
 Simplest, Easist and Smallest Email Forward Service based on Docker.
+
 1. Config by **one variable**
 1. Run by **docker start**
 1. Image Size only **20MB**
-
-See? There is nothing easier. 
 
 Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
@@ -21,6 +20,8 @@ $ export SMF_CONFIG='from@testi.com:to@testo.com:test'
 $ docker run -p 25:25 zixia/simple-mail-forwarder
 ```
 > Don't forget to modify the MX record of your domain. (in this example, it's _testi.com_)
+
+See? There is nothing easier. 
 
 Quick Test
 ----------
@@ -39,7 +40,10 @@ quit
 > 221 2.0.0 Bye
 > Connection closed by foreign host
 ```
-> _dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0_ stands for _testi@testo.com\0testi@testo.com\0test_, base64 encoded. 
+> _dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0_  
+> stands for  
+> _testi@testo.com\0testi@testo.com\0test_  
+> which is base64 encoded. 
 
 You are set! :-]
 
@@ -59,9 +63,9 @@ I was about to pay for xxx (xx) but the cheapest plan is $10 per 10 mails/month.
 
 Environment Variables and Defaults
 ----------------------------------
-- SMF_CONFIG
+- `SMF_CONFIG`
     * MUST be defined. no default setting.  
-- SMF_DOMAIN
+- `SMF_DOMAIN`
     * Optional. 
     * Default: Domain from user email address.
     * Affect the following settings:
@@ -71,7 +75,7 @@ Environment Variables and Defaults
         * Mail Header
         * etc.
 
-### SMF_CONFIG Examples
+### `SMF_CONFIG` Examples
 Here's how to config the only parameter of SMF Docker:
 
 #### 1. Basic
@@ -80,13 +84,15 @@ Forward one email address to another:
 $ export SMF_CONFIG='from@testi.com:to@testo.com'
 ```
 > You could get the ESMTP AUTH password for your on your docker log. It's random generated.
-#### 1. Advanced
+
+#### 2. Advanced
 Forward one email address to another, with ESMTP AUTH login password:
 ```bash
 $ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword'
 ```
 > All passwords will print on the docker log.
-#### 1. Hardcore
+
+#### 3. Hardcore
 Forward as many email you wantseperated by semicolons(newline supported well):
 ```bash
 $ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword;testi@from.com:testo@to.com:AnotherPassword'
@@ -99,12 +105,10 @@ Done with [bats](https://github.com/sstephenson/bats). Useful articles:
 * https://blog.engineyard.com/2014/bats-test-command-line-tools
 * http://blog.spike.cx/post/60548255435/testing-bash-scripts-with-bats
 
-How to run tests (in docker):
+How to run tests:
 ```bash
-$ pwd
-/app
-
-$ bats test/
+$ docker run zixia/simple-mail-forwarder test
+>> exec bats test
 1..20
 ok 1 confirm hostname pretend to work.
 ok 2 confirm hwclock pretend to work.
@@ -128,21 +132,21 @@ ok 19 ESMTP AUTH by testi@testo.com/test
 ok 20 ESMTP TLS AUTH by testi@testo.com/test
 ```
 
-Helper Scripts
+Other Helper Scripts
 --------------
 1. Build from source.
-  ```bash
-  ./script/build.sh latest
-  ```
+```bash
+./script/build.sh latest
+```
 1. Run a self-test for SMF inside docker.
-  ```bash
-  ./script/run.sh latest test
-  ```
+```bash
+./script/run.sh latest test
+```
 1. Get a shell of SMF enviroment inside docker.
-  ```bash
-  ./script/devshell.sh latest
-  ```
+```bash
+./script/devshell.sh latest
+```
 
 Author
 ------
-Zhuohuan LI <zixia@zixia.net> http://linkedin.com/in/zixia
+Zhuohuan LI <zixia@zixia.net> (http://linkedin.com/in/zixia)

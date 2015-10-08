@@ -6,24 +6,23 @@ Simple Mail Forwarder (SMF) Docker
 
 Simplest, Easist and Smallest Email Forward Service based on Docker.
 
-1. Config only **one variable**
-1. Run by **docker start**
-1. Image Size less than **10MB**
+1. Config by **one line**
+1. Run as **docker start**
+1. Image Size **10MB**
 
 View on Github - https://github.com/zixia/docker-simple-mail-forwarder
 
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------
-If you have a domain name, only want to have email address from this domain, but forward all the emails to gmail(or other). SMF is exactly what you need. (Of couse, you are able to put docker online, right?)
+If you have a domain name, only want to have a(or a few) email address from this domain, but forward all the emails to gmail(etc). SMF is exactly what you need. (with [Docker](http://docker.com)
 
-This docker built for maximum **simple** & **easy** to use because of this reason. I love to have many domains and get email address from them. Some dns provider provide free email forwarding service for their own domain. some not. And some email forwarding service is not free. So I decided to make it myself.
+This docker was built for maximum **simple** & **easy** to use because of this reason. I had many domains and need email address of them(for fun/work), and I'd love to zero config. Some dns provider provide free email forwarding service for their own domain. some not. And some email forwarding service is not free. So I decided to make it myself(thanks docker).
 
-Related Services
-----------------
+### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
-- [https://www.cloudmailin.com/plans](https://www.cloudmailin.com/plans) From $9/month, not for human. 
+- [https://www.cloudmailin.com/plans](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
 
-I was about to pay but the cheapest plan is $9 per month. Having a $10 USD machine with unlimited mail&domains/month is an amazing idea! And of couse you also could put other dockers in it. :-D
+I was about to pay $10/year maybe, but the cheapest plan is $9 per month. Having a $10 USD machine with unlimited mail&domains/month is an amazing idea! And of couse you also could put other dockers in the machine. :-D
 
 Quick Start (TL;DR)
 -------------------
@@ -32,7 +31,7 @@ Just set `SMF_CONFIG` and run:
 $ export SMF_CONFIG='testi@testo.com:test@test.com:test'
 $ docker run -p 25:25 zixia/simple-mail-forwarder
 ```
-> Don't forget to modify the DNS MX record of your domain. (in this example, it's _testi.com_)
+> Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
 
 This will forward all email received by testi@testo.com, to test@test.com.
 
@@ -40,7 +39,7 @@ See? There is nothing easier.
 
 Quick Test
 ----------
-Done with [BATS(Bash Automated Testing System)](https://github.com/sstephenson/bats), a bash implementation of [TAP(Test Anything Protol)]( http://testanything.org)
+Done with [BATS(Bash Automated Testing System)](https://github.com/sstephenson/bats), a bash implementation of [TAP(Test Anything Protol)]( http://testanything.org).
 
 How to run:
 ```bash
@@ -70,13 +69,6 @@ ok 20 ESMTP TLS AUTH by testi@testo.com/test
 ```
 
 You are set! :-]
-
-Installation
-------------
-* Docker is required.
-  * docker.com
-* A Cloud Service that could host docker is required.
-  * tutum.co
 
 Environment Variables and Defaults
 ----------------------------------
@@ -121,17 +113,18 @@ Other Helper Scripts
 ```bash
 $ ./script/build.sh latest
 ```
-1. Run a self-test for SMF inside docker.
+
+2. Run a self-test for SMF docker.
 ```bash
 $ ./script/run.sh latest test
 ```
-1. Get a shell of SMF enviroment inside docker.
+
+3. Get a shell inside SMF docker.
 ```bash
 $ ./script/devshell.sh latest
 ```
 
-Test by Hand
-------------
+### Test by Hand
 ```bash
 $ telnet 127.0.0.1 25
 > 220 testo.com ESMTP
@@ -169,7 +162,16 @@ Changelog
 * self-testing
 * [docker image size: 6MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
-Author & License
+Cloud Requirement
+-----------------
+* A Cloud Service that could host docker is required.
+  * DigitalOcean.com
+* A Docker management platform is recommanded.
+  * Tutum.co
+* Docker is required.
+  * Docker.com
+
+Author
 -----------------
 Zhuohuan LI <zixia@zixia.net> (http://linkedin.com/in/zixia)
 

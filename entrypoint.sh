@@ -150,9 +150,9 @@ function start_postfix {
 
     # starting services
     echo ">> Starting the services"
-    service syslog  stop > /dev/null 2>&1;  
-    service cron    stop > /dev/null 2>&1;  
-    service postfix stop > /dev/null 2>&1;  
+#    service syslog  stop > /dev/null 2>&1
+#    service cron    stop > /dev/null 2>&1
+#    service postfix stop > /dev/null 2>&1
 
     service syslog  start
     service cron    start

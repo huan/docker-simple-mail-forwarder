@@ -34,8 +34,8 @@ COPY install/master.dist.cf /etc/postfix/master.cf
 RUN mkdir /run/openrc && touch /run/openrc/softlevel \
     && cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
-    && rc-update add postfix \
-    && rc-status 
+    && rc-update add postfix default \
+    && rc-status
 
 RUN echo test | saslpasswd2 -p test@test.com \
     && chown postfix /etc/sasldb2 \

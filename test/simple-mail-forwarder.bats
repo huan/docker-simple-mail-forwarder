@@ -94,7 +94,7 @@
     [[ $output =~ LOGIN ]]
 }
 
-@test "ESMTP STARTTLS supported" {
+@test "ESMTP STARTTLS connect ok" {
     output=$(echo QUIT | 2>&1 openssl s_client -starttls smtp -crlf -connect 127.0.0.1:25)
 
     [ $? -eq 0 ]
@@ -129,7 +129,8 @@
         <<<'AUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0' \
         )
 
-    skip "don't know why this test sometimes pass sometimes failure."
+    skip "don't know why this test sometimes pass but sometimes failure."
+
     [[ $output =~ "235 2.7.0 Authentication successful" ]]
 }
 

@@ -11,7 +11,16 @@
 }
 
 @test "service postfix could start/stop right." {
-    run service postfix stop
+    run service postfix status
+
+    wasRunning=false
+
+    # we save postfix service stat at start, so we could restore at end
+    if [[ $output =~ started ]]
+    then
+        wasRunning=true
+        service postfix stop
+    fi
 
     run service postfix start
     [ $status = 0 ]
@@ -36,8 +45,11 @@
     [ $status = 0 ]
     [[ $output =~ "WARNING: postfix is already stopped" ]]
 
-    # we keep postfix start at the end
-    run service postfix start
-    [ $status = 0 ]
-    [[ $output =~ "Starting postfix  ..." ]]
+    # we restore postfix at the end
+    if $wasRunning
+    then
+        run service postfix start
+        [ $status = 0 ]
+        [[ $output =~ "Starting postfix  ..." ]]
+    fi
 }

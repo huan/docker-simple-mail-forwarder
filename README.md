@@ -18,7 +18,7 @@ What is SMF? (Simple Mail Forwarder)
 ------------------------------------
 If you have a domain name, only want to have a(or a few) email address from this domain, but forward all the emails to gmail(etc). SMF is exactly what you need. (with [Docker](http://docker.com))
 
-This docker was built for maximum **simple** & **easy** to use because of this reason. I had many domains and need email address of them(for fun/work), and I hate config mail server. Some dns provider provide free email forwarding service for their own domain. some not. And almose all email forwarding service is not free. So I decided to make it myself(thanks docker).
+This docker was built for maximum **simple** & **easy** to use because of this reason. I had many domains and need email address of them(for fun/work), and I hate config mail server. Some dns providers provide free email forwarding service for their own domain. some do not. And almose all email forwarding service is not free. So I decided to make it myself(thanks docker).
 
 ### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year

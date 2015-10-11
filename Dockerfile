@@ -55,8 +55,11 @@ COPY entrypoint.sh /entrypoint.sh
 RUN bash -n /entrypoint.sh && chmod a+x /entrypoint.sh
 
 COPY BANNER /app/
-COPY BUILD.env /app/
 COPY test /app/test
+
+COPY .git/logs/HEAD /app/GIT_LOG
+COPY .git/HEAD /app/GIT_HEAD
+COPY install/buildenv.sh /app/
 
 VOLUME ["/etc", "/var/spool/postfix"]
 
@@ -64,3 +67,9 @@ EXPOSE 25
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["start"]
+
+
+## Log Environment (in Builder)
+
+RUN bash buildenv.sh
+

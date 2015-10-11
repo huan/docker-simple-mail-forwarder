@@ -13,7 +13,7 @@ BASEDIR=$(dirname $0)
 ENV_FILE=$BASEDIR/../BUILD.env
 
 RE='[0-9]+\s+IN\s+A\s+([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'
-[[ `drill Builder.SimpleMailForwarder.\`hostname\` @wimi.zixia.svc.tutum.io` =~ $RE ]] && {
+[[ `drill SimpleMailForwarder.Builder.\`hostname\` @wimi.zixia.svc.tutum.io` =~ $RE ]] && {
     SMF_BUILD_IP="${BASH_REMATCH[1]}"
 }
 

@@ -5,7 +5,7 @@
 
 OWNER="zixia"
 NAME="simple-mail-forwarder"
-IMAGENAME="$OWNER/$NAME"
+IMAGE_NAME="$OWNER/$NAME"
 
 TAG='' && [ -n "$1" ] && TAG=":$1" && shift
 

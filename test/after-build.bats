@@ -1,13 +1,10 @@
 #!/usr/bin/env bats
 
-@test "confirm hostname pretend to work." {
-    run service hostname start
-    [ $status = 0 ]
-}
+@test "confirm openrc conf set to lxc" {
+    # sed -i '/rc_sys/ c\rc_sys="lxc"' /etc/rc.conf \
+    n=$(grep ^rc_sys /etc/rc.conf | grep lxc | wc -l)
 
-@test "confirm hwclock pretend to work." {
-    run hwclock any-params
-    [ $status = 0 ]
+    [ $n -gt 0 ]
 }
 
 @test "service postfix could start/stop right." {
@@ -33,7 +30,7 @@
     processNum=$(ps | grep -v grep | grep /usr/lib/postfix/master | wc -l)
     [ $processNum -gt 0 ]
 
-    run netstat -nlt 
+    run netstat -nlt
     [ $status = 0 ]
     [[ $output =~ ":25 " ]]
 
@@ -52,4 +49,12 @@
         [ $status = 0 ]
         [[ $output =~ "Starting postfix  ..." ]]
     fi
+}
+
+@test "cgroups disabled" {
+    output=$(grep rc_controller_cgroups /etc/rc.conf | grep NO)
+    [[ $output =~ NO ]]
+
+    output=$(grep cgroup_add_service /lib/rc/sh/openrc-run.sh | grep DISABLED)
+    [[ $output =~ DISABLED ]]
 }

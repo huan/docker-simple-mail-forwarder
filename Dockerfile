@@ -8,13 +8,10 @@ ENV BATS_VERSION 0.4.0
 RUN apk add --update \
         bash \
         curl \
+        drill \
         logrotate \
         postfix \
         cyrus-sasl \
-    \
-    && mkdir -p /lib/modules \
-    && sed -i 's/^\(\s*\)hostname/#\1hostname/g' /etc/init.d/hostname \
-    && rm /sbin/hwclock && echo "#/bin/sh\nexit 0" > /sbin/hwclock && chmod +x /sbin/hwclock \
     \
     && curl -s -o "/tmp/v${BATS_VERSION}.tar.gz" -L \
         "https://github.com/sstephenson/bats/archive/v${BATS_VERSION}.tar.gz" \
@@ -25,7 +22,6 @@ RUN apk add --update \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 
-
 ## Configure Service
 
 COPY install/main.dist.cf /etc/postfix/main.cf
@@ -34,6 +30,12 @@ COPY install/master.dist.cf /etc/postfix/master.cf
 RUN mkdir /run/openrc && echo default > /run/openrc/softlevel \
     && cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
+    \
+    && sed -i '/rc_controller_cgroups/ c\rc_controller_cgroups="NO"' /etc/rc.conf \
+    && sed -i '/rc_sys/ c\rc_sys="lxc"' /etc/rc.conf \
+    \
+    && sed -i 's/cgroup_add_service/cgroup_add_service_DISABLED/g' /lib/rc/sh/openrc-run.sh\
+    \
     && rc-update add postfix default \
     && rc-status
 
@@ -52,7 +54,8 @@ WORKDIR /app
 COPY entrypoint.sh /entrypoint.sh
 RUN bash -n /entrypoint.sh && chmod a+x /entrypoint.sh
 
-COPY BANNER /app/BANNER
+COPY BANNER /app/
+COPY BUILD.env /app/
 COPY test /app/test
 
 VOLUME ["/etc", "/var/spool/postfix"]
@@ -61,14 +64,3 @@ EXPOSE 25
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["start"]
-
-
-## Log Environment (in Builder)
-
-RUN echo "SMF_BUILD_DATE='`date`'" > /app/BUILD.env \
-    && echo "SMF_BUILD_HOST='`hostname`'" >> /app/BUILD.env \
-    \
-    && echo "GIT_BRANCH='$GIT_BRANCH'" >> /app/BUILD.env \
-    && echo "GIT_TAG='$GIT_TAG'" >> /app/BUILD.env \
-    && echo "GIT_SHA1='$GIT_SHA1'" >> /app/BUILD.env \
-    && echo "IMAGE_NAME='$IMAGE_NAME'" >> /app/BUILD.env 

@@ -5,11 +5,11 @@
 
 OWNER="zixia"
 NAME="simple-mail-forwarder"
-IMAGENAME="$OWNER/$NAME"
+IMAGE_NAME="$OWNER/$NAME"
 
 TAG='' && [ -n "$1" ] && TAG=":$1" && shift
 
-CMD2="docker run --rm --name $NAME ${IMAGENAME}${TAG} test"
+CMD2="docker run --rm --name $NAME ${IMAGE_NAME}${TAG} test"
 
 echo ">> Run $CMD1"
 $CMD1

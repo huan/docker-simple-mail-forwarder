@@ -133,6 +133,15 @@ function start_postfix {
         HOSTNAME=`hostname`
     fi
 
+    RE='\d+\s+IN\s+A\s+(\d+\.\d+\.\d+\.\d+)'
+    [[ `drill SMF.$HOSTNAME @wimi.zixia.svc.tutum.io` =~ $RE ]] && {
+        # Setting hosts
+        HOSTS_LINE="${BASH_REMATCH[1]}\t$HOSTNAME"
+        grep -v $HOSTS_LINE /etc/hosts | grep -v ^$ > /etc/hosts.$$
+        cat /etc/hosts.$$ > /etc/hosts && rm /etc/hosts.$$
+        echo -e $HOSTS_LINE >> /etc/hosts
+    }
+
     echo "SMF_DOMAIN='$HOSTNAME'" > SMF_DOMAIN.env
 
     echo ">> Set hostname to $HOSTNAME"

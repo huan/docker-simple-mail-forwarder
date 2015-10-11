@@ -31,7 +31,7 @@ RUN apk add --update \
 COPY install/main.dist.cf /etc/postfix/main.cf
 COPY install/master.dist.cf /etc/postfix/master.cf
 
-RUN mkdir /run/openrc && touch /run/openrc/softlevel \
+RUN mkdir /run/openrc && echo default > /run/openrc/softlevel \
     && cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
     && rc-update add postfix default \

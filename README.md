@@ -145,7 +145,7 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 Changelog
 ---------
 ### v0.3.0
-* CI(continuous integration) supported by use [CircleCI](circleci.com)
+* CI(continuous integration) supported by use [CircleCI](https://circleci.com)
 * CD(continuous delivery/continuous deployment) supported by use [Tutum Button](https://support.tutum.co/support/solutions/articles/5000620449-deploy-to-tutum-button)
 * write better tests
 * tune OpenRC inside alpine linux

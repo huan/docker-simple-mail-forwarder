@@ -144,7 +144,15 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
-### v0.2.0
+### v0.3.0
+* add deploy to Tutum Button
+* use CircleCI for continuous integration
+* write better tests
+* tune OpenRC inside alpine linux
+* full description README
+* [docker image size: 7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+
+### ~~v0.2.0~~ <- Don'tt use me, I'm BUGGY
 * supported specify user password
 * supported ESMTP TLS
 * [docker image size: 7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)

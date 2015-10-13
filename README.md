@@ -152,7 +152,7 @@ Changelog
 * full description README
 * [docker image size: 7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
-### ~~v0.2.0~~ <- Don'tt use me, I'm BUGGY
+### ~~v0.2.0~~ <- Don't use me, I'm BUGGY
 * supported specify user password
 * supported ESMTP TLS
 * [docker image size: 7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)

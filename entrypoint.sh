@@ -166,8 +166,9 @@ function start_postfix {
 #    service postfix stop > /dev/null 2>&1
 
     service syslog  start
-    service cron    start
-    service postfix start
+    #service cron    start
+    #service postfix start
+    postfix start
 }
 
 #

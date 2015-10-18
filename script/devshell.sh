@@ -10,7 +10,15 @@ NAME="zixia/simple-mail-forwarder"
     exit 1
 }
 
-TAG=":$1" && shift
+if [[ $1 =~ : ]]
+then
+    NAME=${1%%:*}
+    TAG=":${1##*:}"
+else
+    TAG=":$1"
+fi
+
+shift # TAG
 
 CMD="docker run --rm --name simple-mail-forwarder -it --entrypoint /bin/bash -v `pwd`:/app.out $NAME$TAG"
 

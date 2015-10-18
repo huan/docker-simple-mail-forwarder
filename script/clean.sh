@@ -27,7 +27,7 @@ imageList=$(docker images -f "dangling=true" -q)
 if [ -n "$imageList" ]
 then
     echo -n "Cleaning... "
-    docker rmi $imageList
+    docker rmi -f $imageList
     echo "Cleaned."
 else
     echo "Already clean."

@@ -32,7 +32,7 @@ RUN mkdir /run/openrc && echo default > /run/openrc/softlevel \
     && echo simple-mail-forwarder.com > /etc/hostname \
     \
     && sed -i '/rc_controller_cgroups/ c\rc_controller_cgroups="NO"' /etc/rc.conf \
-    && sed -i '/rc_sys/ c\rc_sys="lxc"' /etc/rc.conf \
+    && sed -i '/rc_sys/c rc_sys="lxc"' /etc/rc.conf \
     \
     && sed -i 's/cgroup_add_service/cgroup_add_service_DISABLED/g' /lib/rc/sh/openrc-run.sh\
     \

@@ -8,6 +8,7 @@
 }
 
 @test "service postfix could start/stop right." {
+    skip "service is not stable, not use this in 0.4.0"
     run service postfix status
 
     wasRunning=false

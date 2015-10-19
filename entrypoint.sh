@@ -285,6 +285,11 @@ echo
 
 # Init
 echo ">> Init System for Servicing..."
+
+while [ $# -gt 0 ]; do
+    shift
+done
+
 exec /init
 
 # ERROR: exec returned?!

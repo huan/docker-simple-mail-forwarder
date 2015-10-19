@@ -57,7 +57,7 @@ VOLUME ["/etc", "/var/spool/postfix"]
 EXPOSE 25
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["start"]
+CMD [""]
 
 
 ## Log Environment (in Builder)

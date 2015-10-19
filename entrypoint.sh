@@ -286,10 +286,12 @@ echo
 # Init
 echo ">> Init System for Servicing..."
 
-while [ $# -gt 0 ]; do
-    shift
-done
+#while [ $# -gt 0 ]; do
+#    shift
+#done
 
+echo "wait you to DEBUG me!"
+sleep 700
 exec /init
 
 # ERROR: exec returned?!

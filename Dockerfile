@@ -1,11 +1,11 @@
-FROM alpine:3.2
+FROM sillelien/base-alpine:0.10
 MAINTAINER Zhuohuan LI <zixia@zixia.net>
 
 ENV BATS_VERSION 0.4.0
 
 ## Install System
 
-RUN apk add --update \
+RUN apk upgrade && apk update && apk add \
         bash \
         curl \
         drill \
@@ -18,39 +18,29 @@ RUN apk add --update \
     && tar -xzf "/tmp/v${BATS_VERSION}.tar.gz" -C /tmp/ \
     && bash "/tmp/bats-${BATS_VERSION}/install.sh" /usr/local \
     \
-    && touch /var/log/messages \
-    && rm -rf /var/cache/apk/* \
-    && rm -rf /tmp/*
+    && rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
 ## Configure Service
 
 COPY install/main.dist.cf /etc/postfix/main.cf
 COPY install/master.dist.cf /etc/postfix/master.cf
 
-RUN mkdir /run/openrc && echo default > /run/openrc/softlevel \
-    && cat /dev/null > /etc/postfix/aliases && newaliases \
+RUN cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
     \
-    && sed -i '/rc_controller_cgroups/ c\rc_controller_cgroups="NO"' /etc/rc.conf \
-    && echo where is my lxc! \
-    && sed -i '/rc_sys/c rc_sys="lxc"' /etc/rc.conf \
-    \
-    && sed -i 's/cgroup_add_service/cgroup_add_service_DISABLED/g' /lib/rc/sh/openrc-run.sh\
-    \
-    && rc-update add postfix default \
-    && rc-status
-
-RUN echo test | saslpasswd2 -p test@test.com \
+    && echo test | saslpasswd2 -p test@test.com \
     && chown postfix /etc/sasldb2 \
     && saslpasswd2 -d test@test.com
-
-COPY install/init.sh /app/init.sh
-RUN bash -n /app/init.sh && chmod +x /app/init.sh
-
 
 ## Copy App
 
 WORKDIR /app
+
+COPY install/init-openssl.sh /app/init-openssl.sh
+RUN bash -n /app/init-openssl.sh && chmod +x /app/init-openssl.sh
+
+COPY install/postfix.sh /etc/services.d/postfix/run
+RUN bash -n /etc/services.d/postfix/run && chmod +x /etc/services.d/postfix/run
 
 COPY entrypoint.sh /entrypoint.sh
 RUN bash -n /entrypoint.sh && chmod a+x /entrypoint.sh

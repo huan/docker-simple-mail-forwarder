@@ -33,7 +33,7 @@ function start_postfix {
     #
     # OpenSSL Init
     #
-    bash /app/init.sh
+    bash /app/init-openssl.sh
 
     #
     # Set virtual user maping
@@ -155,19 +155,6 @@ function start_postfix {
     echo "$HOSTNAME" > /etc/mailname
     echo "$HOSTNAME" > /etc/hostname
 
-    # XXX permition denied in docker? - zixia 20150930
-    #hostname "$HOSTNAME"
-
-
-    # starting services
-    echo ">> Starting the services"
-#    service syslog  stop > /dev/null 2>&1
-#    service cron    stop > /dev/null 2>&1
-#    service postfix stop > /dev/null 2>&1
-
-    service syslog  start
-    #service cron    start
-    #service postfix start
     postfix start
 }
 
@@ -296,6 +283,12 @@ echo ">> View in DockerHub: https://hub.docker.com/r/zixia/simple-mail-forwarder
 echo
 echo
 
-# print logs
-echo ">> Printing the logs"
-tail -F /var/log/*
+# Init
+echo ">> Init System for Servicing..."
+exec /init
+
+# ERROR: exec returned?!
+ret=$?
+echo ">> Exec ERROR: $ret"
+sleep 7
+exit $ret

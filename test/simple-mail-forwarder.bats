@@ -125,13 +125,39 @@
     # # perl -MMIME::Base64 -e 'print encode_base64("testi\@testo.com\0testi\@testo.com\0test");'
     # dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0
     #
-    output=$(2>&1 openssl s_client -starttls smtp -crlf -connect 127.0.0.1:25 \
-        <<<'EHLO test.com' \
-        <<<'AUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0' \
-        )
+    FIFO_SSL_I=/tmp/ssli.$$
+    FIFO_SSL_O=/tmp/sslo.$$
 
-    skip "don't know why this test sometimes pass but sometimes failure."
+    mkfifo $FIFO_SSL_{I,O}
 
-    [[ $output =~ "235 2.7.0 Authentication successful" ]]
+    0<$FIFO_SSL_I &>$FIFO_SSL_O \
+        timeout -t 7 -s TERM \
+        openssl s_client -starttls smtp -crlf -connect 127.0.0.1:25 &
+
+    exec {FD_I}> $FIFO_SSL_I
+    exec {FD_O}< $FIFO_SSL_O
+
+    ret=1
+
+    while read line; do
+        line=$(sed 's/\r$//'<<<$line)
+
+        if [[ $line =~ 'CONNECTED' ]]; then
+            >& $FD_I echo 'AUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0'
+        elif [[ $line =~ '235 2.7.0 Authentication successful' ]]; then
+            >& $FD_I echo 'QUIT'
+            exec {FD_I}>&-
+            ret=0
+        elif [[ $line =~ '503 5.5.1 Error: already authenticated' ]]; then
+            >& $FD_I echo 'QUIT'
+            exec {FD_I}>&-
+            ret=0
+        fi
+    done <& $FD_O
+
+    unlink $FIFO_SSL_I
+    unlink $FIFO_SSL_O
+
+    [ $ret = 0 ]
 }
 

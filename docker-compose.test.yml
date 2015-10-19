@@ -1,5 +1,6 @@
 sut:
-    build: .
+    #    build: .
+    image: this
     command: test after-build
     environment:
         #- GIT_BRANCH

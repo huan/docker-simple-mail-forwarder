@@ -291,7 +291,7 @@ echo ">> Init System for Servicing..."
 #done
 
 
-for i in $(seq 7 -1 1); do
+for i in $(seq 2 -1 1); do
     echo exec init after ${i}0 seconds...
     sleep 10
 done

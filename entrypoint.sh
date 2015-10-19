@@ -285,18 +285,6 @@ echo
 
 # Init
 echo ">> Init System for Servicing..."
-
-#while [ $# -gt 0 ]; do
-#    shift
-#done
-
-
-for i in $(seq 2 -1 1); do
-    echo exec init after ${i}0 seconds...
-    sleep 10
-done
-
-echo "Init..."
 exec /init
 
 # ERROR: exec returned?!

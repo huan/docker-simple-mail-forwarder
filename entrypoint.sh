@@ -290,8 +290,13 @@ echo ">> Init System for Servicing..."
 #    shift
 #done
 
-echo "wait you to DEBUG me!"
-sleep 700
+
+for i in $(seq 7 -1 1); do
+    echo exec init after ${i}0 seconds...
+    sleep 10
+done
+
+echo "Init..."
 exec /init
 
 # ERROR: exec returned?!

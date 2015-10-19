@@ -31,7 +31,7 @@ read branch < GIT_HEAD
 branch=${branch##*/}
 
 ## short hash
-hash=${hash:0:3}
+hash=${hash:0:8}
 
 ## get IP
 RE='[0-9]+\s+IN\s+A\s+([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'

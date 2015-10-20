@@ -146,9 +146,18 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
-### v0.3.0
+### v0.4.0
+* switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)
+ 1. manage postfix service by [S6](http://skarnet.org/software/s6/)
+ 1. [solve PID 1 Zombie Problem](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)
+ 1. enhanced busybox shell
+* NOT to use OpenRC(very buggy run inside docker container) any more!
+* better ESMTP TLS AUTH test script
+* [docker image size: 10MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+
+### ~~v0.3.0~~ <- Don't use me, I'm BUGGY
 * CI(continuous integration) supported by use [CircleCI](https://circleci.com)
-* CD(continuous delivery/continuous deployment) supported by use [Tutum Button](https://support.tutum.co/support/solutions/articles/5000620449-deploy-to-tutum-button)
+* CD(continuous delivery) supported by use [Tutum Button](https://support.tutum.co/support/solutions/articles/5000620449-deploy-to-tutum-button)
 * write better tests
 * tune OpenRC inside alpine linux
 * full description README

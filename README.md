@@ -1,4 +1,4 @@
-Simple Mail Forwarder(SMF)[![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=svg)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
+Simple Mail Forwarder(SMF) [![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=svg)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
 ==================================
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zixia/docker-simple-mail-forwarder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')
@@ -24,6 +24,7 @@ This docker was built for maximum **simple** & **easy** to use because of this r
 ### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
 - [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
+- [MailGun](https://mailgun.com) professional, free. under 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
 
 I was about to pay $10/year maybe, but the cheapest plan is $9 per month. Having a $10 USD machine with unlimited mail&domains/month is an amazing idea! And of couse you also could put other dockers in this machine. :-D
 

@@ -30,8 +30,8 @@ date="$date $tz"
 read branch < GIT_HEAD
 branch=${branch##*/}
 
-## short hash
-hash=${hash:0:8}
+## short hash as github, lentgh: 7
+hash=${hash:0:7}
 
 ## get IP
 RE='[0-9]+\s+IN\s+A\s+([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'

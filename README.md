@@ -1,9 +1,8 @@
-Simple Mail Forwarder (SMF) Docker
+Simple Mail Forwarder(SMF)[![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=svg)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
 ==================================
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zixia/docker-simple-mail-forwarder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')
 [![Docker Puuls](https://img.shields.io/docker/pulls/zixia/simple-mail-forwarder.svg)](https://hub.docker.com/r/zixia/simple-mail-forwarder/)
-[![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=shield)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
 [![Docker Repository on Quay.io](https://quay.io/repository/zixia/simple-mail-forwarder/status "Docker Repository on Quay.io")](https://quay.io/repository/zixia/simple-mail-forwarder)
 [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/zixia/docker-simple-mail-forwarder)
 
@@ -153,7 +152,7 @@ Changelog
  1. enhanced busybox shell
 * NOT to use OpenRC(very buggy run inside docker container) any more!
 * better ESMTP TLS AUTH test script
-* [docker image size: 10MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+* docker image size: [10MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 ### ~~v0.3.0~~ <- Don't use me, I'm BUGGY
 * CI(continuous integration) supported by use [CircleCI](https://circleci.com)
@@ -161,18 +160,18 @@ Changelog
 * write better tests
 * tune OpenRC inside alpine linux
 * full description README
-* [docker image size: 7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+* docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 ### ~~v0.2.0~~ <- Don't use me, I'm BUGGY
 * supported specify user password
 * supported ESMTP TLS
-* [docker image size: 7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+* docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 ### v0.1.0
 * dockerized
 * basic forward function
 * self-testing
-* [docker image size: 6MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+* docker image size: [6MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 Cloud Requirement
 -----------------

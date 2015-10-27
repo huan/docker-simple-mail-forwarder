@@ -24,7 +24,7 @@ This docker was built for maximum **simple** & **easy** to use because of this r
 ### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
 - [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
-- [MailGun](https://mailgun.com) professional, free. under 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
+- [MailGun](https://mailgun.com) professional service. Free plan includes 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
 
 I was about to pay $10/year maybe, but the cheapest plan is $9 per month. Having a $10 USD machine with unlimited mail&domains/month is an amazing idea! And of couse you also could put other dockers in this machine. :-D
 

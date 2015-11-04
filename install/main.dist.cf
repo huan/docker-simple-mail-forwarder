@@ -738,3 +738,4 @@ smtpd_tls_exclude_ciphers =
 #smtpd_tls_dh512_param_file = ${config_directory}/cert/dh_512.pem
 #smtpd_tls_dh1024_param_file = ${config_directory}/cert/dh_1024.pem
 
+message_size_limit = 40960000

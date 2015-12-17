@@ -146,6 +146,10 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
+### v0.4.1
+* close issue #1
+* increace message size limit from 10MB to 40MB
+
 ### v0.4.0
 * switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)
  1. manage postfix service by [S6](http://skarnet.org/software/s6/)

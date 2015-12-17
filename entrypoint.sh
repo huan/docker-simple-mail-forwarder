@@ -86,8 +86,8 @@ function start_postfix {
         echo ">> Setting password[$password] for user $emailFrom ..."
         echo $password | saslpasswd2 $emailFrom
 
-        line=$(printf '%s\t%s' $emailFrom $emailTo)
-        virtualUsers="$virtualUsers$line$NEWLINE"
+        newLine=$(printf '%s\t%s' $emailFrom $emailTo)
+        virtualUsers="${virtualUsers}${newLine}${NEWLINE}"
 
         domainFrom=${emailFrom##*@}
 
@@ -96,9 +96,17 @@ function start_postfix {
         }
     done
 
+    #
+    # issue #1: forward all other emails to the original domain
+    #
+    for virtualDomain in "$virtualDomains"; do
+      $virtualUsers="@$virtualDomain @$virtualDomain $NEWLINE"
+    done
+
     echo "$virtualUsers"  > /etc/postfix/virtual
 
-    postconf -e virtual_alias_domains="$virtualDomains"
+    # issue #1: postconf -e virtual_alias_domains="$virtualDomains"
+    postconf -e relay_domains ="$virtualDomains"
     postconf -e virtual_alias_maps="hash:/etc/postfix/virtual"
 
     # initial user database

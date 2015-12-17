@@ -24,15 +24,15 @@
 
         userFrom=${addrFrom%@*}
         domainFrom=${addrFrom##*@}
-        [ "$userFrom" != "" ]
+# issue #1        [ "$userFrom" != "" ]
         [ "$domainFrom" != "" ]
 
         userTo=${addrTo%@*}
         domainTo=${addrTo##*@}
-        [ "$userTo" != "" ]
+# issue #1        [ "$userTo" != "" ]
         [ "$domainTo" != "" ]
 
-        [ "$domainFrom" != "$domainTo" ]
+# issue #1        [ "$domainFrom" != "$domainTo" ]
     done < /etc/postfix/virtual
 }
 

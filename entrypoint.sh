@@ -99,14 +99,14 @@ function start_postfix {
     #
     # issue #1: forward all other emails to the original domain
     #
-    for virtualDomain in "$virtualDomains"; do
-      $virtualUsers="@$virtualDomain @$virtualDomain $NEWLINE"
+    for virtualDomain in $virtualDomains; do
+      virtualUsers="${virtualUsers}@${virtualDomain} @${virtualDomain} $NEWLINE"
     done
 
     echo "$virtualUsers"  > /etc/postfix/virtual
 
     # issue #1: postconf -e virtual_alias_domains="$virtualDomains"
-    postconf -e relay_domains ="$virtualDomains"
+    postconf -e relay_domains="$virtualDomains"
     postconf -e virtual_alias_maps="hash:/etc/postfix/virtual"
 
     # initial user database

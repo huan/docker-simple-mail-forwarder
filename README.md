@@ -7,7 +7,7 @@ Simple Mail Forwarder(SMF) [![Circle CI](https://circleci.com/gh/zixia/docker-si
 [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/zixia/docker-simple-mail-forwarder)
 
 
-Simplest, Easist and Smallest Email Forward Service based on Docker.
+Simplest and Smallest Email Forward Service based on Docker.
 
 1. Config by [**one line**](#environment-variable-and-default)
 1. Run as [**docker start**](#quick-start-tldr)
@@ -17,16 +17,16 @@ View on Github - https://github.com/zixia/docker-simple-mail-forwarder
 
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------
-If you have a domain name, only want to have a(or a few) email address from this domain, but forward all the emails to gmail(etc). SMF is exactly what you need. (with [Docker](http://docker.com))
+If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. SMF is exactly what you need. (with [Docker](http://docker.com))
 
-This docker was built for maximum **simple** & **easy** to use because of this reason. I had many domains and need email address of them(for fun/work), and I hate config mail server. Some dns providers provide free email forwarding service for their own domain. some do not. And almose all email forwarding service is not free. So I decided to make it myself(thanks docker).
+This docker was built for ultimate **simplicity** because of this reason. I owned many domains and needed email addresses of them(for fun/work), and I hated to config email server. Some DNS providers provide free email forwarding service for their own domain, some do not. And almose all email forwarding service is NOT free. So I decided to make it myself(thanks docker).
 
 ### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
 - [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
 - [MailGun](https://mailgun.com) professional service. Free plan includes 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
 
-I was about to pay $10/year maybe, but the cheapest plan is $9 per month. Having a $10 USD machine with unlimited mail&domains/month is an amazing idea! And of couse you also could put other dockers in this machine. :-D
+I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited mail&domains per month is an amazing idea! And of couse you could also put other dockers on this same machine. :-D
 
 Quick Start (TL;DR)
 -------------------
@@ -37,13 +37,13 @@ $ docker run -p 25:25 zixia/simple-mail-forwarder
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
 
-This will forward all email received by testi@testo.com, to test@test.com.
+This will forward all emails received by testi@testo.com to test@test.com.
 
 See? There is nothing easier. 
 
 Quick Test
 ----------
-Done with [BATS(Bash Automated Testing System)](https://github.com/sstephenson/bats), a bash implementation of [TAP(Test Anything Protol)]( http://testanything.org).
+Tested by [BATS(Bash Automated Testing System)](https://github.com/sstephenson/bats), a bash implementation of [TAP(Test Anything Protol)]( http://testanything.org).
 
 How to run:
 ```bash
@@ -72,9 +72,9 @@ ok 19 ESMTP AUTH by testi@testo.com/test
 ok 20 ESMTP TLS AUTH by testi@testo.com/test
 ```
 
-You are set! :-]
+You are all set! :-]
 
-Environment Variable and Default
+Environment Variable and Default Values
 ----------------------------------
 `SMF_CONFIG`: MUST be defined. no default setting. (set me! I'm the only parameter~)
 
@@ -82,25 +82,25 @@ Environment Variable and Default
 Here's how to config the only environment parameter of SMF Docker:
 
 #### 1. Basic
-Forward all email received by testi@testo.com, to test@test.com:
+Forward all emails received by testi@testo.com to test@test.com:
 ```bash
 $ export SMF_CONFIG='testi@testo.com:test@test.com'
 ```
-> You could get the ESMTP AUTH password for your on your docker log. It's random generated if you do not provide one.
+> You could get the ESMTP AUTH password for you on your docker log. It's randomly generated if you do not provide one.
 
 #### 2. Advanced
 Add ESMTP AUTH password:
 ```bash
 $ export SMF_CONFIG='from@testi.com:to@testo.com:ThisIsPassword'
 ```
-> Password will print on the docker log.
+> Password will be printed on the docker log.
 
 #### 3. Hardcore
-Add as many email as you want, with or without password. Seperated by semicolons or newline:
+Add as many email accounts as you want, with or without password. Seperated by semicolon or a new line:
 ```bash
 $ export SMF_CONFIG='testi@testo.com:test@test.com:ThisIsPassword;testo@testi.com:test@test.com:AnotherPassword'
 ```
-> Tips: if you only provide the first password, and omit followings, then the passwords of all users will be the same as the password last seen. This is a feature.
+> Tips: if you only provide the first password and leave the rest blank, then the passwords for all the rest accounts will be the same as the last password value you set. This is by design.
  
 Helper Scripts
 --------------------
@@ -119,7 +119,7 @@ $ ./script/run.sh latest test
 $ ./script/devshell.sh latest
 ```
 
-### Test by Hand
+### Manual Test
 ```bash
 $ telnet 127.0.0.1 25
 > 220 testo.com ESMTP
@@ -136,7 +136,7 @@ quit
 > Connection closed by foreign host
 ```
 
-P.S. The magic string `dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0` stands for `testi@testo.com\0test@testo.com\0test` in base64 encode, required by AUTH PLAIN.
+P.S. The magic string `dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0` stands for `testi@testo.com\0test@testo.com\0test` in base64 encoding, required by AUTH PLAIN.
 
 > Useful article about SMTP Authentication: http://www.fehcom.de/qmail/smtpauth.html
 

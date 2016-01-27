@@ -2,7 +2,7 @@ sut:
     #    build: .
     image: this
     command: test after-build
-    environment:
+    # environment:
         #- GIT_BRANCH
         #- GIT_TAG
         #- GIT_SHA1

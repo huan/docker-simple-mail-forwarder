@@ -33,7 +33,7 @@ Quick Start (TL;DR)
 Just set `SMF_CONFIG` and run:
 ```bash
 $ export SMF_CONFIG='testi@testo.com:test@test.com:test'
-$ docker run -p 25:25 zixia/simple-mail-forwarder
+$ docker run  -e SMF_CONFIG=$SMF_CONFIG -p 25:25 zixia/simple-mail-forwarder
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
 

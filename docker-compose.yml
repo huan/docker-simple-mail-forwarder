@@ -4,7 +4,6 @@ smf:
         - "25:25"
     environment:
         - SMF_CONFIG=testi@testo.com:test@test.com:test
-    tags:
-        - mx
+        
     deployment_strategy: high_availability
     restart: always

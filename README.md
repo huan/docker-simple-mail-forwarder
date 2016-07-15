@@ -15,6 +15,10 @@ Simplest and Smallest Email Forward Service based on Docker.
 
 View on Github - https://github.com/zixia/docker-simple-mail-forwarder
 
+Voice from Users
+------------------------------------
+> @Brian Christner : After testing a ton of different mail projects I finally discovered Simple Mail Forwarder (SMF) by Zixia. This image is based on Alpine which is already a positive. It is super tiny and as the name suggests, easy to use. [link](https://www.brianchristner.io/setting-up-a-mail-forwarder-in-docker/)
+
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------
 If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. SMF is exactly what you need. (with [Docker](http://docker.com))

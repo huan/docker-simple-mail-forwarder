@@ -67,6 +67,9 @@ function start_postfix {
 
         emailFrom=${emailPair[0]}
         emailTo=${emailPair[1]}
+        emailToArr=(${emailTo//|/ })
+        emailTo=$(printf "\t%s" "${emailToArr[@]}")
+        emailTo=${emailTo:1}
         tryPassword=${emailPair[2]}
 
         # 1. if user has no password, then use the last seen password from other users.
@@ -86,7 +89,7 @@ function start_postfix {
         echo ">> Setting password[$password] for user $emailFrom ..."
         echo $password | saslpasswd2 $emailFrom
 
-        newLine=$(printf '%s\t%s' $emailFrom $emailTo)
+        newLine=$(printf '%s\t%s' $emailFrom "$emailTo")
         virtualUsers="${virtualUsers}${newLine}${NEWLINE}"
 
         domainFrom=${emailFrom##*@}

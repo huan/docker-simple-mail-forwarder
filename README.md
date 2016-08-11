@@ -95,6 +95,12 @@ $ export SMF_CONFIG='testi@testo.com:test@test.com'
 ```
 > You could get the ESMTP AUTH password for you on your docker log. It's randomly generated if you do not provide one.
 
+You can also forward all emails received by testi@testo.com to multiple destination addresses:
+
+```bash
+$ export SMF_CONFIG='testi@testo.com:test1@test.com|test2@test.com|test3@test.com'
+```
+
 #### 2. Advanced
 Add ESMTP AUTH password:
 ```bash

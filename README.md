@@ -159,9 +159,10 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
-### v0.4.1
+### v0.4.2
 * close issue #1
 * increace message size limit from 10MB to 40MB
+* merged pull request from @kminek : allow multiple forwards seperated by "|" #7
 
 ### v0.4.0
 * switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)

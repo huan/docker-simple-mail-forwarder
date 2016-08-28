@@ -198,8 +198,8 @@ Cloud Requirement
 -----------------
 * A Cloud Service that could host docker is required.
   * DigitalOcean.com
+  * LiNode.com
 * A Docker management platform is recommanded.
-  * Tutum.co [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/zixia/docker-simple-mail-forwarder)
 * Docker is required.
   * Docker.com
 

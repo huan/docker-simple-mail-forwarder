@@ -5,7 +5,7 @@ ENV BATS_VERSION 0.4.0
 
 ## Install System
 
-RUN apk upgrade && apk update && apk add \
+RUN apk update && apk upgrade && apk add \
         bash \
         curl \
         drill \

@@ -4,7 +4,6 @@
 [![](https://badge.imagelayers.io/stefand/simple-mail-forwarder-armhf:latest.svg)](https://imagelayers.io/?images=stefand/simple-mail-forwarder-armhf:latest 'Get your own badge on imagelayers.io')
 [![Docker Puuls](https://img.shields.io/docker/pulls/stefand/simple-mail-forwarder-armhf.svg)](https://hub.docker.com/r/stefand/simple-mail-forwarder-armhf/)
 ![Docker Stars](https://img.shields.io/docker/stars/stefand/simple-mail-forwarder-armhf.svg?maxAge=2592000)
-[![Docker Repository on Quay.io](https://quay.io/repository/stefand/simple-mail-forwarder-armhf/status "Docker Repository on Quay.io")](https://quay.io/repository/stefand/simple-mail-forwarder-armhf)
 
 [![dockeri.co](http://dockeri.co/image/stefand/simple-mail-forwarder-armhf)](https://hub.docker.com/r/stefand/simple-mail-forwarder-armhf/)
 

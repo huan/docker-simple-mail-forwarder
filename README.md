@@ -1,20 +1,22 @@
-Simple Mail Forwarder(SMF) [![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=svg)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
+
 ==================================
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zixia/docker-simple-mail-forwarder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')
-[![Docker Puuls](https://img.shields.io/docker/pulls/zixia/simple-mail-forwarder.svg)](https://hub.docker.com/r/zixia/simple-mail-forwarder/)
-![Docker Stars](https://img.shields.io/docker/stars/zixia/simple-mail-forwarder.svg?maxAge=2592000)
-[![Docker Repository on Quay.io](https://quay.io/repository/zixia/simple-mail-forwarder/status "Docker Repository on Quay.io")](https://quay.io/repository/zixia/simple-mail-forwarder)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dimitrovs/docker-simple-mail-forwarder-armhf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![](https://badge.imagelayers.io/stefand/simple-mail-forwarder-armhf:latest.svg)](https://imagelayers.io/?images=stefand/simple-mail-forwarder-armhf:latest 'Get your own badge on imagelayers.io')
+[![Docker Puuls](https://img.shields.io/docker/pulls/stefand/simple-mail-forwarder-armhf.svg)](https://hub.docker.com/r/stefand/simple-mail-forwarder-armhf/)
+![Docker Stars](https://img.shields.io/docker/stars/stefand/simple-mail-forwarder-armhf.svg?maxAge=2592000)
+[![Docker Repository on Quay.io](https://quay.io/repository/stefand/simple-mail-forwarder-armhf/status "Docker Repository on Quay.io")](https://quay.io/repository/stefand/simple-mail-forwarder-armhf)
 
-[![dockeri.co](http://dockeri.co/image/zixia/simple-mail-forwarder)](https://hub.docker.com/r/zixia/simple-mail-forwarder/)
+[![dockeri.co](http://dockeri.co/image/stefand/simple-mail-forwarder-armhf)](https://hub.docker.com/r/stefand/simple-mail-forwarder-armhf/)
 
-Simplest and Smallest Email Forward Service based on Docker.
+Simplest and Smallest Email Forward Service based on Docker for your Raspberry Pi or Scaleway instance.
 
 1. Config by [**one line**](#environment-variable-and-default)
 1. Run as [**docker start**](#quick-start-tldr)
 1. Image Size [**10MB**](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
-View on Github - https://github.com/zixia/docker-simple-mail-forwarder
+View on Github - https://github.com/dimitrovs/docker-simple-mail-forwarder-armhf
+
+ARM fork of: [zixia/docker-simple-mail-forwarder](https://github.com/zixia/docker-simple-mail-forwarder) .
 
 Voice from Users
 ------------------------------------
@@ -26,22 +28,15 @@ Voice from Users
 
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------
-If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. SMF is exactly what you need. (with [Docker](http://docker.com))
+If you have a domain name and only want to have one (or a few) email address on this domain, while forwarding all emails to another email account, SMF is exactly what you need. (with [Docker](http://docker.com) for ARM )
 
-This docker was built for ultimate **simplicity** because of this reason. I owned many domains and needed email addresses of them(for fun/work), and I hated to config email server. Some DNS providers provide free email forwarding service for their own domain, some do not. And almose all email forwarding service is NOT free. So I decided to make it myself(thanks docker).
-
-### Related Services
-- [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
-- [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
-- [MailGun](https://mailgun.com) professional service. Free plan includes 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
-
-I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited mail&domains per month is an amazing idea! And of couse you could also put other dockers on this same machine. :-D
+This docker image was built for ultimate **simplicity** . I own many domains and need email addresses for them (for fun/work), and I hate to configure email serverers. Some DNS providers provide free email forwarding service with domain purchase, some do not. And almose all email forwarding services are NOT free. I have a number of Raspberry Pi devices, some of them colocated in datacenters, so I decided to port Zhuohuan LI's SMF to ARM. All credit goes to Zhuohuan LI: https://github.com/zixia/docker-simple-mail-forwarder .
 
 Quick Start (TL;DR)
 -------------------
 Just set `SMF_CONFIG` and run:
 ```bash
-$ export SMF_CONFIG='testi@testo.com:test@test.com:test'
+$ export SMF_CONFIG='testi@testo.com:test@test.com'
 $ docker run  -e SMF_CONFIG=$SMF_CONFIG -p 25:25 zixia/simple-mail-forwarder
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)

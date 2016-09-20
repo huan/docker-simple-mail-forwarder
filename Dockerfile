@@ -1,5 +1,5 @@
-FROM sillelien/base-alpine:0.10
-MAINTAINER Zhuohuan LI <zixia@zixia.net>
+FROM stefand/base-alpine-armhf
+MAINTAINER Stefan Dimitrov <stefan@dimitrov.li>
 
 ENV BATS_VERSION 0.4.0
 

@@ -153,54 +153,21 @@ P.S. The magic string `dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0` stands 
 Bug
 ---
 Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
+For ARM specific: https://github.com/dimitrovs/docker-simple-mail-forwarder-armhf/issues
 
-Changelog
----------
-### v0.4.2
-* close issue #1
-* increace message size limit from 10MB to 40MB
-* merged pull request from @kminek : allow multiple forwards seperated by "|" #7
-
-### v0.4.0
-* switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)
- 1. manage postfix service by [S6](http://skarnet.org/software/s6/)
- 1. [solve PID 1 Zombie Problem](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)
- 1. enhanced busybox shell
-* NOT to use OpenRC(very buggy run inside docker container) any more!
-* better ESMTP TLS AUTH test script
-* docker image size: [10MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
-
-### ~~v0.3.0~~ <- Don't use me, I'm BUGGY
-* CI(continuous integration) supported by use [CircleCI](https://circleci.com)
-* CD(continuous delivery) supported by use [Tutum Button](https://support.tutum.co/support/solutions/articles/5000620449-deploy-to-tutum-button)
-* write better tests
-* tune OpenRC inside alpine linux
-* full description README
-* docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
-
-### ~~v0.2.0~~ <- Don't use me, I'm BUGGY
-* supported specify user password
-* supported ESMTP TLS
-* docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
-
-### v0.1.0
-* dockerized
-* basic forward function
-* self-testing
-* docker image size: [6MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
-
-Cloud Requirement
+Hardware Requirement
 -----------------
-* A Cloud Service that could host docker is required.
-  * DigitalOcean.com
-  * LiNode.com
-* A Docker management platform is recommanded.
-* Docker is required.
+* ARM-based board is required (ARMv6+)
+  * Tested on Raspberry Pi Model B
+* Docker for ARM is required.
   * Docker.com
+  * 
+NOTE: THIS IMAGE IS NOT FOR YOUR PC/MAC/VPS/CloudServer! This image is for ARM boards. If you don't know what this means you are most likely looking for: https://github.com/zixia/docker-simple-mail-forwarder
 
 Author
 -----------------
 Zhuohuan LI <zixia@zixia.net> (http://linkedin.com/in/zixia)
+ARM port by Stefan Dimitrov <stefan@dimitrov.li> (https://www.linkedin.com/in/dimitrovs)
 
 <a href="http://stackoverflow.com/users/1123955/zixia">
 <img src="http://stackoverflow.com/users/flair/1123955.png" width="208" height="58" alt="profile for zixia at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for zixia at Stack Overflow, Q&amp;A for professional and enthusiast programmers">

@@ -4,7 +4,6 @@
 [![](https://badge.imagelayers.io/stefand/simple-mail-forwarder-armhf:latest.svg)](https://imagelayers.io/?images=stefand/simple-mail-forwarder-armhf:latest 'Get your own badge on imagelayers.io')
 [![Docker Puuls](https://img.shields.io/docker/pulls/stefand/simple-mail-forwarder-armhf.svg)](https://hub.docker.com/r/stefand/simple-mail-forwarder-armhf/)
 ![Docker Stars](https://img.shields.io/docker/stars/stefand/simple-mail-forwarder-armhf.svg?maxAge=2592000)
-[![Docker Repository on Quay.io](https://quay.io/repository/stefand/simple-mail-forwarder-armhf/status "Docker Repository on Quay.io")](https://quay.io/repository/stefand/simple-mail-forwarder-armhf)
 
 [![dockeri.co](http://dockeri.co/image/stefand/simple-mail-forwarder-armhf)](https://hub.docker.com/r/stefand/simple-mail-forwarder-armhf/)
 
@@ -37,7 +36,7 @@ Quick Start (TL;DR)
 Just set `SMF_CONFIG` and run:
 ```bash
 $ export SMF_CONFIG='testi@testo.com:test@test.com'
-$ docker run  -e SMF_CONFIG=$SMF_CONFIG -p 25:25 zixia/simple-mail-forwarder
+$ docker run  -e SMF_CONFIG=$SMF_CONFIG -p 25:25 stefand/simple-mail-forwarder-armhf
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
 

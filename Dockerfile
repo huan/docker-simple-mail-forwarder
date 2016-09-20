@@ -9,6 +9,7 @@ RUN apk update && apk upgrade && apk add \
         bash \
         curl \
         drill \
+	openssl \
         logrotate \
         postfix \
         cyrus-sasl \

@@ -24,6 +24,8 @@ Voice from Users
 
 > @kiani: have a working mail server, seriously, it was that easy. [link](https://kiani.io/blog/custom-domain-mail-forward)
 
+> @counterbeing : great image. Wonderfully easy interface, with all that i need. :+1: [link](https://github.com/zixia/docker-simple-mail-forwarder/issues/6#issuecomment-248667232)
+
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------
 If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. SMF is exactly what you need. (with [Docker](http://docker.com))

@@ -44,7 +44,7 @@ Quick Start (TL;DR)
 Just set `SMF_CONFIG` and run:
 ```bash
 $ export SMF_CONFIG='testi@testo.com:test@test.com:test'
-$ docker run  -e SMF_CONFIG=$SMF_CONFIG -p 25:25 zixia/simple-mail-forwarder
+$ docker run  -e SMF_CONFIG=$SMF_CONFIG -p 25:25 zixia/simple-mail-forwarder:armhf-latest
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
 
@@ -196,11 +196,12 @@ Changelog
 * self-testing
 * docker image size: [6MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
-Cloud Requirement
+Hardware Requirement
 -----------------
-* A Cloud Service that could host docker is required.
-  * DigitalOcean.com
-  * LiNode.com
+* ARM based device (tested on ARMv6).
+  * RaspberryPi
+  * (Banana|Orange|*)Pi
+  * Scaleway BareMetal ARM
 * A Docker management platform is recommanded.
 * Docker is required.
   * Docker.com

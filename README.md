@@ -167,6 +167,9 @@ Changelog
 * close issue #1
 * increace message size limit from 10MB to 40MB
 * merged pull request from @kminek : allow multiple forwards seperated by "|" #7
+* fix domain name in scripts
+* fix unit test fail error: do not upgrade alpine
+* restore deploy button in reamde: it is docker cloud now.(former tutum)
 
 ### v0.4.0
 * switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)

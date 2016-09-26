@@ -5,11 +5,12 @@ ENV BATS_VERSION 0.4.0
 
 ## Install System
 
-RUN apk update && apk upgrade && apk add \
+RUN apk update && apk add \
         bash \
         curl \
         drill \
         logrotate \
+        openssl \
         postfix \
         cyrus-sasl \
     \

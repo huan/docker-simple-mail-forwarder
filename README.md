@@ -163,6 +163,9 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
+### master
+* TBD
+
 ### v0.4.2
 * close issue #1
 * increace message size limit from 10MB to 40MB

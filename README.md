@@ -44,7 +44,7 @@ Quick Start (TL;DR)
 Just set `SMF_CONFIG` and run:
 ```bash
 $ export SMF_CONFIG='testi@testo.com:test@test.com:test'
-$ docker run  -e SMF_CONFIG=$SMF_CONFIG -p 25:25 zixia/simple-mail-forwarder
+$ docker run  -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
 
@@ -166,7 +166,7 @@ Changelog
 ### master
 * TBD
 
-### v0.4.2
+### v0.4.2 (25th Sep 2016)
 * close issue #1
 * increace message size limit from 10MB to 40MB
 * merged pull request from @kminek : allow multiple forwards seperated by "|" #7
@@ -209,8 +209,6 @@ Cloud Requirement
   * [LiNode.com](https://www.linode.com/?r=5fd2b713d711746bb5451111df0f2b6d863e9f63)
 * A Docker management platform is recommanded.
   * Docker Cloud(Former Tutum) [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy)
-
-
 * Docker is required.
   * Docker.com
 

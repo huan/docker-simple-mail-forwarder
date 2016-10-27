@@ -54,7 +54,7 @@ This will forward all emails received by testi@testo.com to test@test.com.
 
 If you want to forward all emails sent to domain testo.com to all@test.com, set it like so:
 ```bash
-$ export SMF_CONFIG='@testo.com:test@test.com'
+$ export SMF_CONFIG='@testo.com:all@test.com'
 ```
 
 See? There is nothing easier. 
@@ -107,7 +107,7 @@ $ export SMF_CONFIG='testi@testo.com:test@test.com'
 
 Forward all emails received by any email address in domain testo.com to all@test.com:
 ```bash
-$ export SMF_CONFIG='@testo.com:test@test.com'
+$ export SMF_CONFIG='@testo.com:all@test.com'
 ```
 > You could get the ESMTP AUTH password for you on your docker log. It's randomly generated if you do not provide one.
 

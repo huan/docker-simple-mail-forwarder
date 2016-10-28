@@ -147,7 +147,7 @@ function start_postfix {
     # this one is not posix compatible: RE='\d+\s+IN\s+A\s+(\d+\.\d+\.\d+\.\d+)'
     # use next one: [0-9] for \d , make posix comfortable (I will not :-[ )
     RE='[0-9]+\s+IN\s+A\s+([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'
-    [[ `drill SimpleMailForwarder.smf.$HOSTNAME @wimi.zixia.svc.tutum.io` =~ $RE ]] && {
+    [[ `drill SimpleMailForwarder.smf.$HOSTNAME @wimi.36c33f49.svc.dockerapp.io` =~ $RE ]] && {
         # Setting hosts
         HOSTS_LINE="${BASH_REMATCH[1]}\t$HOSTNAME"
         grep -v $HOSTS_LINE /etc/hosts | grep -v ^$ > /etc/hosts.$$

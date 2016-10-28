@@ -26,6 +26,8 @@ Voice from Users
 
 > @counterbeing : great image. Wonderfully easy interface, with all that i need. :+1: [link](https://github.com/zixia/docker-simple-mail-forwarder/issues/6#issuecomment-248667232)
 
+> @nelfer : Guess what? Your image already supports this! [link](https://github.com/zixia/docker-simple-mail-forwarder/issues/13#issuecomment-255562151)
+
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------
 If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. SMF is exactly what you need. (with [Docker](http://docker.com))
@@ -44,11 +46,16 @@ Quick Start (TL;DR)
 Just set `SMF_CONFIG` and run:
 ```bash
 $ export SMF_CONFIG='testi@testo.com:test@test.com:test'
-$ docker run  -e SMF_CONFIG=$SMF_CONFIG -p 25:25 zixia/simple-mail-forwarder:armhf-latest
+$ docker run  -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder:armhf-latest
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
 
 This will forward all emails received by testi@testo.com to test@test.com.
+
+If you want to forward all emails sent to domain testo.com to all@test.com, set it like so:
+```bash
+$ export SMF_CONFIG='@testo.com:all@test.com'
+```
 
 See? There is nothing easier. 
 
@@ -96,6 +103,11 @@ Here's how to config the only environment parameter of SMF Docker:
 Forward all emails received by testi@testo.com to test@test.com:
 ```bash
 $ export SMF_CONFIG='testi@testo.com:test@test.com'
+```
+
+Forward all emails received by any email address in domain testo.com to all@test.com:
+```bash
+$ export SMF_CONFIG='@testo.com:all@test.com'
 ```
 > You could get the ESMTP AUTH password for you on your docker log. It's randomly generated if you do not provide one.
 
@@ -163,10 +175,16 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
-### v0.4.2
+### master
+* TBD
+
+### v0.4.2 (25th Sep 2016)
 * close issue #1
 * increace message size limit from 10MB to 40MB
 * merged pull request from @kminek : allow multiple forwards seperated by "|" #7
+* fix domain name in scripts
+* fix unit test fail error: do not upgrade alpine
+* restore deploy button in reamde: it is docker cloud now.(former tutum)
 
 ### v0.4.0
 * switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)
@@ -203,6 +221,7 @@ Hardware Requirement
   * (Banana|Orange|*)Pi
   * Scaleway BareMetal ARM
 * A Docker management platform is recommanded.
+  * Docker Cloud(Former Tutum) [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy)
 * Docker is required.
   * Docker.com
 

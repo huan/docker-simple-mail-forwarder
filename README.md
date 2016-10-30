@@ -211,13 +211,16 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
-### master
-* TBD
+### v0.4.3 master
+* Allow own certificates by @nelfer #15
+* ARM version of armhf by @dimitrovs #12
+* use SMF_DOMAIN env for certificate's CN by @bcardiff #11
+* allow multiple forwards separated by | by @kminek #7
+* Update docker-compose.yml to fix tutum tag by @vegasbrianc #4
 
 ### v0.4.2 (25th Sep 2016)
 * close issue #1
 * increace message size limit from 10MB to 40MB
-* merged pull request from @kminek : allow multiple forwards seperated by "|" #7
 * fix domain name in scripts
 * fix unit test fail error: do not upgrade alpine
 * restore deploy button in reamde: it is docker cloud now.(former tutum)

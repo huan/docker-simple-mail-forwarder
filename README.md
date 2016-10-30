@@ -216,7 +216,7 @@ Changelog
 * ARM version of armhf by @dimitrovs [#12](https://github.com/zixia/docker-simple-mail-forwarder/pull/12)
 * use SMF_DOMAIN env for certificate's CN by @bcardiff [#11](https://github.com/zixia/docker-simple-mail-forwarder/pull/11)
 * allow multiple forwards separated by | by @kminek [#7](https://github.com/zixia/docker-simple-mail-forwarder/pull/7)
-* Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4])(https://github.com/zixia/docker-simple-mail-forwarder/pull/4)
+* Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4](https://github.com/zixia/docker-simple-mail-forwarder/pull/4)
 
 ### v0.4.2 (25th Sep 2016)
 * close issue #1

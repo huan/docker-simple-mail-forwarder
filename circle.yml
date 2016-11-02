@@ -11,6 +11,8 @@ test:
   override:
     - ./script/build.sh latest
 
-notify:
-  webhooks:
-      - url: https://registry.hub.docker.com/u/zixia/simple-mail-forwarder/trigger/38e60758-f6ef-45fc-8aec-29c6d47335a4/
+deployment:
+  master:
+    branch: master
+    commands:
+      - curl -X POST -d '{"from":"circleci"}' "$DOCKER_REBUILD_URL"

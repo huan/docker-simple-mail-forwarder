@@ -53,7 +53,7 @@ COPY .git/logs/HEAD /app/GIT_LOG
 COPY .git/HEAD /app/GIT_HEAD
 COPY install/buildenv.sh /app/
 
-VOLUME ["/etc", "/var/spool/postfix"]
+VOLUME ["/var/spool/postfix"]
 
 EXPOSE 25
 

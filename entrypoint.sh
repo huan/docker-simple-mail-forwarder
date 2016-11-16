@@ -14,9 +14,10 @@ $ docker run -p 25:25 \\
     user2@domain1.com:forward-user2@forward-domain1.com; \\
     userN@domainN.com:forward-userN@forward-domainN.com;
 
-Enviroment Variables:
+Environment Variables:
     SMF_DOMAIN - mail server hostname. use tutum/docker hostname if omitted.
-    SMF_CONFIG - mail forward addresses maping list.
+    SMF_CONFIG - mail forward addresses mapping list.
+    SMF_MYNETWORKS - configure relaying from trusted IPs, see http://www.postfix.org/postconf.5.html#mynetworks
 
 this creates a new smtp server which listens on port 25,
 forward all email from
@@ -159,6 +160,10 @@ function start_postfix {
 
     echo ">> Set hostname to $HOSTNAME"
 
+    if [ "$SMF_MYNETWORKS" != "" ]
+    then
+        postconf -e mynetworks="$SMF_MYNETWORKS"
+    fi
 
     # add domain
     postconf -e myhostname="$HOSTNAME"

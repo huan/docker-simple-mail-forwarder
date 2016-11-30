@@ -18,6 +18,7 @@ Environment Variables:
     SMF_DOMAIN - mail server hostname. use tutum/docker hostname if omitted.
     SMF_CONFIG - mail forward addresses mapping list.
     SMF_MYNETWORKS - configure relaying from trusted IPs, see http://www.postfix.org/postconf.5.html#mynetworks
+    SMF_SMARTHOST - configure a smarthost
 
 this creates a new smtp server which listens on port 25,
 forward all email from
@@ -170,6 +171,15 @@ function start_postfix {
     postconf -e mydestination="localhost"
     echo "$HOSTNAME" > /etc/mailname
     echo "$HOSTNAME" > /etc/hostname
+
+    if [ "$SMF_SMARTHOST" = "" ]; then
+        SMF_SMARTHOST=$1
+    fi
+
+    if [ "SMF_SMARTHOST" != "" ]
+    then
+        postconf -e relayhost="$SMF_SMARTHOST"
+    fi
 
     postfix start
 }

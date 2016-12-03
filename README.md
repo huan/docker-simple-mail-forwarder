@@ -131,6 +131,14 @@ You can also forward all emails received by testi@testo.com to multiple destinat
 $ export SMF_CONFIG='testi@testo.com:test1@test.com|test2@test.com|test3@test.com'
 ```
 
+### `SMF_RELAYHOST` Examples
+Here's howto config a relayhost/smarthost to use for forwarding mail.
+
+Send all outgoing mail trough a smarthost on 192.168.1.2
+```bash
+$ export SMF_RELAYHOST='192.168.1.2'
+```
+
 TLS (SSL) Certificates
 --------------------
 SMF creates its own certificate and private key when starts. However, this certificate is self signed and so some systems might give you a warning about the server not being trusted.

@@ -131,22 +131,66 @@ You can also forward all emails received by testi@testo.com to multiple destinat
 $ export SMF_CONFIG='testi@testo.com:test1@test.com|test2@test.com|test3@test.com'
 ```
 
+### `SMF_RELAYHOST` Examples
+Here's howto config a relayhost/smarthost to use for forwarding mail.
+
+Send all outgoing mail trough a smarthost on 192.168.1.2
+```bash
+$ export SMF_RELAYHOST='192.168.1.2'
+```
+
+TLS (SSL) Certificates
+--------------------
+SMF creates its own certificate and private key when starts. However, this certificate is self signed and so some systems might give you a warning about the server not being trusted.
+If you have valid certificates for the domain name of the host, then you can use them and avoid the warning about not being trusted.
+
+1. First you need to prepare the certificate files. Copy your full chain certificate to a file named `smtp.cert`. Then copy the private key to a file named `smtp.key`
+
+2. Copy these files to a folder. For example: `/data/certs/`. This folder will be mounted as a volume in SMF
+
+3. When creating the container, add the `-v` (volume) parameter to mount it to the folder `/etc/postfix/cert/` like so:
+ ```bash
+ $ docker run  -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 -v /data/certs/:/etc/postfix/cert/ zixia/simple-mail-forwarder
+ ```
+4. Your emails should now be forwarded with trusted encryption. You can use this tool to test it: <a href="http://checktls.com/" target="_blank">http://checktls.com/</a>
+
+If you do not have a certificate and don't have the $$ to buy one, you can use <a href="https://letsencrypt.org" target="_blank">https://letsencrypt.org</a> if you have shell access to the server (Notice, SMF does not provide, yet, this service). Letsencrypt allows you to create valid trusted certificates for a server, if the server responds to the domain you specify. In order to do this, you need to run the program from within the server and have administrator rights.
+
+1. First install letsencrypt. This might vary by distribution, but in Ubuntu it is like this:
+
+ ```bash
+ $ sudo apt-get install letsencrypt
+ ```
+2. Stop any web server that might be using port 80 (Apache, nginx, etc)
+
+3. Determine all of the domains and subdomains that you want the certificate to cover, for example `mydomain.com`, `www.mydomain.com`, `smtp.mydomain.com`, etc. Remember to include the domain that SMF will respond to (as per MX record in DNS configuration of the domain)
+
+4. Execute the following command (you can add as many domains as you wish with the `-d` option. But remember, their DNS resolution must resolve to the server where `letsencrypt` is being executed)
+ ```bash
+ $ letsencrypt certonly --standalone -d yourdomain.com -d www.yourdomain.com -d mail.yourdomain.com
+ ```
+5. Follow the prompts and if everything is successful you will get your certificates in a folder like `/etc/letsencrypt/live/mydomain.com`
+
+6. You can now use those certificates to make SMF TLS trusted.
+
+> This was a quick way of how to use letsencrypt. For a full tutorial based on your OS see: <a href="https://certbot.eff.org/" tareget="_blank">https://certbot.eff.org/</a>
+
 Helper Scripts
 --------------------
 1. Build from source.
-```bash
-$ ./script/build.sh latest
-```
+ ```bash
+ $ ./script/build.sh latest
+ ```
 
 2. Run a self-test for SMF docker.
-```bash
-$ ./script/run.sh latest test
-```
+ ```bash
+ $ ./script/run.sh latest test
+ ```
 
 3. Get a shell inside SMF docker.
-```bash
-$ ./script/devshell.sh latest
-```
+ ```bash
+ $ ./script/devshell.sh latest
+ ```
 
 ### Manual Test
 ```bash
@@ -175,13 +219,16 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
-### master
-* TBD
+### v0.4.3 master
+* Allow own certificates by @nelfer [#15](https://github.com/zixia/docker-simple-mail-forwarder/pull/15)
+* ARM version of armhf by @dimitrovs [#12](https://github.com/zixia/docker-simple-mail-forwarder/pull/12)
+* use SMF_DOMAIN env for certificate's CN by @bcardiff [#11](https://github.com/zixia/docker-simple-mail-forwarder/pull/11)
+* allow multiple forwards separated by | by @kminek [#7](https://github.com/zixia/docker-simple-mail-forwarder/pull/7)
+* Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4](https://github.com/zixia/docker-simple-mail-forwarder/pull/4)
 
 ### v0.4.2 (25th Sep 2016)
 * close issue #1
 * increace message size limit from 10MB to 40MB
-* merged pull request from @kminek : allow multiple forwards seperated by "|" #7
 * fix domain name in scripts
 * fix unit test fail error: do not upgrade alpine
 * restore deploy button in reamde: it is docker cloud now.(former tutum)

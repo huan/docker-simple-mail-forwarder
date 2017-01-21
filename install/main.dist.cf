@@ -737,5 +737,7 @@ smtpd_tls_exclude_ciphers =
 # openssl dhparam -2 -out dh_1024.pem 1024
 #smtpd_tls_dh512_param_file = ${config_directory}/cert/dh_512.pem
 #smtpd_tls_dh1024_param_file = ${config_directory}/cert/dh_1024.pem
+
 smtp_tls_security_level = may
+
 message_size_limit = 40960000

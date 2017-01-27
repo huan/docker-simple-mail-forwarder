@@ -266,6 +266,8 @@ Cloud Requirement
 * A Cloud Service that could host docker is required.
   * [DigitalOcean.com](https://m.do.co/c/01a54778df5c) get $10 free credit(cover 2 months vpsv cost) by register from here.
   * [LiNode.com](https://www.linode.com/?r=5fd2b713d711746bb5451111df0f2b6d863e9f63)
+  * [Netdedi](http://www.netdedi.com/?affid=35) SSD VPS and Dedicated Server with NetDedi(Koera)
+
 * A Docker management platform is recommanded.
   * Docker Cloud(Former Tutum) [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy)
 * Docker is required.

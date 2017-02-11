@@ -61,8 +61,12 @@ See? There is nothing easier.
 
 > If you want to run it constanly in the background add ` -td` after `run`:
 ```bash
-$ docker run -tde SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
+$ docker run -t -d -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
 ```
+
+* `-t`: Allocate a pseudo-tty
+* `-d`: Detached Mode
+
 Otherwise, docker thinks that your applications stops and shutdown the container.
 
 Quick Test

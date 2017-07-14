@@ -229,14 +229,20 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
-### v0.4.3 master
+### v0.4.4 master
+
+### v0.4.3 (14 Jul 2017)
+* Add a note about running it in the background to prevent docker auto shutdown. by @delmicio [#27](https://github.com/zixia/docker-simple-mail-forwarder/pull/27)
+* Added smarthost support by @Duumke [#22](https://github.com/zixia/docker-simple-mail-forwarder/pull/22)
+* Added support for mynetworks by @SamMousa [#20](https://github.com/zixia/docker-simple-mail-forwarder/issues/20)
 * Allow own certificates by @nelfer [#15](https://github.com/zixia/docker-simple-mail-forwarder/pull/15)
+* Updated documentation for forward all emails @nelfer [#14](https://github.com/zixia/docker-simple-mail-forwarder/pull/14)
 * ARM version of armhf by @dimitrovs [#12](https://github.com/zixia/docker-simple-mail-forwarder/pull/12)
 * use SMF_DOMAIN env for certificate's CN by @bcardiff [#11](https://github.com/zixia/docker-simple-mail-forwarder/pull/11)
 * allow multiple forwards separated by | by @kminek [#7](https://github.com/zixia/docker-simple-mail-forwarder/pull/7)
 * Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4](https://github.com/zixia/docker-simple-mail-forwarder/pull/4)
 
-### v0.4.2 (25th Sep 2016)
+### v0.4.2 (25 Sep 2016)
 * close issue #1
 * increace message size limit from 10MB to 40MB
 * fix domain name in scripts

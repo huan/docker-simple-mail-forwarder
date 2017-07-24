@@ -229,7 +229,10 @@ Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
-### v0.4.4 master
+### v1.0.x master
+
+### v1.0.0 (25 Jul 2017)
+* Release v1.0
 
 ### v0.4.3 (14 Jul 2017)
 * Add a note about running it in the background to prevent docker auto shutdown. by @delmicio [#27](https://github.com/zixia/docker-simple-mail-forwarder/pull/27)

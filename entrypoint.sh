@@ -1,6 +1,8 @@
 #!/bin/bash
 ARGV=$@
 
+dockerize -no-overwrite -template /etc/postfix/main.cf.tmpl:/etc/postfix/main.cf
+
 function print_help {
 cat <<EOF
                 Docker SMF - Simple Mail Forwarder

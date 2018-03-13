@@ -706,10 +706,10 @@ smtpd_tls_auth_only = no
 # smtpd_tls_CAfile = /etc/postfix/cert/example-cacert.pem
 
 # Public Certificate
-smtpd_tls_cert_file = /etc/postfix/cert/smtp.cert
+smtpd_tls_cert_file = {{ .Env.CERTIFICATE_PUBLIC }}
 
 # Private Key (without passphrase)
-smtpd_tls_key_file = /etc/postfix/cert/smtp.key
+smtpd_tls_key_file = {{ .Env.CERTIFICATE_PRIVATE }}
 
 # Randomizer for key creation
 tls_random_source = dev:/dev/urandom

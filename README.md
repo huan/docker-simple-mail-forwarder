@@ -36,7 +36,7 @@ This docker was built for ultimate **simplicity** because of this reason. I owne
 
 ### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
-- [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
+- [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human.
 - [MailGun](https://mailgun.com) professional service. Free plan includes 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
 
 I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited mail&domains per month is an amazing idea! And of couse you could also put other dockers on this same machine. :-D
@@ -57,7 +57,7 @@ If you want to forward all emails sent to domain testo.com to all@test.com, set 
 $ export SMF_CONFIG='@testo.com:all@test.com'
 ```
 
-See? There is nothing easier. 
+See? There is nothing easier.
 
 > If you want to run it constanly in the background add ` -td` after `run`:
 ```bash
@@ -149,20 +149,30 @@ Send all outgoing mail trough a smarthost on 192.168.1.2
 $ export SMF_RELAYHOST='192.168.1.2'
 ```
 
+### `CERTIFICATE_PUBLIC`, `CERTIFICATE_PRIVATE` Examples
+
+Path of the certificate and private key. Defaults:
+
+* `CERTIFICATE_PUBLIC` = `/etc/postfix/cert/smtp.cert`
+* `CERTIFICATE_PRIVATE` = `/etc/postfix/cert/smtp.key`
+
+**Note:** Although full paths are specified for each file they must be in the same directory.
+
+If files do no exist on boot a self signed certificate is created. Read the following section for more information.
+
 TLS (SSL) Certificates
 --------------------
 SMF creates its own certificate and private key when starts. However, this certificate is self signed and so some systems might give you a warning about the server not being trusted.
 If you have valid certificates for the domain name of the host, then you can use them and avoid the warning about not being trusted.
 
-1. First you need to prepare the certificate files. Copy your full chain certificate to a file named `smtp.cert`. Then copy the private key to a file named `smtp.key`
+1. First you need to prepare the certificate files. Identify your full chain certificate and private key. They are usually next to each other. Mount the directory for example at `/data/certs`. Let's assume `/data/certs/smtp.cert` is the full chain certificat and `/data/certs/smtp.key` is the private key in your host running docker.
 
-2. Copy these files to a folder. For example: `/data/certs/`. This folder will be mounted as a volume in SMF
-
-3. When creating the container, add the `-v` (volume) parameter to mount it to the folder `/etc/postfix/cert/` like so:
+2. When creating the container, add the `-v` (volume) parameter to mount as a folder `/certificate` and specify the path of them in the container like so:
  ```bash
- $ docker run  -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 -v /data/certs/:/etc/postfix/cert/ zixia/simple-mail-forwarder
+ $ docker run  -e SMF_CONFIG="$SMF_CONFIG" -e CERTIFICATE_PUBLIC="/certificate/smtp.cert" -e CERTIFICATE_PRIVATE="/certificate/smtp.key" -p 25:25 -v /data/certs:/certificate zixia/simple-mail-forwarder
  ```
-4. Your emails should now be forwarded with trusted encryption. You can use this tool to test it: <a href="http://checktls.com/" target="_blank">http://checktls.com/</a>
+
+3. Your emails should now be forwarded with trusted encryption. You can use this tool to test it: <a href="http://checktls.com/" target="_blank">http://checktls.com/</a>
 
 If you do not have a certificate and don't have the $$ to buy one, you can use <a href="https://letsencrypt.org" target="_blank">https://letsencrypt.org</a> if you have shell access to the server (Notice, SMF does not provide, yet, this service). Letsencrypt allows you to create valid trusted certificates for a server, if the server responds to the domain you specify. In order to do this, you need to run the program from within the server and have administrator rights.
 
@@ -179,9 +189,10 @@ If you do not have a certificate and don't have the $$ to buy one, you can use <
  ```bash
  $ letsencrypt certonly --standalone -d yourdomain.com -d www.yourdomain.com -d mail.yourdomain.com
  ```
-5. Follow the prompts and if everything is successful you will get your certificates in a folder like `/etc/letsencrypt/live/mydomain.com`
 
-6. You can now use those certificates to make SMF TLS trusted.
+5. Follow the prompts and if everything is successful you will get your certificates in a folder like `/etc/letsencrypt/live/mydomain.com`.
+
+6. You can now use those certificates to make SMF TLS trusted. You will need to use `fullchain.pem` and `privkey.pem` as the certificate and private key respectively.
 
 > This was a quick way of how to use letsencrypt. For a full tutorial based on your OS see: <a href="https://certbot.eff.org/" tareget="_blank">https://certbot.eff.org/</a>
 

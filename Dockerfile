@@ -1,11 +1,11 @@
-FROM sillelien/base-alpine:0.10
-MAINTAINER Zhuohuan LI <zixia@zixia.net>
+FROM alpine:latest
+LABEL maintainer="Zhuohuan LI <zixia@zixia.net>"
 
 ENV BATS_VERSION 0.4.0
 
 ## Install System
 
-RUN apk update && apk add \
+RUN apk add --update --no-cache \
         bash \
         curl \
         drill \
@@ -19,7 +19,7 @@ RUN apk update && apk add \
     && tar -xzf "/tmp/v${BATS_VERSION}.tar.gz" -C /tmp/ \
     && bash "/tmp/bats-${BATS_VERSION}/install.sh" /usr/local \
     \
-    && rm -rf /var/cache/apk/* && rm -rf /tmp/*
+    && rm -rf /tmp/*
 
 ## Configure Service
 

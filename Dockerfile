@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM sillelien/base-alpine:0.10
 LABEL maintainer="Zhuohuan LI <zixia@zixia.net>"
 
 ENV BATS_VERSION 0.4.0

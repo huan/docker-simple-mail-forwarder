@@ -32,7 +32,7 @@ What is SMF? (Simple Mail Forwarder)
 ------------------------------------
 If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. SMF is exactly what you need. (with [Docker](http://docker.com))
 
-This docker was built for ultimate **simplicity** because of this reason. I owned many domains and needed email addresses of them(for fun/work), and I hated to config email server. Some DNS providers provide free email forwarding service for their own domain, some do not. And almose all email forwarding service is NOT free. So I decided to make it myself(thanks docker).
+This docker image was built for ultimate **simplicity** because of this reason. I owned many domains and needed email addresses of them(for fun/work), and I hated to config email server. Some DNS providers provide free email forwarding service for their own domain, some do not. And almose all email forwarding service is NOT free. So I decided to make it myself(thanks docker).
 
 ### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
@@ -45,8 +45,8 @@ Quick Start (TL;DR)
 -------------------
 Just set `SMF_CONFIG` and run:
 ```bash
-$ export SMF_CONFIG='testi@testo.com:test@test.com:test'
-$ docker run  -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
+$ export SMF_CONFIG='testi@testo.com:test@test.com'
+$ docker run --restart=always -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
 

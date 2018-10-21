@@ -46,7 +46,7 @@ Quick Start (TL;DR)
 Just set `SMF_CONFIG` and run:
 ```bash
 $ export SMF_CONFIG='testi@testo.com:test@test.com'
-$ docker run --restart=always -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
+$ docker run -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
 ```
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
 
@@ -59,13 +59,14 @@ $ export SMF_CONFIG='@testo.com:all@test.com'
 
 See? There is nothing easier. 
 
-> If you want to run it constanly in the background add ` -td` after `run`:
+> If you want to run it constanly in the background add `-t -d --restart=always` after `run`:
 ```bash
-$ docker run -t -d -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
+$ docker run -t -d --restart=always -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
 ```
 
-* `-t`: Allocate a pseudo-tty
-* `-d`: Detached Mode
+- `-t`: Allocate a pseudo-tty
+- `-d`: Detached Mode
+- `--restart=always`: Restart this container automatically
 
 Otherwise, docker thinks that your applications stops and shutdown the container.
 

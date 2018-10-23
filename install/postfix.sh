@@ -13,8 +13,6 @@ daemon_directory=`$command_directory/postconf -h daemon_directory`
 $daemon_directory/master -t || $command_directory/postfix stop
 
 # make consistency check
-chown root /var/spool/postfix
-chown root /var/spool/postfix/pid
 $command_directory/postfix check >/dev/console 2>&1
 
 # run Postfix

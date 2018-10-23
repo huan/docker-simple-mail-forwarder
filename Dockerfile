@@ -1,30 +1,37 @@
-FROM sillelien/base-alpine:0.10
+FROM alpine:3.8
 LABEL maintainer="Zhuohuan LI <zixia@zixia.net>"
 
-ENV BATS_VERSION 0.4.0
+ENV BATS_VERSION 1.1.0
+ENV S6_VERSION 1.21.7.0
 
 ## Install System
 
 RUN apk add --update --no-cache \
         bash \
         curl \
+        cyrus-sasl \
         drill \
         logrotate \
         openssl \
         postfix \
-        cyrus-sasl \
+        syslog-ng \
     \
     && curl -s -o "/tmp/v${BATS_VERSION}.tar.gz" -L \
-        "https://github.com/sstephenson/bats/archive/v${BATS_VERSION}.tar.gz" \
+        "https://github.com/bats-core/bats-core/archive/v${BATS_VERSION}.tar.gz" \
     && tar -xzf "/tmp/v${BATS_VERSION}.tar.gz" -C /tmp/ \
-    && bash "/tmp/bats-${BATS_VERSION}/install.sh" /usr/local \
+    && bash "/tmp/bats-core-${BATS_VERSION}/install.sh" /usr/local \
     \
     && rm -rf /tmp/*
+
+## Install s6 process manager
+RUN curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-amd64.tar.gz \
+  | tar xzf - -C /
 
 ## Configure Service
 
 COPY install/main.dist.cf /etc/postfix/main.cf
 COPY install/master.dist.cf /etc/postfix/master.cf
+COPY install/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
 
 RUN cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
@@ -42,6 +49,9 @@ RUN bash -n /app/init-openssl.sh && chmod +x /app/init-openssl.sh
 
 COPY install/postfix.sh /etc/services.d/postfix/run
 RUN bash -n /etc/services.d/postfix/run && chmod +x /etc/services.d/postfix/run
+
+COPY install/syslog-ng.sh /etc/services.d/syslog-ng/run
+RUN bash -n /etc/services.d/syslog-ng/run && chmod +x /etc/services.d/syslog-ng/run
 
 COPY entrypoint.sh /entrypoint.sh
 RUN bash -n /entrypoint.sh && chmod a+x /entrypoint.sh

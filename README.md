@@ -39,7 +39,7 @@ This docker image was built for ultimate **simplicity** because of this reason. 
 - [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
 - [MailGun](https://mailgun.com) professional service. Free plan includes 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
 
-I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited mail&domains per month is an amazing idea! And of couse you could also put other dockers on this same machine. :-D
+I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited mail&domains per month is an amazing idea! And of course you could also put other dockers on this same machine. :-D
 
 Quick Start (TL;DR)
 -------------------

@@ -1,8 +1,6 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: trussworks/circleci-docker-primary:25fb58d78157ba0664802478ea7195cdb1d5f9d7
     steps:
       - checkout
       - run:
@@ -25,9 +23,11 @@ workflows:
                 - master
   build_deploy:
     jobs:
+      - build
+        filters:
+          branches:
+            only: master
       - deploy:
-          requires:
-            - build
           filters:
             branches:
               only: master

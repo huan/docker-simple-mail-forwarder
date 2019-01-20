@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: trussworks/circleci-docker-primary:25fb58d78157ba0664802478ea7195cdb1d5f9d7
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: ./script/build.sh latest
+  deploy:
+    steps:
+      - run:
+        name: Deploy
+        command: curl -X POST -d '{"from":"circleci"}' "$DOCKER_REBUILD_URL"
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - master
+  build_deploy:
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

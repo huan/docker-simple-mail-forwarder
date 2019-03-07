@@ -295,7 +295,7 @@ Cloud Requirement
 
 Author
 -----------------
-Huan LI <zixia@zixia.net> (http://linkedin.com/in/zixia)
+Huan LI (李卓桓) <zixia@zixia.net> (http://linkedin.com/in/zixia)
 
 <a href="http://stackoverflow.com/users/1123955/zixia">
 <img src="http://stackoverflow.com/users/flair/1123955.png" width="208" height="58" alt="profile for zixia at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for zixia at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
@@ -303,6 +303,6 @@ Huan LI <zixia@zixia.net> (http://linkedin.com/in/zixia)
 
 Copyright & License
 -------------------
-* Code & Documentation 2015© zixia
+* Code & Documentation © 2015 - 2019, Huan LI
 * Code released under the Apache 2.0 license
 * Docs released under Creative Commons

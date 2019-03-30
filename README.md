@@ -28,6 +28,8 @@ Voice from Users
 
 > @nelfer : Guess what? Your image already supports this! [link](https://github.com/zixia/docker-simple-mail-forwarder/issues/13#issuecomment-255562151)
 
+> @Czoche : It's at least a time saver if not a lifesaver. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/50#issue-427317446)
+
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------
 If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. SMF is exactly what you need. (with [Docker](http://docker.com))

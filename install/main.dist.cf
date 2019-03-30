@@ -707,9 +707,11 @@ smtpd_tls_auth_only = no
 
 # Public Certificate
 smtpd_tls_cert_file = /etc/postfix/cert/smtp.cert
+smtpd_tls_eccert_file = /etc/postfix/cert/smtp.ec.cert
 
 # Private Key (without passphrase)
 smtpd_tls_key_file = /etc/postfix/cert/smtp.key
+smtpd_tls_eckey_file = /etc/postfix/cert/smtp.ec.key
 
 # Randomizer for key creation
 tls_random_source = dev:/dev/urandom

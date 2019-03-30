@@ -28,7 +28,7 @@ Voice from Users
 
 > @nelfer : Guess what? Your image already supports this! [link](https://github.com/zixia/docker-simple-mail-forwarder/issues/13#issuecomment-255562151)
 
-> @Czoche : It's at least a time saver if not a lifesaver. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/50#issue-427317446)
+> @Czocher : It's at least a time saver if not a lifesaver. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/50#issue-427317446)
 
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------
@@ -38,7 +38,7 @@ This docker image was built for ultimate **simplicity** because of this reason. 
 
 ### Related Services
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
-- [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human. 
+- [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human.
 - [MailGun](https://mailgun.com) professional service. Free plan includes 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
 
 I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited mail&domains per month is an amazing idea! And of course you could also put other dockers on this same machine. :-D
@@ -59,7 +59,7 @@ If you want to forward all emails sent to domain testo.com to all@test.com, set 
 $ export SMF_CONFIG='@testo.com:all@test.com'
 ```
 
-See? There is nothing easier. 
+See? There is nothing easier.
 
 > If you want to run it constanly in the background add `-t -d --restart=always` after `run`:
 ```bash

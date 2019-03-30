@@ -157,7 +157,7 @@ TLS (SSL) Certificates
 SMF creates its own certificate and private key when starts. However, this certificate is self signed and so some systems might give you a warning about the server not being trusted.
 If you have valid certificates for the domain name of the host, then you can use them and avoid the warning about not being trusted.
 
-1. First you need to prepare the certificate files. Copy your full chain certificate to a file named `smtp.cert`. Then copy the private key to a file named `smtp.key`
+1. First you need to prepare the certificate files. Copy your full chain certificate to a file named `smtp.cert` (or `smtp.ec.cert` if it contains a EC certificate). Then copy the private key to a file named `smtp.key` (or `smtp.ec.key` if it contains a EC key)
 
 2. Copy these files to a folder. For example: `/data/certs/`. This folder will be mounted as a volume in SMF
 

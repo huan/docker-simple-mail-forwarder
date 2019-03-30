@@ -6,7 +6,7 @@
 
 cd /etc/postfix/cert
 # skip generation of certificate if one exists (by mounting a volume)
-if [ ! -f "smtp.cert" ]; then
+if [ ! -f "smtp.cert" ] || [ ! -f "smtp.ec.cert" ]; then
     #openssl dhparam -2 -out dh_512.pem 512
     #openssl dhparam -2 -out dh_1024.pem 1024
     openssl req -new -outform PEM -out smtp.cert -newkey rsa:2048 \

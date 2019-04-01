@@ -28,7 +28,7 @@ Voice from Users
 
 > @nelfer : Guess what? Your image already supports this! [link](https://github.com/zixia/docker-simple-mail-forwarder/issues/13#issuecomment-255562151)
 
-> @Czocher : It's at least a time saver if not a lifesaver. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/50#issue-427317446)
+> @Czocher : It's at least a timesaver if not a lifesaver. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/50#issue-427317446)
 
 What is SMF? (Simple Mail Forwarder)
 ------------------------------------

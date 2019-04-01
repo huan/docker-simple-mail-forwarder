@@ -1,4 +1,4 @@
-Simple Mail Forwarder(SMF) [![Circle CI](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/tree/master.svg?style=svg)](https://circleci.com/gh/zixia/docker-simple-mail-forwarder/)
+Simple Mail Forwarder(SMF) [![Circle CI](https://circleci.com/gh/huan/docker-simple-mail-forwarder/tree/master.svg?style=svg)](https://circleci.com/gh/huan/docker-simple-mail-forwarder/)
 ==================================
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zixia/docker-simple-mail-forwarder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')
@@ -14,19 +14,19 @@ Simplest and Smallest Email Forward Service based on Docker.
 1. Run as [**docker start**](#quick-start-tldr)
 1. Image Size [**10MB**](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
-View on Github - https://github.com/zixia/docker-simple-mail-forwarder
+View on Github - https://github.com/huan/docker-simple-mail-forwarder
 
 Voice from Users
 ------------------------------------
 > @Brian Christner : After testing a ton of different mail projects I finally discovered Simple Mail Forwarder (SMF) by Zixia. This image is based on Alpine which is already a positive. It is super tiny and as the name suggests, easy to use. [link](https://www.brianchristner.io/setting-up-a-mail-forwarder-in-docker/)
 
-> @kachkaev : really happy to discover it! [link](https://github.com/zixia/docker-simple-mail-forwarder/issues/5#issue-165988701)
+> @kachkaev : really happy to discover it! [link](https://github.com/huan/docker-simple-mail-forwarder/issues/5#issue-165988701)
 
 > @kiani: have a working mail server, seriously, it was that easy. [link](https://kiani.io/blog/custom-domain-mail-forward)
 
-> @counterbeing : great image. Wonderfully easy interface, with all that i need. :+1: [link](https://github.com/zixia/docker-simple-mail-forwarder/issues/6#issuecomment-248667232)
+> @counterbeing : great image. Wonderfully easy interface, with all that i need. :+1: [link](https://github.com/huan/docker-simple-mail-forwarder/issues/6#issuecomment-248667232)
 
-> @nelfer : Guess what? Your image already supports this! [link](https://github.com/zixia/docker-simple-mail-forwarder/issues/13#issuecomment-255562151)
+> @nelfer : Guess what? Your image already supports this! [link](https://github.com/huan/docker-simple-mail-forwarder/issues/13#issuecomment-255562151)
 
 > @Czocher : It's at least a timesaver if not a lifesaver. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/50#issue-427317446)
 
@@ -228,7 +228,7 @@ P.S. The magic string `dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0` stands 
 
 Bug
 ---
-Github Issue - https://github.com/zixia/docker-simple-mail-forwarder/issues
+Github Issue - https://github.com/huan/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
@@ -238,15 +238,15 @@ Changelog
 * Release v1.0
 
 ### v0.4.3 (14 Jul 2017)
-* Add a note about running it in the background to prevent docker auto shutdown. by @delmicio [#27](https://github.com/zixia/docker-simple-mail-forwarder/pull/27)
-* Added smarthost support by @Duumke [#22](https://github.com/zixia/docker-simple-mail-forwarder/pull/22)
-* Added support for mynetworks by @SamMousa [#20](https://github.com/zixia/docker-simple-mail-forwarder/issues/20)
-* Allow own certificates by @nelfer [#15](https://github.com/zixia/docker-simple-mail-forwarder/pull/15)
-* Updated documentation for forward all emails @nelfer [#14](https://github.com/zixia/docker-simple-mail-forwarder/pull/14)
-* ARM version of armhf by @dimitrovs [#12](https://github.com/zixia/docker-simple-mail-forwarder/pull/12)
-* use SMF_DOMAIN env for certificate's CN by @bcardiff [#11](https://github.com/zixia/docker-simple-mail-forwarder/pull/11)
-* allow multiple forwards separated by | by @kminek [#7](https://github.com/zixia/docker-simple-mail-forwarder/pull/7)
-* Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4](https://github.com/zixia/docker-simple-mail-forwarder/pull/4)
+* Add a note about running it in the background to prevent docker auto shutdown. by @delmicio [#27](https://github.com/huan/docker-simple-mail-forwarder/pull/27)
+* Added smarthost support by @Duumke [#22](https://github.com/huan/docker-simple-mail-forwarder/pull/22)
+* Added support for mynetworks by @SamMousa [#20](https://github.com/huan/docker-simple-mail-forwarder/issues/20)
+* Allow own certificates by @nelfer [#15](https://github.com/huan/docker-simple-mail-forwarder/pull/15)
+* Updated documentation for forward all emails @nelfer [#14](https://github.com/huan/docker-simple-mail-forwarder/pull/14)
+* ARM version of armhf by @dimitrovs [#12](https://github.com/huan/docker-simple-mail-forwarder/pull/12)
+* use SMF_DOMAIN env for certificate's CN by @bcardiff [#11](https://github.com/huan/docker-simple-mail-forwarder/pull/11)
+* allow multiple forwards separated by | by @kminek [#7](https://github.com/huan/docker-simple-mail-forwarder/pull/7)
+* Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4](https://github.com/huan/docker-simple-mail-forwarder/pull/4)
 
 ### v0.4.2 (25 Sep 2016)
 * close issue #1
@@ -299,8 +299,8 @@ Author
 -----------------
 Huan LI (李卓桓) <zixia@zixia.net> (http://linkedin.com/in/zixia)
 
-<a href="http://stackoverflow.com/users/1123955/zixia">
-<img src="http://stackoverflow.com/users/flair/1123955.png" width="208" height="58" alt="profile for zixia at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for zixia at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+<a href="http://stackoverflow.com/users/1123955/huan">
+<img src="http://stackoverflow.com/users/flair/1123955.png" width="208" height="58" alt="profile for huan at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for huan at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
 </a>
 
 Copyright & License

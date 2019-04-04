@@ -232,7 +232,9 @@ Github Issue - https://github.com/huan/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
-### v1.0.x master
+### master
+
+* EC key support by @Czocher [#51]（https://github.com/huan/docker-simple-mail-forwarder/pull/51）
 
 ### v1.0.0 (25 Jul 2017)
 * Release v1.0

@@ -18,7 +18,7 @@ View on Github - https://github.com/huan/docker-simple-mail-forwarder
 
 Voice from Users
 ------------------------------------
-> @Brian Christner : After testing a ton of different mail projects I finally discovered Simple Mail Forwarder (SMF) by Zixia. This image is based on Alpine which is already a positive. It is super tiny and as the name suggests, easy to use. [link](https://www.brianchristner.io/setting-up-a-mail-forwarder-in-docker/)
+> @Brian Christner : After testing a ton of different mail projects I finally discovered Simple Mail Forwarder (SMF) by Huan. This image is based on Alpine which is already a positive. It is super tiny and as the name suggests, easy to use. [link](https://www.brianchristner.io/setting-up-a-mail-forwarder-in-docker/)
 
 > @kachkaev : really happy to discover it! [link](https://github.com/huan/docker-simple-mail-forwarder/issues/5#issue-165988701)
 
@@ -234,56 +234,56 @@ Changelog
 ---------
 ### master
 
-* EC key support by @Czocher [#51]（https://github.com/huan/docker-simple-mail-forwarder/pull/51）
+1. EC key support by @Czocher [#51](https://github.com/huan/docker-simple-mail-forwarder/pull/51)
 
 ### v1.0.0 (25 Jul 2017)
 * Release v1.0
 
 ### v0.4.3 (14 Jul 2017)
-* Add a note about running it in the background to prevent docker auto shutdown. by @delmicio [#27](https://github.com/huan/docker-simple-mail-forwarder/pull/27)
-* Added smarthost support by @Duumke [#22](https://github.com/huan/docker-simple-mail-forwarder/pull/22)
-* Added support for mynetworks by @SamMousa [#20](https://github.com/huan/docker-simple-mail-forwarder/issues/20)
-* Allow own certificates by @nelfer [#15](https://github.com/huan/docker-simple-mail-forwarder/pull/15)
-* Updated documentation for forward all emails @nelfer [#14](https://github.com/huan/docker-simple-mail-forwarder/pull/14)
-* ARM version of armhf by @dimitrovs [#12](https://github.com/huan/docker-simple-mail-forwarder/pull/12)
-* use SMF_DOMAIN env for certificate's CN by @bcardiff [#11](https://github.com/huan/docker-simple-mail-forwarder/pull/11)
-* allow multiple forwards separated by | by @kminek [#7](https://github.com/huan/docker-simple-mail-forwarder/pull/7)
-* Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4](https://github.com/huan/docker-simple-mail-forwarder/pull/4)
+1. Add a note about running it in the background to prevent docker auto shutdown. by @delmicio [#27](https://github.com/huan/docker-simple-mail-forwarder/pull/27)
+1. Added smarthost support by @Duumke [#22](https://github.com/huan/docker-simple-mail-forwarder/pull/22)
+1. Added support for mynetworks by @SamMousa [#20](https://github.com/huan/docker-simple-mail-forwarder/issues/20)
+1. Allow own certificates by @nelfer [#15](https://github.com/huan/docker-simple-mail-forwarder/pull/15)
+1. Updated documentation for forward all emails @nelfer [#14](https://github.com/huan/docker-simple-mail-forwarder/pull/14)
+1. ARM version of armhf by @dimitrovs [#12](https://github.com/huan/docker-simple-mail-forwarder/pull/12)
+1. use SMF_DOMAIN env for certificate's CN by @bcardiff [#11](https://github.com/huan/docker-simple-mail-forwarder/pull/11)
+1. allow multiple forwards separated by | by @kminek [#7](https://github.com/huan/docker-simple-mail-forwarder/pull/7)
+1. Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4](https://github.com/huan/docker-simple-mail-forwarder/pull/4)
 
 ### v0.4.2 (25 Sep 2016)
-* close issue #1
-* increace message size limit from 10MB to 40MB
-* fix domain name in scripts
-* fix unit test fail error: do not upgrade alpine
-* restore deploy button in reamde: it is docker cloud now.(former tutum)
+1. close issue #1
+1. increace message size limit from 10MB to 40MB
+1. fix domain name in scripts
+1. fix unit test fail error: do not upgrade alpine
+1. restore deploy button in reamde: it is docker cloud now.(former tutum)
 
 ### v0.4.0
-* switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)
+1. switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)
  1. manage postfix service by [S6](http://skarnet.org/software/s6/)
  1. [solve PID 1 Zombie Problem](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)
  1. enhanced busybox shell
-* NOT to use OpenRC(very buggy run inside docker container) any more!
-* better ESMTP TLS AUTH test script
-* docker image size: [10MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+1. NOT to use OpenRC(very buggy run inside docker container) any more!
+1. better ESMTP TLS AUTH test script
+1. docker image size: [10MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 ### ~~v0.3.0~~ <- Don't use me, I'm BUGGY
-* CI(continuous integration) supported by use [CircleCI](https://circleci.com)
-* CD(continuous delivery) supported by use [Tutum Button](https://support.tutum.co/support/solutions/articles/5000620449-deploy-to-tutum-button)
-* write better tests
-* tune OpenRC inside alpine linux
-* full description README
-* docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+1. CI(continuous integration) supported by use [CircleCI](https://circleci.com)
+1. CD(continuous delivery) supported by use [Tutum Button](https://support.tutum.co/support/solutions/articles/5000620449-deploy-to-tutum-button)
+1. write better tests
+1. tune OpenRC inside alpine linux
+1. full description README
+1. docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 ### ~~v0.2.0~~ <- Don't use me, I'm BUGGY
-* supported specify user password
-* supported ESMTP TLS
-* docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+1. supported specify user password
+1. supported ESMTP TLS
+1. docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 ### v0.1.0
-* dockerized
-* basic forward function
-* self-testing
-* docker image size: [6MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
+1. dockerized
+1. basic forward function
+1. self-testing
+1. docker image size: [6MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 Cloud Requirement
 -----------------

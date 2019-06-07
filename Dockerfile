@@ -15,6 +15,7 @@ RUN apk add --update --no-cache \
         openssl \
         postfix \
         syslog-ng \
+        tzdata \
     \
     && curl -s -o "/tmp/v${BATS_VERSION}.tar.gz" -L \
         "https://github.com/bats-core/bats-core/archive/v${BATS_VERSION}.tar.gz" \

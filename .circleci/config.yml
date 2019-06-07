@@ -5,15 +5,15 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Build
-        command: ./script/build.sh latest
+          name: Build
+          command: ./script/build.sh latest
   deploy:
     docker:
       - image: buildpack-deps:trusty
     steps:
       - run:
-        name: Deploy
-        command: curl -X POST -d '{"from":"circleci2"}' "$DOCKER_REBUILD_URL"
+          name: Deploy
+          command: curl -X POST -d '{"from":"circleci2"}' "$DOCKER_REBUILD_URL"
 
 workflows:
   version: 2

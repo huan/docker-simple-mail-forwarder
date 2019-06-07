@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ENV_FILE=BUILD.env
 
@@ -34,9 +35,9 @@ branch=${branch##*/}
 hash=${hash:0:7}
 
 ## get IP
-RE='[0-9]+\s+IN\s+A\s+([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'
-[[ `drill SimpleMailForwarder.Builder.\`hostname\` @wimi.36c33f49.svc.dockerapp.io` =~ $RE ]] \
-        && SMF_BUILD_IP="${BASH_REMATCH[1]}"
+# RE='[0-9]+\s+IN\s+A\s+([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'
+# [[ `drill SimpleMailForwarder.Builder.\`hostname\` @wimi.36c33f49.svc.dockerapp.io` =~ $RE ]] \
+#         && SMF_BUILD_IP="${BASH_REMATCH[1]}"
 
 #
 # Save to file

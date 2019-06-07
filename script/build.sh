@@ -2,6 +2,7 @@
 #
 # maintainer: Zhuohuan LI <zixia@zixia.net>
 #
+set -e
 
 OWNER="zixia"
 NAME="simple-mail-forwarder"
@@ -12,10 +13,10 @@ TAG='' && [ -n "$1" ] && TAG=":$1" && shift
 BASEDIR=$(dirname $0)
 ENV_FILE=$BASEDIR/../BUILD.env
 
-RE='[0-9]+\s+IN\s+A\s+([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'
-[[ `drill SimpleMailForwarder.Builder.\`hostname\` @wimi.36c33f49.svc.dockerapp.io` =~ $RE ]] && {
-    SMF_BUILD_IP="${BASH_REMATCH[1]}"
-}
+# RE='[0-9]+\s+IN\s+A\s+([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'
+# [[ `drill SimpleMailForwarder.Builder.\`hostname\` @wimi.36c33f49.svc.dockerapp.io` =~ $RE ]] && {
+#     SMF_BUILD_IP="${BASH_REMATCH[1]}"
+# }
 
 cat > $ENV_FILE <<_EOF
 IMAGE_NAME=$IMAGE_NAME

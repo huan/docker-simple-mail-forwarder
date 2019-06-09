@@ -10,7 +10,7 @@ Simple Mail Forwarder(SMF) [![Circle CI](https://circleci.com/gh/huan/docker-sim
 
 Simplest and Smallest Email Forward Service based on Docker.
 
-1. Config by [**one line**](#environment-variable-and-default)
+1. Config by [**one-line**](#environment-variable-and-default)
 1. Run as [**docker start**](#quick-start-tldr)
 1. Image Size [**10MB**](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 

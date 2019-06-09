@@ -232,15 +232,18 @@ Github Issue - https://github.com/huan/docker-simple-mail-forwarder/issues
 
 Changelog
 ---------
+
 ### master
 
-1. EC key support by @Czocher [#51](https://github.com/huan/docker-simple-mail-forwarder/pull/51)
 1. Timezone support by @me1299 [#56](https://github.com/huan/docker-simple-mail-forwarder/issues/56) [#57](https://github.com/huan/docker-simple-mail-forwarder/pull/57)
+1. EC key support by @Czocher [#51](https://github.com/huan/docker-simple-mail-forwarder/pull/51)
 
 ### v1.0.0 (25 Jul 2017)
+
 * Release v1.0
 
 ### v0.4.3 (14 Jul 2017)
+
 1. Add a note about running it in the background to prevent docker auto shutdown. by @delmicio [#27](https://github.com/huan/docker-simple-mail-forwarder/pull/27)
 1. Added smarthost support by @Duumke [#22](https://github.com/huan/docker-simple-mail-forwarder/pull/22)
 1. Added support for mynetworks by @SamMousa [#20](https://github.com/huan/docker-simple-mail-forwarder/issues/20)
@@ -252,6 +255,7 @@ Changelog
 1. Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4](https://github.com/huan/docker-simple-mail-forwarder/pull/4)
 
 ### v0.4.2 (25 Sep 2016)
+
 1. close issue #1
 1. increace message size limit from 10MB to 40MB
 1. fix domain name in scripts
@@ -298,16 +302,14 @@ Cloud Requirement
 * Docker is required.
   * Docker.com
 
-Author
------------------
-Huan LI (李卓桓) <zixia@zixia.net> (http://linkedin.com/in/zixia)
+## AUTHOR
 
-<a href="http://stackoverflow.com/users/1123955/huan">
-<img src="http://stackoverflow.com/users/flair/1123955.png" width="208" height="58" alt="profile for huan at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for huan at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
-</a>
+[Huan LI (李卓桓)](http://linkedin.com/in/zixia) <zixia@zixia.net>
 
-Copyright & License
--------------------
-* Code & Documentation © 2015 - 2019, Huan LI
-* Code released under the Apache 2.0 license
-* Docs released under Creative Commons
+[![Profile of Huan LI (李卓桓) on StackOverflow](https://stackexchange.com/users/flair/265499.png)](https://stackexchange.com/users/265499)
+
+## COPYRIGHT & LICENSE
+
+- Code & Docs © 2015 - now Huan LI <zixia@zixia.net>
+- Code released under the Apache-2.0 License
+- Docs released under Creative Commons

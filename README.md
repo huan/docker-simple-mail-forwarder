@@ -107,10 +107,12 @@ You are all set! :-]
 
 Environment Variable and Default Values
 ----------------------------------
-`SMF_CONFIG`: MUST be defined. no default setting. (set me! I'm the only parameter~)
+`SMF_CONFIG`: MUST be defined. no default setting. (set me! I'm the only parameter you need to set~)
+
+`TZ` : (Optional) set the timezone , IE `EST5EDT` or `Europe/Rome`
 
 ### `SMF_CONFIG` Examples
-Here's how to config the only environment parameter of SMF Docker:
+Here's how to config the only required `SMF_CONFIG` environment parameter of SMF Docker:
 
 #### 1. Basic
 Forward all emails received by testi@testo.com to test@test.com:

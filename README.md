@@ -235,6 +235,8 @@ Changelog
 
 ### master
 
+### v1.1 (09 Jun 2019)
+
 1. Timezone support by @me1299 [#56](https://github.com/huan/docker-simple-mail-forwarder/issues/56) [#57](https://github.com/huan/docker-simple-mail-forwarder/pull/57)
 1. EC key support by @Czocher [#51](https://github.com/huan/docker-simple-mail-forwarder/pull/51)
 1. Upgrade CircleCI from v1 to v2 @huan
@@ -267,6 +269,7 @@ Changelog
 1. restore deploy button in reamde: it is docker cloud now.(former tutum)
 
 ### v0.4.0
+
 1. switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)
  1. manage postfix service by [S6](http://skarnet.org/software/s6/)
  1. [solve PID 1 Zombie Problem](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)
@@ -276,6 +279,7 @@ Changelog
 1. docker image size: [10MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 ### ~~v0.3.0~~ <- Don't use me, I'm BUGGY
+
 1. CI(continuous integration) supported by use [CircleCI](https://circleci.com)
 1. CD(continuous delivery) supported by use [Tutum Button](https://support.tutum.co/support/solutions/articles/5000620449-deploy-to-tutum-button)
 1. write better tests
@@ -284,11 +288,13 @@ Changelog
 1. docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 ### ~~v0.2.0~~ <- Don't use me, I'm BUGGY
+
 1. supported specify user password
 1. supported ESMTP TLS
 1. docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 ### v0.1.0
+
 1. dockerized
 1. basic forward function
 1. self-testing

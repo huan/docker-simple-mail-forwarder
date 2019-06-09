@@ -235,6 +235,7 @@ Changelog
 ### master
 
 1. EC key support by @Czocher [#51](https://github.com/huan/docker-simple-mail-forwarder/pull/51)
+1. Timezone support by @me1299 [#56](https://github.com/huan/docker-simple-mail-forwarder/issues/56) [#57](https://github.com/huan/docker-simple-mail-forwarder/pull/57)
 
 ### v1.0.0 (25 Jul 2017)
 * Release v1.0

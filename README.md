@@ -240,7 +240,7 @@ Changelog
 1. Upgrade CircleCI from v1 to v2 @huan
 1. Fix typo in README @universeroc [#47](https://github.com/huan/docker-simple-mail-forwarder/pull/47)
 1. Update Base to Alpine 3.8 @riptidewave93 [#43](https://github.com/huan/docker-simple-mail-forwarder/pull/43)
-1. Update alpine:latest as base image @martijnrondeel [#37](https://github.com/huan/docker-simple-mail-forwarder/pull/37）
+1. Update alpine:latest as base image @martijnrondeel [#37](https://github.com/huan/docker-simple-mail-forwarder/pull/37)
 
 ### v1.0.0 (25 Jul 2017)
 

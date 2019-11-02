@@ -31,10 +31,10 @@ Voice from Users
 
 > @Czocher: It's at least a timesaver if not a lifesaver. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/50#issue-427317446)
 
-What is SMF? (Simple Mail Forwarder)
+What is Simple Mail Forwarder (SMF)?
 ------------------------------------
 
-If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. SMF is exactly what you need. (with [Docker](http://docker.com))
+If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. **Simple Mail Forwarder (SMF)** is exactly what you need. (with [Docker](http://docker.com))
 
 This docker image was built for ultimate **simplicity** because of this reason. I owned many domains and needed email addresses of them(for fun/work), and I hated to config email server. Some DNS providers provide free email forwarding service for their own domain, some do not. And almose all email forwarding service is NOT free. So I decided to make it myself(thanks docker).
 

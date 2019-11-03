@@ -1,4 +1,4 @@
-# Simple Mail Forwarder(SMF) [![Circle CI](https://circleci.com/gh/huan/docker-simple-mail-forwarder/tree/master.svg?style=svg)](https://circleci.com/gh/huan/docker-simple-mail-forwarder/)
+# Simple Mail Forwarder (SMF) [![Circle CI](https://circleci.com/gh/huan/docker-simple-mail-forwarder/tree/master.svg?style=svg)](https://circleci.com/gh/huan/docker-simple-mail-forwarder/)
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zixia/docker-simple-mail-forwarder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![layers](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')

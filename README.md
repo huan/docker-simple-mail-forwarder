@@ -300,7 +300,7 @@ Changelog
 1. increace message size limit from 10MB to 40MB
 1. fix domain name in scripts
 1. fix unit test fail error: do not upgrade alpine
-1. restore deploy button in reamde: it is docker cloud now.(former tutum)
+1. restore deploy button in readme: it is docker cloud now.(former tutum)
 
 ### v0.4.0
 

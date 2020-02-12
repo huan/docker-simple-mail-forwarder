@@ -179,8 +179,8 @@ function start_postfix {
 
     if [ "$SMF_RELAYAUTH" != "" ]
     then
-	echo "$SMF_RELAYHOST   $SMF_RELAYAUTH" > /etc/postfix/sasl_passwd
-	postmap /etc/postfix/sasl_passwd
+        echo "$SMF_RELAYHOST   $SMF_RELAYAUTH" > /etc/postfix/sasl_passwd
+        postmap /etc/postfix/sasl_passwd
         postconf -e smtp_use_tls=yes
         postconf -e smtp_sasl_auth_enable=yes
         postconf -e smtp_sasl_security_options=

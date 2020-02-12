@@ -178,6 +178,14 @@ Send all outgoing mail trough a smarthost on 192.168.1.2
 export SMF_RELAYHOST='192.168.1.2'
 ```
 
+### `SMF_RELAYAUTH` Examples
+
+If the `SMF_RELAYHOST` require authentication,
+
+```bash
+export SMF_RELAYHOST='username@relayhost.com:RelayHostPassword'
+```
+
 TLS (SSL) Certificates
 --------------------
 

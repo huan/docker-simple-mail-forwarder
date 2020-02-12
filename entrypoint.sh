@@ -172,12 +172,24 @@ function start_postfix {
     echo "$HOSTNAME" > /etc/mailname
     echo "$HOSTNAME" > /etc/hostname
 
-    if [ "SMF_RELAYHOST" != "" ]
+    if [ "$SMF_RELAYHOST" != "" ]
     then
         postconf -e relayhost="$SMF_RELAYHOST"
     fi
 
+    if [ "$SMF_RELAYAUTH" != "" ]
+    then
+	echo "$SMF_RELAYHOST   $SMF_RELAYAUTH" > /etc/postfix/sasl_passwd
+	postmap /etc/postfix/sasl_passwd
+        postconf -e smtp_use_tls=yes
+        postconf -e smtp_sasl_auth_enable=yes
+        postconf -e smtp_sasl_security_options=
+        postconf -e smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd
+        postconf -e smtp_tls_CAfile=/etc/ssl/certs/ca-certificates.crt
+    fi
+
     postfix start
+
 }
 
 #

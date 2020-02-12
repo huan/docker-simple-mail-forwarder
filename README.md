@@ -183,7 +183,7 @@ export SMF_RELAYHOST='192.168.1.2'
 If the `SMF_RELAYHOST` require authentication,
 
 ```bash
-export SMF_RELAYHOST='username@relayhost.com:RelayHostPassword'
+export SMF_RELAYAUTH='username@relayhost.com:RelayHostPassword'
 ```
 
 TLS (SSL) Certificates

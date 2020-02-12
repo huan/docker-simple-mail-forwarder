@@ -189,7 +189,6 @@ function start_postfix {
     fi
 
     postfix start
-
 }
 
 #

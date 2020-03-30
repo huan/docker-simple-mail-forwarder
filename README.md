@@ -14,6 +14,7 @@ Simplest and Smallest Email Forward Service for Docker.
 1. Run as [**docker start**](#quick-start-tldr)
 1. Image Size [**10MB**](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
+[View on GitHub](https://github.com/huan/docker-simple-mail-forwarder)
 [View on Docker](https://hub.docker.com/r/zixia/simple-mail-forwarder)
 
 Voice from Users
@@ -46,7 +47,7 @@ Because of the above, this docker image was built for ultimate **simplicity**. I
 
 I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited e-mail & domains per month is an amazing idea! And of course you could also put other dockers on this machine. :-D
 
-Quick-Start (TL;DR)
+Quick-start (TL;DR)
 -------------------
 
 Just set `SMF_CONFIG` and run:

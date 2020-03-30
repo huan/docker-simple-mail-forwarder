@@ -8,13 +8,13 @@
 
 [![dockeri.co](https://dockeri.co/image/zixia/simple-mail-forwarder)](https://hub.docker.com/r/zixia/simple-mail-forwarder/)
 
-Simplest and Smallest Email Forward Service based on Docker.
+Simplest and Smallest Email Forward Service for Docker.
 
-1. Config by [**one-line**](#environment-variable-and-default)
+<!-- @Deprecated 1. Config by [**one-line**](#environment-variable-and-default) -->
 1. Run as [**docker start**](#quick-start-tldr)
 1. Image Size [**10MB**](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
-View on Github - https://github.com/huan/docker-simple-mail-forwarder
+[View on Docker](https://hub.docker.com/r/zixia/simple-mail-forwarder)
 
 Voice from Users
 ------------------------------------
@@ -34,19 +34,19 @@ Voice from Users
 What is Simple Mail Forwarder (SMF)?
 ------------------------------------
 
-If you had a domain name and only wanted to have one(or a few) email address from this domain, but you want to forward all the emails to another email account. **Simple Mail Forwarder (SMF)** is exactly what you need. (with [Docker](http://docker.com))
+If you have a domain name, only want to have one (or a few) email address(es) on this domain, and you want to forward all the emails to another email account - **Simple Mail Forwarder (SMF)** is exactly what you need. (with [Docker](http://docker.com))
 
-This docker image was built for ultimate **simplicity** because of this reason. I owned many domains and needed email addresses of them(for fun/work), and I hated to config email server. Some DNS providers provide free email forwarding service for their own domain, some do not. And almose all email forwarding service is NOT free. So I decided to make it myself(thanks docker).
+Because of the above, this docker image was built for ultimate **simplicity**. I've owned many domains and needed email addresses for them (for fun and/or work). I hated configuring email servers. Some DNS providers provide free email forwarding services for their own domains, some do not. And almost all email forwarding services are NOT free. So I decided to make one myself (thanks docker).
 
 ### Related Services
 
 - [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
-- [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for human.
+- [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for humans.
 - [MailGun](https://mailgun.com) professional service. Free plan includes 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
 
-I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited mail&domains per month is an amazing idea! And of course you could also put other dockers on this same machine. :-D
+I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited e-mail & domains per month is an amazing idea! And of course you could also put other dockers on this machine. :-D
 
-Quick Start (TL;DR)
+Quick-Start (TL;DR)
 -------------------
 
 Just set `SMF_CONFIG` and run:
@@ -118,7 +118,7 @@ You are all set! :-]
 Environment Variable and Default Values
 ----------------------------------
 
-`SMF_CONFIG`: MUST be defined. no default setting. (set me! I'm the only parameter you need to set~)
+`SMF_CONFIG`: MUST be defined. there's no default setting. (set me! I'm the only parameter you need to set~)
 
 `TZ` : (Optional) set the timezone , IE `EST5EDT` or `Europe/Rome`
 
@@ -170,7 +170,7 @@ export SMF_CONFIG='testi@testo.com:test1@test.com|test2@test.com|test3@test.com'
 
 ### `SMF_RELAYHOST` Examples
 
-Here's howto config a relayhost/smarthost to use for forwarding mail.
+Here's how to configure a relayhost/smarthost to use for forwarding mail.
 
 Send all outgoing mail trough a smarthost on 192.168.1.2
 
@@ -189,7 +189,7 @@ export SMF_RELAYAUTH='username@relayhost.com:RelayHostPassword'
 TLS (SSL) Certificates
 --------------------
 
-SMF creates its own certificate and private key when starts. However, this certificate is self signed and so some systems might give you a warning about the server not being trusted.
+SMF creates its own certificate and private key when it starts. This certificate is self signed, so some systems might give you a warning about the server not being trusted.
 If you have valid certificates for the domain name of the host, then you can use them and avoid the warning about not being trusted.
 
 1. First you need to prepare the certificate files. Copy your full chain certificate to a file named `smtp.cert` (or `smtp.ec.cert` if it contains a EC certificate). Then copy the private key to a file named `smtp.key` (or `smtp.ec.key` if it contains a EC key)
@@ -204,7 +204,7 @@ If you have valid certificates for the domain name of the host, then you can use
 
 4. Your emails should now be forwarded with trusted encryption. You can use this tool to test it: <a href="http://checktls.com/" target="_blank">http://checktls.com/</a>
 
-If you do not have a certificate and don't have the $$ to buy one, you can use <a href="https://letsencrypt.org" target="_blank">https://letsencrypt.org</a> if you have shell access to the server (Notice, SMF does not provide, yet, this service). Letsencrypt allows you to create valid trusted certificates for a server, if the server responds to the domain you specify. In order to do this, you need to run the program from within the server and have administrator rights.
+If you do not have a certificate and don't have the budget to afford one, you can use <a href="https://letsencrypt.org" target="_blank">https://letsencrypt.org</a> if you have shell access to the server (Note, SMF does not provide this service, yet). Letsencrypt allows you to create valid trusted certificates for a server, if the server responds to the domain you specify. In order to do this, you need to run the program from within the server and have administrator rights.
 
 1. First install letsencrypt. This might vary by distribution, but in Ubuntu it is like this:
 

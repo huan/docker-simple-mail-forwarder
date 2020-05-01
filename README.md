@@ -72,7 +72,9 @@ See? There is nothing easier.
 > If you want to run it constanly in the background add `-t -d --restart=always` after `run`:
 
 ```bash
-docker run -t -d --restart=always -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
+docker run -t -d --restart=always --name=mailman -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
+crontab -e
+# Add entry: @reboot docker start mailman
 ```
 
 - `-t`: Allocate a pseudo-tty

@@ -117,6 +117,8 @@ function start_postfix {
     # initial user database
     postmap /etc/postfix/virtual
 
+    # Allow for setting any Postfix variables in the config file through environment variables.
+    for e in ${!SMF_POSTFIX_*} ; do postconf -e "${e:12}=${!e}" ; done
 
     #
     # Set HOSTNAME to right Domain

@@ -187,6 +187,22 @@ If the `SMF_RELAYHOST` require authentication,
 export SMF_RELAYAUTH='username@relayhost.com:RelayHostPassword'
 ```
 
+### `SMF_POSTFIX_*` Examples
+
+To provide a generic way to customize Postfix configuration, you can use environment variables 
+prefixed with `SMF_POSTFIX_`:
+
+```bash
+export SMF_POSTFIX_myhostname=smtp.domain1.com
+```
+
+This will cause SMF to execute the following command before starting up:
+
+```bash
+postconf -e "myhostname=smtp.domain1.com"
+```
+
+
 TLS (SSL) Certificates
 --------------------
 

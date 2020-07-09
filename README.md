@@ -1,51 +1,14 @@
-# Simple Mail Forwarder (SMF) ![Docker](https://github.com/huan/docker-simple-mail-forwarder/workflows/Docker/badge.svg)
+# Simple Mail Forwarder (SMF)
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/zixia/docker-simple-mail-forwarder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![layers](https://badge.imagelayers.io/zixia/simple-mail-forwarder:latest.svg)](https://imagelayers.io/?images=zixia/simple-mail-forwarder:latest 'Get your own badge on imagelayers.io')
-[![Docker Pulls](https://img.shields.io/docker/pulls/zixia/simple-mail-forwarder.svg)](https://hub.docker.com/r/zixia/simple-mail-forwarder/)
-![Docker Stars](https://img.shields.io/docker/stars/zixia/simple-mail-forwarder.svg?maxAge=2592000)
-[![Docker Repository on Quay.io](https://quay.io/repository/zixia/simple-mail-forwarder/status "Docker Repository on Quay.io")](https://quay.io/repository/zixia/simple-mail-forwarder)
+This is a fork of huan/docker-simple-mail-forwarder that adds the `SMF_POSTFIX_*` variable as documented below.
 
-[![dockeri.co](https://dockeri.co/image/zixia/simple-mail-forwarder)](https://hub.docker.com/r/zixia/simple-mail-forwarder/)
 
-Simplest and Smallest Email Forward Service for Docker.
-
-1. Config by [**one-line**](#environment-variable-and-default-values)
-1. Run as [**docker start**](#quick-start-tldr)
-1. Image Size [**10MB**](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
-
-[View on GitHub](https://github.com/huan/docker-simple-mail-forwarder)
-[View on Docker](https://hub.docker.com/r/zixia/simple-mail-forwarder)
-
-Voice from Users
-------------------------------------
-
-> @Brian Christner : After testing a ton of different mail projects I finally discovered Simple Mail Forwarder (SMF) by Huan. This image is based on Alpine which is already a positive. It is super tiny and as the name suggests, easy to use. [link](https://www.brianchristner.io/setting-up-a-mail-forwarder-in-docker/)
-
-> @kachkaev : really happy to discover it! [link](https://github.com/huan/docker-simple-mail-forwarder/issues/5#issue-165988701)
-
-> @kiani: have a working mail server, seriously, it was that easy. [link](https://kiani.io/blog/custom-domain-mail-forward)
-
-> @counterbeing: great image. Wonderfully easy interface, with all that i need. :+1: [link](https://github.com/huan/docker-simple-mail-forwarder/issues/6#issuecomment-248667232)
-
-> @nelfer: Guess what? Your image already supports this! [link](https://github.com/huan/docker-simple-mail-forwarder/issues/13#issuecomment-255562151)
-
-> @Czocher: It's at least a timesaver if not a lifesaver. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/50#issue-427317446)
 
 What is Simple Mail Forwarder (SMF)?
 ------------------------------------
 
 If you have a domain name, only want to have one (or a few) email address(es) on this domain, and you want to forward all the emails to another email account - **Simple Mail Forwarder (SMF)** is exactly what you need. (with [Docker](http://docker.com))
 
-Because of the above, this docker image was built for ultimate **simplicity**. I've owned many domains and needed email addresses for them (for fun and/or work). I hated configuring email servers. Some DNS providers provide free email forwarding services for their own domains, some do not. And almost all email forwarding services are NOT free. So I decided to make one myself (thanks docker).
-
-### Related Services
-
-- [DuoCircle Email Forwarding](http://www.duocircle.com/services/email-forwarding) From $59.95/year
-- [Cloud Mail In](https://www.cloudmailin.com/plans) From $9/month. And it is not for humans.
-- [MailGun](https://mailgun.com) professional service. Free plan includes 10,000 emails/month. but [can result in your domain being treated as spam](https://blog.rajivm.net/mailgun-forwarding-spam.html)
-
-I was willing to pay $10/year, but the cheapest plan I could find was $9 per month. Having a $10 USD machine with unlimited e-mail & domains per month is an amazing idea! And of course you could also put other dockers on this machine. :-D
 
 Quick-start (TL;DR)
 -------------------
@@ -89,7 +52,7 @@ Tested by [BATS(Bash Automated Testing System)](https://github.com/sstephenson/b
 How to run:
 
 ```bash
-$ docker run zixia/simple-mail-forwarder test
+$ docker run knipknap/docker-simple-mail-forwarder test
 >> exec bats test
 1..20
 ok 1 confirm hostname pretend to work.
@@ -285,108 +248,6 @@ P.S. The magic string `dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0` stands 
 
 > Useful article about SMTP Authentication: http://www.fehcom.de/qmail/smtpauth.html
 
-Bug
----
-Github Issue - https://github.com/huan/docker-simple-mail-forwarder/issues
-
-Changelog
----------
-
-### master
-
-### v1.1 (09 Jun 2019)
-
-1. Timezone support by @me1299 [#56](https://github.com/huan/docker-simple-mail-forwarder/issues/56) [#57](https://github.com/huan/docker-simple-mail-forwarder/pull/57)
-1. EC key support by @Czocher [#51](https://github.com/huan/docker-simple-mail-forwarder/pull/51)
-1. Upgrade CircleCI from v1 to v2 @huan
-1. Fix typo in README @universeroc [#47](https://github.com/huan/docker-simple-mail-forwarder/pull/47)
-1. Update Base to Alpine 3.8 @riptidewave93 [#43](https://github.com/huan/docker-simple-mail-forwarder/pull/43)
-1. Update alpine:latest as base image @martijnrondeel [#37](https://github.com/huan/docker-simple-mail-forwarder/pull/37)
-
-### v1.0.0 (25 Jul 2017)
-
-* Release v1.0
-
-### v0.4.3 (14 Jul 2017)
-
-1. Add a note about running it in the background to prevent docker auto shutdown. by @delmicio [#27](https://github.com/huan/docker-simple-mail-forwarder/pull/27)
-1. Added smarthost support by @Duumke [#22](https://github.com/huan/docker-simple-mail-forwarder/pull/22)
-1. Added support for mynetworks by @SamMousa [#20](https://github.com/huan/docker-simple-mail-forwarder/issues/20)
-1. Allow own certificates by @nelfer [#15](https://github.com/huan/docker-simple-mail-forwarder/pull/15)
-1. Updated documentation for forward all emails @nelfer [#14](https://github.com/huan/docker-simple-mail-forwarder/pull/14)
-1. ARM version of armhf by @dimitrovs [#12](https://github.com/huan/docker-simple-mail-forwarder/pull/12)
-1. use SMF_DOMAIN env for certificate's CN by @bcardiff [#11](https://github.com/huan/docker-simple-mail-forwarder/pull/11)
-1. allow multiple forwards separated by | by @kminek [#7](https://github.com/huan/docker-simple-mail-forwarder/pull/7)
-1. Update docker-compose.yml to fix tutum tag by @vegasbrianc [#4](https://github.com/huan/docker-simple-mail-forwarder/pull/4)
-
-### v0.4.2 (25 Sep 2016)
-
-1. close issue #1
-1. increace message size limit from 10MB to 40MB
-1. fix domain name in scripts
-1. fix unit test fail error: do not upgrade alpine
-1. restore deploy button in readme: it is docker cloud now.(former tutum)
-
-### v0.4.0
-
-1. switch FROM image from alpine to [sillelien/base-alpine](https://github.com/sillelien/base-alpine)
- 1. manage postfix service by [S6](http://skarnet.org/software/s6/)
- 1. [solve PID 1 Zombie Problem](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)
- 1. enhanced busybox shell
-1. NOT to use OpenRC(very buggy run inside docker container) any more!
-1. better ESMTP TLS AUTH test script
-1. docker image size: [10MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
-
-### ~~v0.3.0~~ <- Don't use me, I'm BUGGY
-
-1. CI(continuous integration) supported by use [CircleCI](https://circleci.com)
-1. CD(continuous delivery) supported by use [Tutum Button](https://support.tutum.co/support/solutions/articles/5000620449-deploy-to-tutum-button)
-1. write better tests
-1. tune OpenRC inside alpine linux
-1. full description README
-1. docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
-
-### ~~v0.2.0~~ <- Don't use me, I'm BUGGY
-
-1. supported specify user password
-1. supported ESMTP TLS
-1. docker image size: [7MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
-
-### v0.1.0
-
-1. dockerized
-1. basic forward function
-1. self-testing
-1. docker image size: [6MB](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
-
-Cloud Requirement
------------------
-* A Cloud Service that could host docker is required.
-  * [DigitalOcean.com](https://m.do.co/c/01a54778df5c) get $10 free credit(cover 2 months vpsv cost) by register from here.
-  * [LiNode.com](https://www.linode.com/?r=5fd2b713d711746bb5451111df0f2b6d863e9f63)
-  * [Netdedi](http://www.netdedi.com/?affid=35) SSD VPS and Dedicated Server with NetDedi(Koera)
-
-* A Docker management platform is recommanded.
-  * Docker Cloud(Former Tutum) [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy)
-* Docker is required.
-  * Docker.com
-
-## CONTRIBUTORS
-
-[![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/0)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/0)
-[![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/1)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/1)
-[![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/2)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/2)
-[![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/3)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/3)
-[![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/4)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/4)
-[![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/5)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/5)
-[![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/6)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/6)
-[![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/7)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/7)
-
-## AUTHOR
-
-[Huan LI (李卓桓)](http://linkedin.com/in/zixia) <zixia@zixia.net>
-
-[![Profile of Huan LI (李卓桓) on StackOverflow](https://stackexchange.com/users/flair/265499.png)](https://stackexchange.com/users/265499)
 
 ## COPYRIGHT & LICENSE
 

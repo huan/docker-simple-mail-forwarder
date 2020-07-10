@@ -19,6 +19,7 @@ Environment Variables:
     SMF_CONFIG - mail forward addresses mapping list.
     SMF_MYNETWORKS - configure relaying from trusted IPs, see http://www.postfix.org/postconf.5.html#mynetworks
     SMF_RELAYHOST - configure a relayhost
+    SMF_POSTFIX_* - configure any postfix variable
 
 this creates a new smtp server which listens on port 25,
 forward all email from
@@ -118,7 +119,11 @@ function start_postfix {
     postmap /etc/postfix/virtual
 
     # Allow for setting any Postfix variables in the config file through environment variables.
-    for e in ${!SMF_POSTFIX_*} ; do postconf -e "${e:12}=${!e}" ; done
+    for e in ${!SMF_POSTFIX_*} ; do
+        set +x
+        postconf -e "${e:12}=${!e}"
+        set -x
+    done
 
     #
     # Set HOSTNAME to right Domain

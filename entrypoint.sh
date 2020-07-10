@@ -120,9 +120,9 @@ function start_postfix {
 
     # Allow for setting any Postfix variables in the config file through environment variables.
     for e in ${!SMF_POSTFIX_*} ; do
-        set +x
-        postconf -e "${e:12}=${!e}"
         set -x
+        postconf -e "${e:12}=${!e}"
+        set +x
     done
 
     #

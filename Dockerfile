@@ -1,8 +1,8 @@
 FROM alpine:3.8
 LABEL maintainer="Zhuohuan LI <zixia@zixia.net>"
 
-ENV BATS_VERSION 1.1.0
-ENV S6_VERSION 1.21.7.0
+ENV BATS_VERSION 1.2.1
+ENV S6_VERSION 2.0.0.1
 
 ## Install System
 
@@ -25,7 +25,7 @@ RUN apk add --update --no-cache \
     && rm -rf /tmp/*
 
 ## Install s6 process manager
-RUN curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-amd64.tar.gz \
+RUN curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-nobin.tar.gz \
   | tar xzf - -C /
 
 ## Configure Service

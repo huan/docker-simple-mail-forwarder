@@ -56,6 +56,7 @@ jobs:
         name: Is A Publish Branch
         if: steps.check-branch.outputs.match == 'true'
         run: |
+          pwd
           version=$(cat VERSION)
           majorVer=$(echo "$version" | cut -d. -f1)
           minorVer=$(echo "$version" | cut -d. -f2)

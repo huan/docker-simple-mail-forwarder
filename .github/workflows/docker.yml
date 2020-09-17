@@ -57,6 +57,7 @@ jobs:
         if: steps.check-branch.outputs.match == 'true'
         run: |
           pwd
+          ls -l
           version=$(cat VERSION)
           majorVer=$(echo "$version" | cut -d. -f1)
           minorVer=$(echo "$version" | cut -d. -f2)

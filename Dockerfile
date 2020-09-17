@@ -1,18 +1,25 @@
-FROM alpine:3.8
-LABEL maintainer="Zhuohuan LI <zixia@zixia.net>"
+FROM alpine:3.12
+LABEL maintainer="Huan LI <zixia@zixia.net>"
 
 ENV BATS_VERSION 1.2.1
-ENV S6_VERSION 2.0.0.1
+ENV S6_VERSION 2.1.0.0
 
 ## Install System
 
 RUN apk add --update --no-cache \
         bash \
+        coreutils \
         curl \
         cyrus-sasl \
+        cyrus-sasl-plain \
+        cyrus-sasl-login \
+        ca-certificates \
         drill \
         logrotate \
+        opendkim \
+        opendkim-utils \
         openssl \
+        postsrsd \
         postfix \
         syslog-ng \
         tzdata \
@@ -38,7 +45,7 @@ RUN cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
     \
     && echo test | saslpasswd2 -p test@test.com \
-    && chown postfix /etc/sasldb2 \
+    && chown postfix /etc/sasl2/sasldb2 \
     && saslpasswd2 -d test@test.com
 
 ## Copy App

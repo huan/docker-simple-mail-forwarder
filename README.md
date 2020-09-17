@@ -278,6 +278,12 @@ Changelog
 
 ### master
 
+### v1.3 (17 Sep 2020)
+
+1. Upgrade alpine docker base image to 3.12
+1. Fix `timeout` args breaking changes
+1. Fix `etc` and `libexec` path change for postfix
+
 ### v1.1 (09 Jun 2019)
 
 1. Timezone support by @me1299 [#56](https://github.com/huan/docker-simple-mail-forwarder/issues/56) [#57](https://github.com/huan/docker-simple-mail-forwarder/pull/57)

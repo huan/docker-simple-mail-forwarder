@@ -63,7 +63,7 @@
 }
 
 @test "confirm postfix is running" {
-    processNum=$(ps | grep -v grep | grep /usr/lib/postfix/master | wc -l)
+    processNum=$(ps | grep -v grep | grep /usr/libexec/postfix/master | wc -l)
     [ $processNum -gt 0 ]
 }
 
@@ -99,7 +99,7 @@
     output=$(echo QUIT | 2>&1 openssl s_client -starttls smtp -crlf -connect 127.0.0.1:25)
 
     [ $? -eq 0 ]
-    [[ $output =~ '250 DSN' ]]
+    [[ $output =~ '250 CHUNKING' ]]
 }
 @test "create user testi@testo.com by password test" {
     echo test | saslpasswd2 -p testi@testo.com
@@ -131,7 +131,7 @@
     mkfifo $FIFO_SSL_{I,O}
 
     0<$FIFO_SSL_I &>$FIFO_SSL_O \
-        timeout -t 7 -s TERM \
+        timeout -s TERM 7 \
         openssl s_client -starttls smtp -crlf -connect 127.0.0.1:25 &
 
     exec {FD_I}> $FIFO_SSL_I

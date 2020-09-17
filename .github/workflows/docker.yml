@@ -53,6 +53,9 @@ jobs:
         env:
           DOCKER_PERSONAL_ACCESS_TOKEN: ${{ secrets.DOCKER_PERSONAL_ACCESS_TOKEN }}
       -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
         name: Is A Publish Branch
         if: steps.check-branch.outputs.match == 'true'
         run: |

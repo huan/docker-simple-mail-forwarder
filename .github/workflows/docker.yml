@@ -60,13 +60,13 @@ jobs:
       -
         name: Is A Publish Branch
         if: steps.check-branch.outputs.match == 'true'
+        # --platform linux/386,linux/amd64,linux/arm/v7,linux/arm/v6,linux/arm64 \
         run: |
           version=$(cat VERSION)
           majorVer=$(echo "$version" | cut -d. -f1)
           minorVer=$(echo "$version" | cut -d. -f2)
           tag="${majorVer}.${minorVer}"
           docker build \
-          # --platform linux/386,linux/amd64,linux/arm/v7,linux/arm/v6,linux/arm64 \
             --platform linux/amd64 \
             --tag zixia/simple-mail-forwarder:"$tag" \
             --tag zixia/simple-mail-forwarder:latest \

@@ -743,3 +743,9 @@ smtpd_tls_exclude_ciphers =
 smtp_tls_security_level = may
 
 message_size_limit = 40960000
+
+#Setup DKIM
+milter_protocol = 2
+milter_default_action = accept
+smtpd_milters = unix:/run/opendkim/opendkim.sock
+non_smtpd_milters = unix:/run/opendkim/opendkim.sock

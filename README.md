@@ -226,6 +226,17 @@ If you do not have a certificate and don't have the budget to afford one, you ca
 
 > This was a quick way of how to use letsencrypt. For a full tutorial based on your OS see: <a href="https://certbot.eff.org/" tareget="_blank">https://certbot.eff.org/</a>
 
+DKIM
+--------------------
+
+SMF generates private/public keypair for `$SMF_DOMAIN` and stores them in `/var/db/dkim/`. Public key must be set as TXT record in DNS under `default._domainkey` name.
+`default._domainkey` can be found in `/var/db/dkim/default.txt`.
+
+It is highly advised to mount `/var/db/dkim/` folder to host, so generated keypair would not get lost/regenerated:
+```
+docker run -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 -v $(pwd)/dkim:/var/db/dkim/ zixia/simple-mail-forwarder
+```
+
 Helper Scripts
 --------------------
 

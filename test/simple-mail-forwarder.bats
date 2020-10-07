@@ -68,7 +68,7 @@
 }
 
 @test "confirm port 25 is open" {
-    run netstat -nlt 
+    run netstat -nlt
     [ $status = 0 ]
     [[ $output =~ ":25 " ]]
 }
@@ -171,4 +171,13 @@
         <<< 'AUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0' \
         )
     [[ $output =~ "535 5.7.8 Error: authentication failed: authentication failure" ]]
+}
+
+@test "test DKIM keys" {
+    if [[ "$SKIP_TEST" == *"DKIM"*  ]]; then
+        skip "This test will fail on docker build workflow"
+    fi
+    opendkim-testkey -d $SMF_DOMAIN -s default -vvv
+
+    [ $? -eq 0 ]
 }

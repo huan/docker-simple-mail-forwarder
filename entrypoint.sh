@@ -189,6 +189,22 @@ function start_postfix {
     fi
 
     postfix start
+
+
+    # DKIM
+    if [ ! -f /var/db/dkim/default.private ]; then
+        mkdir -p /var/db/dkim
+        echo "OpenDKIM: Keys not found, generating..."
+        opendkim-genkey -b 2048 -d $HOSTNAME -D /var/db/dkim/ -s default -v
+
+        chmod 400 /var/db/dkim/default.private
+        chown opendkim:opendkim /var/db/dkim/default.private
+
+        echo "OpenDKIM: Add TXT record to DNS:"
+        cat /var/db/dkim/default.txt
+    fi
+    
+    sed -n -e '/^Domain\s/!p' -e '$aDomain '$HOSTNAME -i /etc/opendkim/opendkim.conf
 }
 
 #

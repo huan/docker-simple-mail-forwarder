@@ -161,3 +161,14 @@
     [ $ret = 0 ]
 }
 
+@test "deleting test user testi@testo.com" {
+    # Delete user
+    saslpasswd2 -d testi@testo.com
+
+    # Expect login to fail
+    output=$(nc 127.0.0.1:25 \
+        <<< 'EHLO test.com' \
+        <<< 'AUTH PLAIN dGVzdGlAdGVzdG8uY29tAHRlc3RpQHRlc3RvLmNvbQB0ZXN0' \
+        )
+    [[ $output =~ "535 5.7.8 Error: authentication failed: authentication failure" ]]
+}

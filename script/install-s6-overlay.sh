@@ -11,13 +11,15 @@ fi
 
 case $(uname -m) in
   armv6l)
-    # fall through
-    ;&
+    ;& # fall through
   armv7l)
     ARCH=armhf
     ;;
-  aarch64 | armv8l)
+  armv8l)
     ARCH=arm
+    ;;
+  aarch64)
+    ARCH=aarch64
     ;;
   i386)
     ARCH=x86

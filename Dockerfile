@@ -31,9 +31,9 @@ RUN apk add --update --no-cache \
     \
     && rm -rf /tmp/*
 
-## Install s6 process manager
-RUN curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-amd64.tar.gz \
-  | tar xzf - -C /
+## Install s6 process manager with the current platform (arm/x86)
+COPY script/install-s6-overlay.sh /app/
+RUN /app/install-s6-overlay.sh "$S6_VERSION"
 
 ## Configure Service
 

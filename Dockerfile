@@ -40,10 +40,11 @@ RUN /app/install-s6-overlay.sh "$S6_VERSION"
 COPY install/main.dist.cf /etc/postfix/main.cf
 COPY install/master.dist.cf /etc/postfix/master.cf
 COPY install/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
+COPY install/opendkim.conf /etc/opendkim/opendkim.conf
 
 RUN cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
-    \
+    && mkdir -p /run/opendkim && chown opendkim:opendkim /run/opendkim \
     && echo test | saslpasswd2 -p test@test.com \
     && chown postfix /etc/sasl2/sasldb2 \
     && saslpasswd2 -d test@test.com
@@ -60,6 +61,9 @@ RUN bash -n /etc/services.d/postfix/run && chmod +x /etc/services.d/postfix/run
 
 COPY install/syslog-ng.sh /etc/services.d/syslog-ng/run
 RUN bash -n /etc/services.d/syslog-ng/run && chmod +x /etc/services.d/syslog-ng/run
+
+COPY install/opendkim.sh /etc/services.d/opendkim/run
+RUN bash -n /etc/services.d/opendkim/run && chmod +x /etc/services.d/opendkim/run
 
 COPY entrypoint.sh /entrypoint.sh
 RUN bash -n /entrypoint.sh && chmod a+x /entrypoint.sh

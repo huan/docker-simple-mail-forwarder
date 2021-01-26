@@ -35,7 +35,7 @@ GIT_LOG='`git log -1 --format=%s`'
 _EOF
 
 CMD1="docker build -t ${IMAGE_NAME}${TAG} ."
-CMD2="docker run --rm --name $NAME ${IMAGE_NAME}${TAG} test"
+CMD2="docker run --rm -e SKIP_TEST='DKIM' --name $NAME ${IMAGE_NAME}${TAG} test"
 
 echo ">> Run $CMD1"
 $CMD1

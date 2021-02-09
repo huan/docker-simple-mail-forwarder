@@ -206,9 +206,10 @@ function start_postfix {
 
     
     sed -n -e '/^Domain\s/!p' -e '$aDomain '$HOSTNAME -i /etc/opendkim/opendkim.conf
-    # DKIM for all virtual
+    # DKIM for all virtual domains and $HOSTNAME 
      if [ "$SMF_DKIM_ALL" != "" ]; then
-        
+        mkdir -p /var/db/dkim/$HOSTNAME
+        cp /var/db/dkim/default.* /var/db/dkim/$HOSTNAME
         for virtualDomain in $virtualDomains; do
             mkdir -p /var/db/dkim/${virtualDomain}
             echo "OpenDKIM: Keys for ${virtualDomain} not found, generating..."

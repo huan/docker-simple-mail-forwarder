@@ -210,6 +210,14 @@ function start_postfix {
      if [ "$SMF_DKIM_ALL" != "" ]; then
         mkdir -p /var/db/dkim/$HOSTNAME
         cp /var/db/dkim/default.* /var/db/dkim/$HOSTNAME
+        
+        echo "default._domainkey.${HOSTNAME} ${HOSTNAME}:default:/var/db/dkim/${HOSTNAME}/default.private
+" >> /etc/opendkim/KeyTable
+
+        echo "${HOSTNAME} default._domainkey.${HOSTNAME}" >> /etc/opendkim/SigningTable
+
+        echo "${HOSTNAME}" >> /etc/opendkim/TrustedHosts
+
         for virtualDomain in $virtualDomains; do
             mkdir -p /var/db/dkim/${virtualDomain}
             echo "OpenDKIM: Keys for ${virtualDomain} not found, generating..."
@@ -217,6 +225,13 @@ function start_postfix {
 
             chmod 400 /var/db/dkim/${virtualDomain}/default.private
             chown opendkim:opendkim /var/db/dkim/${virtualDomain}/default.private
+
+            echo "default._domainkey.${virtualDomain} ${virtualDomain}:default:/var/db/dkim/${virtualDomain}/default.private
+" >> /etc/opendkim/KeyTable
+
+            echo "${virtualDomain} default._domainkey.${virtualDomain}" >> /etc/opendkim/SigningTable
+
+            echo "${virtualDomain}" >> /etc/opendkim/TrustedHosts
 
             echo "OpenDKIM: Add TXT record to DNS for ${virtualDomain}:"
             cat /var/db/dkim/${virtualDomain}/default.txt  

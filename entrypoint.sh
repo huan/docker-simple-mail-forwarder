@@ -239,6 +239,13 @@ function start_postfix {
                 cat /var/db/dkim/${virtualDomain}/default.txt  
             fi
         done
+        sed -e '/KeyFile/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
+        sed -e '/Selector/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
+        sed -e '/Domain/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
+        echo "KeyTable /etc/opendkim/KeyTable" >> /etc/opendkim/opendkim.conf
+        echo "SigningTable /etc/opendkim/SigningTable" >> /etc/opendkim/opendkim.conf
+        echo "ExternalIgnoreList /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf
+        echo "InternalHosts /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf
     fi
 
 }

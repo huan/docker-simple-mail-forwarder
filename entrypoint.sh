@@ -19,6 +19,7 @@ Environment Variables:
     SMF_CONFIG - mail forward addresses mapping list.
     SMF_MYNETWORKS - configure relaying from trusted IPs, see http://www.postfix.org/postconf.5.html#mynetworks
     SMF_RELAYHOST - configure a relayhost
+    SMF_DKIM_ALL - If defined, generate a DKIM key for all domains found in SMF_CONFIG, in addition to the one in SMF_DOMAIN
 
 this creates a new smtp server which listens on port 25,
 forward all email from
@@ -190,8 +191,7 @@ function start_postfix {
 
     postfix start
 
-
-    # DKIM
+    # DKIM only for $HOSTNAME
     if [ ! -f /var/db/dkim/default.private ]; then
         mkdir -p /var/db/dkim
         echo "OpenDKIM: Keys not found, generating..."
@@ -203,8 +203,25 @@ function start_postfix {
         echo "OpenDKIM: Add TXT record to DNS:"
         cat /var/db/dkim/default.txt
     fi
+
     
     sed -n -e '/^Domain\s/!p' -e '$aDomain '$HOSTNAME -i /etc/opendkim/opendkim.conf
+    # DKIM for all virtual
+     if [ "$SMF_DKIM_ALL" != "" ]; then
+        
+        for virtualDomain in $virtualDomains; do
+            mkdir -p /var/db/dkim/${virtualDomain}
+            echo "OpenDKIM: Keys for ${virtualDomain} not found, generating..."
+            opendkim-genkey -b 2048 -d ${virtualDomain} -D /var/db/dkim/${virtualDomain} -s default -v
+
+            chmod 400 /var/db/dkim/${virtualDomain}/default.private
+            chown opendkim:opendkim /var/db/dkim/${virtualDomain}/default.private
+
+            echo "OpenDKIM: Add TXT record to DNS for ${virtualDomain}:"
+            cat /var/db/dkim/${virtualDomain}/default.txt  
+        done
+    fi
+
 }
 
 #

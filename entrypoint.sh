@@ -19,7 +19,6 @@ Environment Variables:
     SMF_CONFIG - mail forward addresses mapping list.
     SMF_MYNETWORKS - configure relaying from trusted IPs, see http://www.postfix.org/postconf.5.html#mynetworks
     SMF_RELAYHOST - configure a relayhost
-    SMF_DKIM_ALL - If defined, generate a DKIM key for all domains found in SMF_CONFIG, in addition to the one in SMF_DOMAIN
 
 this creates a new smtp server which listens on port 25,
 forward all email from

@@ -216,8 +216,7 @@ function start_postfix {
             chmod 400 /var/db/dkim/default.private
             chown opendkim:opendkim /var/db/dkim/default.private
             echo "Inserting ${HOSTNAME} data to /etc/opendkim/{KeyTable, SigningTable, TrustedHosts}"
-            echo "default._domainkey.${HOSTNAME} ${HOSTNAME}:default:/var/db/dkim/${HOSTNAME}/default.private
-            " >> /etc/opendkim/KeyTable
+            echo "default._domainkey.${HOSTNAME} ${HOSTNAME}:default:/var/db/dkim/${HOSTNAME}/default.private" >> /etc/opendkim/KeyTable
 
             echo "${HOSTNAME} default._domainkey.${HOSTNAME}" >> /etc/opendkim/SigningTable
 

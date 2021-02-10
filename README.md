@@ -229,22 +229,17 @@ If you do not have a certificate and don't have the budget to afford one, you ca
 DKIM
 --------------------
 
-SMF generates private/public keypair for `$SMF_DOMAIN` and stores them in `/var/db/dkim/`. Public key must be set as TXT record in DNS under `default._domainkey` name.
-`default._domainkey` can be found in `/var/db/dkim/default.txt`.
-
-It is highly advised to mount `/var/db/dkim/` folder to host, so generated keypair would not get lost/regenerated:
-```
-docker run -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 -v $(pwd)/dkim:/var/db/dkim/ zixia/simple-mail-forwarder
-```
-
-DKIM and multiple domains
-=========================
-
-If `$SMF_DKIM_ALL` is defined (any value will do, including `1`), SMF will generate private/public keypairs for `$SMF_DOMAIN` and for all source domains contained in `SMF_CONFIG`. All keys will be stored in `/var/db/dkim/<domain.ext>/`.
+SMF will generate private/public keypairs for `$SMF_DOMAIN` and for all source domains contained in `SMF_CONFIG`. All keys will be stored in `/var/db/dkim/<domain.ext>/`.
 
 This will enable DKIM for multiple domains and test for their validity on SMF startup.
 
-If a DKIM key was already present for `$SMF_DOMAIN` under `/var/db/dkim/`, it will be copied under `/var/db/dkim/{$SMF_DOMAIN}`.
+Public key must be set as TXT record in DNS under `default._domainkey` name. `default._domainkey` can be found in `/var/db/dkim/<domain.ext>/default.txt`.
+
+It is highly advised to mount `/var/db/dkim/` folder to host, so generated keypair would not get lost/regenerated:
+
+```
+docker run -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 -v $(pwd)/dkim:/var/db/dkim/ zixia/simple-mail-forwarder
+```
 
 Helper Scripts
 --------------------

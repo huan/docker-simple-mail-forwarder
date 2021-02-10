@@ -222,12 +222,18 @@ function start_postfix {
         chown opendkim:opendkim /var/db/dkim/${virtualDomain}/default.private
 
         echo "Inserting ${virtualDomain} data to /etc/opendkim/{KeyTable, SigningTable, TrustedHosts}"
-        echo "default._domainkey.${virtualDomain} ${virtualDomain}:default:/var/db/dkim/${virtualDomain}/default.private" >> /etc/opendkim/KeyTable
-        echo "${virtualDomain} default._domainkey.${virtualDomain}" >> /etc/opendkim/SigningTable
-        echo "${virtualDomain}" >> /etc/opendkim/TrustedHosts
-        echo "OpenDKIM: Add TXT record to DNS for ${virtualDomain}:"
+        if ! grep -q "default._domainkey.${virtualDomain}" /etc/opendkim/KeyTable; then
+            echo "default._domainkey.${virtualDomain} ${virtualDomain}:default:/var/db/dkim/${virtualDomain}/default.private" >> /etc/opendkim/KeyTable
+        fi
+        if ! grep -q "default._domainkey.${virtualDomain}" /etc/opendkim/SigningTable; then
+            echo "${virtualDomain} default._domainkey.${virtualDomain}" >> /etc/opendkim/SigningTable
+        fi
+        if ! grep -q "${virtualDomain}" /etc/opendkim/TrustedHosts; then
+            echo "${virtualDomain}" >> /etc/opendkim/TrustedHosts
+        fi
 
-        cat /var/db/dkim/${virtualDomain}/default.txt  
+        echo "OpenDKIM: this TXT record for ${virtualDomain} should be present:"
+        cat /var/db/dkim/${virtualDomain}/default.txt
         
     done
 
@@ -236,10 +242,18 @@ function start_postfix {
     sed -e '/Selector/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
     sed -e '/Domain/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
 
-    echo "KeyTable /etc/opendkim/KeyTable" >> /etc/opendkim/opendkim.conf
-    echo "SigningTable /etc/opendkim/SigningTable" >> /etc/opendkim/opendkim.conf
-    echo "ExternalIgnoreList /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf
-    echo "InternalHosts /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf
+    if ! grep -q "KeyTable" /etc/opendkim/opendkim.conf; then
+        echo "KeyTable /etc/opendkim/KeyTable" >> /etc/opendkim/opendkim.conf; 
+    fi
+    if ! grep -q "SigningTable" /etc/opendkim/opendkim.conf; then
+        echo "SigningTable /etc/opendkim/SigningTable" >> /etc/opendkim/opendkim.conf; 
+    fi
+    if ! grep -q "ExternalIgnoreList" /etc/opendkim/opendkim.conf; then
+        echo "ExternalIgnoreList /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf; 
+    fi
+    if ! grep -q "InternalHosts" /etc/opendkim/opendkim.conf; then
+        echo "InternalHosts /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf 
+    fi
 
 }
 

@@ -177,9 +177,9 @@
     if [[ "$SKIP_TEST" == *"DKIM"*  ]]; then
         skip "This test will fail on docker build workflow"
     fi
-    cd /var/db/dkim/ && for domain in */ ; do
-        echo "Validating DKIM for ${domain::-1}"
-        opendkim-testkey -d ${domain::-1} -s default -vvv
+    for domain in /var/db/dkim/*/ ; do
+        echo "Validating DKIM for ${domain:13:-1}"
+        opendkim-testkey -d ${domain:13:-1} -s default -vvv
     done
     [ $? -eq 0 ]
 }

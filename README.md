@@ -229,11 +229,11 @@ If you do not have a certificate and don't have the budget to afford one, you ca
 DKIM
 --------------------
 
-SMF will generate private/public keypairs for `$SMF_DOMAIN` and for all source domains contained in `SMF_CONFIG`. All keys will be stored in `/var/db/dkim/<domain.ext>/`.
+SMF will generate private/public keypairs for `$SMF_DOMAIN` and for all source domains contained in `SMF_CONFIG`. All keys will be stored in `/var/db/dkim/<domain.tld>/`.
 
 This will enable DKIM for multiple domains and test for their validity on SMF startup.
 
-Public key must be set as TXT record in DNS under `default._domainkey` name. `default._domainkey` can be found in `/var/db/dkim/<domain.ext>/default.txt`.
+Public key must be set as TXT record in DNS under `default._domainkey` name. `default._domainkey` can be found in `/var/db/dkim/<domain.tld>/default.txt`.
 
 It is highly advised to mount `/var/db/dkim/` folder to host, so generated keypair would not get lost/regenerated:
 

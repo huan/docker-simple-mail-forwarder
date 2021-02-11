@@ -199,17 +199,12 @@ function start_postfix {
         chown opendkim:opendkim /var/db/dkim/$HOSTNAME/default.private
     fi
 
-    echo "Inserting ${HOSTNAME} data to /etc/opendkim/{KeyTable, SigningTable, TrustedHosts}"
-    echo "default._domainkey.${HOSTNAME} ${HOSTNAME}:default:/var/db/dkim/${HOSTNAME}/default.private" >> /etc/opendkim/KeyTable
-    echo "${HOSTNAME} default._domainkey.${HOSTNAME}" >> /etc/opendkim/SigningTable
-    echo "${HOSTNAME}" >> /etc/opendkim/TrustedHosts
+    allDomains="$virtualDomains"
+    [[ $allDomains =~ $HOSTNAME ]] || {
+        allDomains="$allDomains $HOSTNAME"
+    }
 
-    for virtualDomain in $virtualDomains; do
-        # skip generating keys for $HOSTNAME twice in case it is also used as forwarded domain.
-        if [ "$virtualDomain" = "$HOSTNAME" ]; then
-            continue
-        fi
-
+    for virtualDomain in $allDomains; do
         # generates new keys only if they are not already present
         if [ ! -f /var/db/dkim/${virtualDomain}/default.private ]; then
             mkdir -p /var/db/dkim/${virtualDomain}
@@ -221,6 +216,8 @@ function start_postfix {
         chown opendkim:opendkim /var/db/dkim/${virtualDomain}/default.private
 
         echo "Inserting ${virtualDomain} data to /etc/opendkim/{KeyTable, SigningTable, TrustedHosts}"
+        echo "'No such file or directory' messages might be displayed here. This is normal."
+
         if ! grep -q "default._domainkey.${virtualDomain}" /etc/opendkim/KeyTable; then
             echo "default._domainkey.${virtualDomain} ${virtualDomain}:default:/var/db/dkim/${virtualDomain}/default.private" >> /etc/opendkim/KeyTable
         fi

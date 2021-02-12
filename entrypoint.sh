@@ -216,15 +216,14 @@ function start_postfix {
         chown opendkim:opendkim /var/db/dkim/${virtualDomain}/default.private
 
         echo "Inserting ${virtualDomain} data to /etc/opendkim/{KeyTable, SigningTable, TrustedHosts}"
-        echo "'No such file or directory' messages might be displayed here. This is normal."
 
-        if ! grep -q "default._domainkey.${virtualDomain}" /etc/opendkim/KeyTable; then
+        if ! grep -q -s "default._domainkey.${virtualDomain}" /etc/opendkim/KeyTable; then
             echo "default._domainkey.${virtualDomain} ${virtualDomain}:default:/var/db/dkim/${virtualDomain}/default.private" >> /etc/opendkim/KeyTable
         fi
-        if ! grep -q "default._domainkey.${virtualDomain}" /etc/opendkim/SigningTable; then
+        if ! grep -q -s "default._domainkey.${virtualDomain}" /etc/opendkim/SigningTable; then
             echo "${virtualDomain} default._domainkey.${virtualDomain}" >> /etc/opendkim/SigningTable
         fi
-        if ! grep -q "${virtualDomain}" /etc/opendkim/TrustedHosts; then
+        if ! grep -q -s "${virtualDomain}" /etc/opendkim/TrustedHosts; then
             echo "${virtualDomain}" >> /etc/opendkim/TrustedHosts
         fi
 
@@ -238,16 +237,16 @@ function start_postfix {
     sed -e '/Selector/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
     sed -e '/Domain/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
 
-    if ! grep -q "KeyTable" /etc/opendkim/opendkim.conf; then
+    if ! grep -q -s "KeyTable" /etc/opendkim/opendkim.conf; then
         echo "KeyTable /etc/opendkim/KeyTable" >> /etc/opendkim/opendkim.conf; 
     fi
-    if ! grep -q "SigningTable" /etc/opendkim/opendkim.conf; then
+    if ! grep -q -s "SigningTable" /etc/opendkim/opendkim.conf; then
         echo "SigningTable /etc/opendkim/SigningTable" >> /etc/opendkim/opendkim.conf; 
     fi
-    if ! grep -q "ExternalIgnoreList" /etc/opendkim/opendkim.conf; then
+    if ! grep -q -s "ExternalIgnoreList" /etc/opendkim/opendkim.conf; then
         echo "ExternalIgnoreList /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf; 
     fi
-    if ! grep -q "InternalHosts" /etc/opendkim/opendkim.conf; then
+    if ! grep -q -s "InternalHosts" /etc/opendkim/opendkim.conf; then
         echo "InternalHosts /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf 
     fi
 

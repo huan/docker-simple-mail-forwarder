@@ -190,21 +190,66 @@ function start_postfix {
 
     postfix start
 
-
-    # DKIM
-    if [ ! -f /var/db/dkim/default.private ]; then
-        mkdir -p /var/db/dkim
-        echo "OpenDKIM: Keys not found, generating..."
-        opendkim-genkey -b 2048 -d $HOSTNAME -D /var/db/dkim/ -s default -v
-
-        chmod 400 /var/db/dkim/default.private
-        chown opendkim:opendkim /var/db/dkim/default.private
-
-        echo "OpenDKIM: Add TXT record to DNS:"
-        cat /var/db/dkim/default.txt
+    # migrating older single-domain DKIM (/var/db/dkim/default.*) to /var/db/dkim/$HOSTNAME/default.*
+    if [ -f /var/db/dkim/default.private ]; then
+        echo "Migrating ${HOSTNAME} keys to /var/db/dkim/$HOSTNAME/"
+        mkdir -p /var/db/dkim/$HOSTNAME
+        mv /var/db/dkim/default.* /var/db/dkim/$HOSTNAME
+        chmod 400 /var/db/dkim/$HOSTNAME/default.private
+        chown opendkim:opendkim /var/db/dkim/$HOSTNAME/default.private
     fi
-    
-    sed -n -e '/^Domain\s/!p' -e '$aDomain '$HOSTNAME -i /etc/opendkim/opendkim.conf
+
+    allDomains="$virtualDomains"
+    [[ $allDomains =~ $HOSTNAME ]] || {
+        allDomains="$allDomains $HOSTNAME"
+    }
+
+    for virtualDomain in $allDomains; do
+        # generates new keys only if they are not already present
+        if [ ! -f /var/db/dkim/${virtualDomain}/default.private ]; then
+            mkdir -p /var/db/dkim/${virtualDomain}
+            echo "OpenDKIM: Keys for ${virtualDomain} not found, generating..."
+            opendkim-genkey -b 2048 -d ${virtualDomain} -D /var/db/dkim/${virtualDomain} -s default -v
+        fi
+
+        chmod 400 /var/db/dkim/${virtualDomain}/default.private
+        chown opendkim:opendkim /var/db/dkim/${virtualDomain}/default.private
+
+        echo "Inserting ${virtualDomain} data to /etc/opendkim/{KeyTable, SigningTable, TrustedHosts}"
+
+        if ! grep -q -s "default._domainkey.${virtualDomain}" /etc/opendkim/KeyTable; then
+            echo "default._domainkey.${virtualDomain} ${virtualDomain}:default:/var/db/dkim/${virtualDomain}/default.private" >> /etc/opendkim/KeyTable
+        fi
+        if ! grep -q -s "default._domainkey.${virtualDomain}" /etc/opendkim/SigningTable; then
+            echo "${virtualDomain} default._domainkey.${virtualDomain}" >> /etc/opendkim/SigningTable
+        fi
+        if ! grep -q -s "${virtualDomain}" /etc/opendkim/TrustedHosts; then
+            echo "${virtualDomain}" >> /etc/opendkim/TrustedHosts
+        fi
+
+        echo "OpenDKIM: this TXT record for ${virtualDomain} should be present:"
+        cat /var/db/dkim/${virtualDomain}/default.txt
+        
+    done
+
+    echo "Configuring DKIM key settings in /etc/opendkim/opendkim.conf"
+    sed -e '/KeyFile/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
+    sed -e '/Selector/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
+    sed -e '/Domain/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
+
+    if ! grep -q -s "KeyTable" /etc/opendkim/opendkim.conf; then
+        echo "KeyTable /etc/opendkim/KeyTable" >> /etc/opendkim/opendkim.conf; 
+    fi
+    if ! grep -q -s "SigningTable" /etc/opendkim/opendkim.conf; then
+        echo "SigningTable /etc/opendkim/SigningTable" >> /etc/opendkim/opendkim.conf; 
+    fi
+    if ! grep -q -s "ExternalIgnoreList" /etc/opendkim/opendkim.conf; then
+        echo "ExternalIgnoreList /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf; 
+    fi
+    if ! grep -q -s "InternalHosts" /etc/opendkim/opendkim.conf; then
+        echo "InternalHosts /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf 
+    fi
+
 }
 
 #

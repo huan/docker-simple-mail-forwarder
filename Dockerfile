@@ -21,6 +21,7 @@ RUN apk add --update --no-cache \
         openssl \
         postsrsd \
         postfix \
+        postfix-pcre \
         syslog-ng \
         tzdata \
     \
@@ -41,7 +42,7 @@ COPY install/main.dist.cf /etc/postfix/main.cf
 COPY install/master.dist.cf /etc/postfix/master.cf
 COPY install/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
 COPY install/opendkim.conf /etc/opendkim/opendkim.conf
-
+COPY install/sender_header_filter.pcre /etc/postfix/sender_header_filter.pcre
 RUN cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
     && mkdir -p /run/opendkim && chown opendkim:opendkim /run/opendkim \

@@ -241,6 +241,11 @@ It is highly advised to mount `/var/db/dkim/` folder to host, so generated keypa
 docker run -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 -v $(pwd)/dkim:/var/db/dkim/ zixia/simple-mail-forwarder
 ```
 
+Stripping sender details
+------------------------
+
+SMF will strip the sender's IP, client, and user agent headers when the `SMF_SENDERPRIVACY` environment variable is defined.
+
 Helper Scripts
 --------------------
 

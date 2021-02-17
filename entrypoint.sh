@@ -19,6 +19,7 @@ Environment Variables:
     SMF_CONFIG - mail forward addresses mapping list.
     SMF_MYNETWORKS - configure relaying from trusted IPs, see http://www.postfix.org/postconf.5.html#mynetworks
     SMF_RELAYHOST - configure a relayhost
+    SMF_SENDERPRIVACY - strips sender's IP, client, and user agent.
 
 this creates a new smtp server which listens on port 25,
 forward all email from
@@ -186,6 +187,12 @@ function start_postfix {
         postconf -e smtp_sasl_security_options=
         postconf -e smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd
         postconf -e smtp_tls_CAfile=/etc/ssl/certs/ca-certificates.crt
+    fi
+
+    if [ "$SMF_SENDERPRIVACY" != "" ]
+    then
+        echo "Stripping sender's IP, client, and user agent."
+        postconf -e smtp_header_checks=pcre:/etc/postfix/sender_header_filter.pcre
     fi
 
     postfix start

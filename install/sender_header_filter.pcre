@@ -1,0 +1,5 @@
+/^(Received: from)[^\n]*(.*)/ REPLACE $1 127.0.0.1 (localhost [127.0.0.1])$2
+/^User-Agent/ IGNORE
+/^X-Originating-IP/ IGNORE
+/^X-Mailer:/            IGNORE
+/^Mime-Version:/        IGNORE

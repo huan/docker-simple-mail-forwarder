@@ -20,6 +20,7 @@ Environment Variables:
     SMF_MYNETWORKS - configure relaying from trusted IPs, see http://www.postfix.org/postconf.5.html#mynetworks
     SMF_RELAYHOST - configure a relayhost
     SMF_SENDERPRIVACY - strips sender's IP, client, and user agent.
+    SMF_POSTFIXMAIN_* - configure any postfix variable
 
 this creates a new smtp server which listens on port 25,
 forward all email from
@@ -256,6 +257,15 @@ function start_postfix {
     if ! grep -q -s "InternalHosts" /etc/opendkim/opendkim.conf; then
         echo "InternalHosts /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf 
     fi
+
+    echo "Postfix main.cf custom entries from SMF_POSTFIXMAIN_"
+    # Allow for setting any Postfix variables in the config file through environment variables.
+    for e in ${!SMF_POSTFIXMAIN_*} ; do
+        OPT_NAME=$(echo ${e:16} | tr '[:upper:]' '[:lower:]')
+        OPT_VALUE=${!e}
+        echo "postconf -e "${OPT_NAME}=${OPT_VALUE}""
+        postconf -e "${OPT_NAME}=${OPT_VALUE}"
+    done
 
 }
 

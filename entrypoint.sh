@@ -270,7 +270,7 @@ function start_postfix {
     echo "Postfix master.cf custom entries from SMF_POSTFIXMASTER_"
     # Allow for setting any Postfix variables in the config file through environment variables.
     for e in ${!SMF_POSTFIXMASTER_*} ; do
-        OPT_NAME=$(echo ${e:18} | tr '[:upper:]' '[:lower:]' | tr '_' '/')
+        OPT_NAME=$(echo ${e:18} | tr '[:upper:]' '[:lower:]' | sed 's/__/\//g')
         OPT_VALUE=${!e}
         echo "postconf -P "${OPT_NAME}=${OPT_VALUE}""
         postconf -P "${OPT_NAME}=${OPT_VALUE}"

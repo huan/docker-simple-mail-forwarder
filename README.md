@@ -54,7 +54,7 @@ Just set `SMF_CONFIG` and run:
 
 ```bash
 export SMF_CONFIG='testi@testo.com:test@test.com:test'
-docker run -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
+docker run -e SMF_CONFIG -p 25:25 zixia/simple-mail-forwarder
 ```
 
 > Don't forget to modify the DNS MX record of your domain. (in this example, it's _testo.com_)
@@ -72,7 +72,7 @@ See? There is nothing easier.
 > If you want to run it constanly in the background add `-t -d --restart=always` after `run`:
 
 ```bash
-docker run -t -d --restart=always -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 zixia/simple-mail-forwarder
+docker run -t -d --restart=always -e SMF_CONFIG -p 25:25 zixia/simple-mail-forwarder
 ```
 
 - `-t`: Allocate a pseudo-tty
@@ -200,7 +200,7 @@ If you have valid certificates for the domain name of the host, then you can use
 3. When creating the container, add the `-v` (volume) parameter to mount it to the folder `/etc/postfix/cert/` like so:
 
     ```bash
-    docker run  -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 -v /data/certs/:/etc/postfix/cert/ zixia/simple-mail-forwarder
+    docker run  -e SMF_CONFIG -p 25:25 -v /data/certs/:/etc/postfix/cert/ zixia/simple-mail-forwarder
     ```
 
 4. Your emails should now be forwarded with trusted encryption. You can use this tool to test it: <a href="http://checktls.com/" target="_blank">http://checktls.com/</a>
@@ -238,7 +238,7 @@ Public key must be set as TXT record in DNS under `default._domainkey` name. `de
 It is highly advised to mount `/var/db/dkim/` folder to host, so generated keypair would not get lost/regenerated:
 
 ```
-docker run -e SMF_CONFIG="$SMF_CONFIG" -p 25:25 -v $(pwd)/dkim:/var/db/dkim/ zixia/simple-mail-forwarder
+docker run -e SMF_CONFIG -p 25:25 -v $(pwd)/dkim:/var/db/dkim/ zixia/simple-mail-forwarder
 ```
 
 Stripping sender details

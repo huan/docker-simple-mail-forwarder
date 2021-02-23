@@ -246,6 +246,22 @@ Stripping sender details
 
 SMF will strip the sender's IP, client, and user agent headers when the `SMF_SENDERPRIVACY` environment variable is defined.
 
+
+Custom postfix configuration
+----------------------------
+
+SMF allows to use environment variables to add or change lines to postfix `main.cf` and `master.cf` configuration files.
+
+- `SMF_POSTFIXMAIN_*` variables will edit postfix `main.cf` entries.
+  - Format: `SMF_POSTFIXMAIN_option_name=value`
+  - Example: `SMF_POSTFIXMAIN_soft_bounce=yes` will call `postconf -e soft_bounce=yes` and add the option.
+
+- `SMF_POSTFIXMASTER_*` variables will edit postfix `master.cf`.
+  - Format: `SMF_POSTFIXMASTER_service__name__type__parameter_name=value` Please note the double underscore `__` to differentiate service and type (which require a `/` as separation symbol) and the single underscore `_` used only by parameter names.
+  - Example: `SMF_POSTFIXMASTER_submission__inet__smtpd__recipient_restrictions=permit_mynetworks,permit_sasl_authenticated,reject` will call `postconf -P submission/inet/smtpd/recipient_restrictions=permit_mynetworks,permit_sasl_authenticated,reject` and add the option.
+
+
+
 Helper Scripts
 --------------------
 

@@ -183,3 +183,21 @@
     done
     [ $? -eq 0 ]
 }
+
+@test "test custom main.cf entries" {
+    for e in ${!SMF_POSTFIXMAIN_*} ; do
+        OPT_NAME=$(echo ${e:16} | tr '[:upper:]' '[:lower:]')
+        OPT_VALUE=${!e}
+        ret=$(postconf | grep "$OPT_NAME" | grep "$OPT_VALUE")
+        [[ ! -z "$ret" ]]
+    done
+}
+
+@test "test custom master.cf entries" {
+    for e in ${!SMF_POSTFIXMASTER_*} ; do
+        OPT_NAME=$(echo ${e:18} | tr '[:upper:]' '[:lower:]' | sed 's/__/\//g')
+        OPT_VALUE=${!e}
+        ret=$(postconf -P | grep "$OPT_NAME" | grep "$OPT_VALUE")
+        [[ ! -z "$ret" ]]
+    done
+}

@@ -15,6 +15,7 @@ Simplest and Smallest Email Forward Service for Docker.
 1. Image Size [**10MB**](https://hub.docker.com/r/zixia/simple-mail-forwarder/tags/)
 
 [View on GitHub](https://github.com/huan/docker-simple-mail-forwarder)
+|
 [View on Docker](https://hub.docker.com/r/zixia/simple-mail-forwarder)
 
 Voice from Users

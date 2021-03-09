@@ -3,7 +3,7 @@ ARGV=$@
 
 function print_help {
 cat <<EOF
-                Docker SMF - Simple Mail Forwarder
+                Docker SMF v$(head -1 /app/VERSION) - Simple Mail Forwarder
 ===============================================================================
 To create a new mail server for your domain,
 you could use the following commands:
@@ -238,7 +238,7 @@ function start_postfix {
 
         echo "OpenDKIM: this TXT record for ${virtualDomain} should be present:"
         cat /var/db/dkim/${virtualDomain}/default.txt
-        
+
     done
 
     echo "Configuring DKIM key settings in /etc/opendkim/opendkim.conf"
@@ -247,16 +247,16 @@ function start_postfix {
     sed -e '/Domain/ s/^#*/#/' -i /etc/opendkim/opendkim.conf
 
     if ! grep -q -s "KeyTable" /etc/opendkim/opendkim.conf; then
-        echo "KeyTable /etc/opendkim/KeyTable" >> /etc/opendkim/opendkim.conf; 
+        echo "KeyTable /etc/opendkim/KeyTable" >> /etc/opendkim/opendkim.conf;
     fi
     if ! grep -q -s "SigningTable" /etc/opendkim/opendkim.conf; then
-        echo "SigningTable /etc/opendkim/SigningTable" >> /etc/opendkim/opendkim.conf; 
+        echo "SigningTable /etc/opendkim/SigningTable" >> /etc/opendkim/opendkim.conf;
     fi
     if ! grep -q -s "ExternalIgnoreList" /etc/opendkim/opendkim.conf; then
-        echo "ExternalIgnoreList /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf; 
+        echo "ExternalIgnoreList /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf;
     fi
     if ! grep -q -s "InternalHosts" /etc/opendkim/opendkim.conf; then
-        echo "InternalHosts /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf 
+        echo "InternalHosts /etc/opendkim/TrustedHosts" >> /etc/opendkim/opendkim.conf
     fi
 
     echo "Postfix main.cf custom entries from SMF_POSTFIXMAIN_"

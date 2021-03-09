@@ -70,6 +70,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN bash -n /entrypoint.sh && chmod a+x /entrypoint.sh
 
 COPY BANNER /app/
+COPY VERSION /app/
 COPY test /app/test
 
 COPY .git/logs/HEAD /app/GIT_LOG

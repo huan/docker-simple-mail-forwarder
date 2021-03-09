@@ -314,6 +314,16 @@ Changelog
 
 ### master
 
+### v1.4 (Mar 9, 2021)
+
+1. Update DockerHub README.md @thexperiments [#94](https://github.com/huan/docker-simple-mail-forwarder/issues/94)
+1. Allow for setting any Postfix variables in the config file (both main.cf and master.cf) @dgraziotin [#93](https://github.com/huan/docker-simple-mail-forwarder/pull/93)
+1. Strips sender details (IP, client, user agent) when sending @dgraziotin [#91](https://github.com/huan/docker-simple-mail-forwarder/pull/91)
+1. Adds DKIM support for multiple domains @dgraziotin [#89](https://github.com/huan/docker-simple-mail-forwarder/pull/89)
+1. DKIM support for multiple domains @dgraziotin [#88](https://github.com/huan/docker-simple-mail-forwarder/issues/88)
+1. Add DKIM support @petslane [#83](https://github.com/huan/docker-simple-mail-forwarder/pull/83)
+1. Use script to install s6 with right platforms (arm/x86) @huan [#76](https://github.com/huan/docker-simple-mail-forwarder/issues/76)
+
 ### v1.3 (17 Sep 2020)
 
 1. Upgrade alpine docker base image to 3.12

@@ -242,7 +242,7 @@
         postfix stop
         mkdir -p "$(dirname "$SMF_POSTFIXLOG")"
         postconf maillog_file="$SMF_POSTFIXLOG"
-        postfix start
+        postfix start || true
         if [ -f /var/log/postfix.log ]; then
           true
         else

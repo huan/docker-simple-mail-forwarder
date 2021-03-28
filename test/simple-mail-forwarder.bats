@@ -236,7 +236,6 @@
         exit 1
       else
         postconf maillog_file="$SMF_POSTFIXLOG"
-        postfix check
         postfix start
         if [ -f /var/log/postfix.log ]; then
           true

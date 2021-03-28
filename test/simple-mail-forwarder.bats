@@ -225,6 +225,7 @@
       fi
     fi
 
+    # Check if postfix can start and logs to the specified file
     SMF_POSTFIXLOG="/var/log/postfix.log"
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       echo "Postfix should not use the default configuration"

@@ -205,7 +205,14 @@
 @test "test default postfix logging configuration" {
     # Check if not specified variable will result in default configuration
     if [ "$SMF_POSTFIXLOG" == "" ]; then
-      true
+      postfix stop
+      postfix start
+      if [ -f /var/log/postfix.log ]; then
+         echo "Postfix should log to /dev/stdout"
+         exit 1
+      else
+        true
+     fi
     else
       echo "Postfix should use the default configuration"
       exit 1

@@ -41,7 +41,7 @@ function start_postfix {
     bash /app/init-openssl.sh
 
     #
-    # Set virtual user maping
+    # Set virtual user mapping
     #
     if [ "$SMF_CONFIG" = "" ]; then
         if [[ "$1" =~ [a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\. ]]; then

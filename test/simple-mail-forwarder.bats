@@ -239,6 +239,7 @@
         echo "Script should recognize that variable starts with /var"
         exit 1
       else
+        postfix stop
         postconf maillog_file="$SMF_POSTFIXLOG"
         postfix start
         if [ -f /var/log/postfix.log ]; then

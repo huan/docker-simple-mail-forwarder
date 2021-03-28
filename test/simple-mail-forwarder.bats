@@ -207,14 +207,14 @@
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       true
     else
-      echo "Postfix should use the default configuration!"
+      echo "Postfix should use the default configuration"
       exit 1
     fi
 
     # Check if specified variable not starting with /var will result in an error
     SMF_POSTFIXLOG="/starts/not/with/var"
     if [ "$SMF_POSTFIXLOG" == "" ]; then
-      echo "Postfix should not use the default configuration!"
+      echo "Postfix should not use the default configuration"
       exit 1
     else
       if [[ $SMF_POSTFIXLOG != "/var"* ]]; then
@@ -227,7 +227,7 @@
 
     SMF_POSTFIXLOG="/var/log/postfix.log"
     if [ "$SMF_POSTFIXLOG" == "" ]; then
-      echo "Postfix should not use the default configuration!"
+      echo "Postfix should not use the default configuration"
       exit 1
     else
       if [[ $SMF_POSTFIXLOG != "/var"* ]]; then

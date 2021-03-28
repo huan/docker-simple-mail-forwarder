@@ -249,6 +249,8 @@
           echo "Postfix should log to /var/log/postfix.log"
           exit 1
         fi
+        cat /var/log/postfix.log
+        exit 1
       fi
     fi
 }

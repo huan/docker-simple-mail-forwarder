@@ -35,6 +35,7 @@ EOF
 #
 # Start
 #
+# shellcheck disable=SC2120
 function start_postfix {
     #
     # OpenSSL Init
@@ -207,6 +208,7 @@ function start_postfix {
         exit 1
       else
         echo "Postfix will log to: $SMF_POSTFIXLOG"
+        mkdir -p "$(dirname "$SMF_POSTFIXLOG")"
         postconf maillog_file="$SMF_POSTFIXLOG"
       fi
     fi

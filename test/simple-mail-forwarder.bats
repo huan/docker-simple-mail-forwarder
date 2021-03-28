@@ -201,3 +201,41 @@
         [[ ! -z "$ret" ]]
     done
 }
+
+@test "test custom postfix logging configuration" {
+    # Check if not specified variable will result in default configuration
+    if [ "$SMF_POSTFIXLOG" == "" ]; then
+      true
+    else
+      echo "Postfix should use the default configuration!"
+      exit 1
+    fi
+
+    # Check if specified variable not starting with /var will result in an error
+    SMF_POSTFIXLOG="/starts/not/with/var"
+    if [ "$SMF_POSTFIXLOG" == "" ]; then
+      echo "Postfix should not use the default configuration!"
+      exit 1
+    else
+      if [[ $SMF_POSTFIXLOG != "/var"* ]]; then
+        true
+      else
+        echo "Script should recognize that variable starts not with /var"
+        exit 1
+      fi
+    fi
+
+    SMF_POSTFIXLOG="/var/log/postfix.log"
+    if [ "$SMF_POSTFIXLOG" == "" ]; then
+      echo "Postfix should not use the default configuration!"
+      exit 1
+    else
+      if [[ $SMF_POSTFIXLOG != "/var"* ]]; then
+        echo "Script should recognize that variable starts with /var"
+        exit 1
+      else
+        echo "Postfix will log to: $SMF_POSTFIXLOG"
+        postconf maillog_file="$SMF_POSTFIXLOG"
+      fi
+    fi
+}

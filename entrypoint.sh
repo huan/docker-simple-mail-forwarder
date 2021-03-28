@@ -210,6 +210,7 @@ function start_postfix {
         echo "Postfix will log to: $SMF_POSTFIXLOG"
         mkdir -p "$(dirname "$SMF_POSTFIXLOG")"
         postconf maillog_file="$SMF_POSTFIXLOG"
+        postfix upgrade-configuration
       fi
     fi
 

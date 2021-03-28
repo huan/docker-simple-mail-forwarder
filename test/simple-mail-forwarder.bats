@@ -243,15 +243,13 @@
         mkdir -p "$(dirname "$SMF_POSTFIXLOG")"
         postconf maillog_file="$SMF_POSTFIXLOG"
         postfix upgrade-configuration
-        postfix start || true
+        postfix start
         if [ -f /var/log/postfix.log ]; then
           true
         else
           echo "Postfix should log to /var/log/postfix.log"
           exit 1
         fi
-        cat /var/log/postfix.log
-        exit 1
       fi
     fi
 }

@@ -234,8 +234,14 @@
         echo "Script should recognize that variable starts with /var"
         exit 1
       else
-        echo "Postfix will log to: $SMF_POSTFIXLOG"
         postconf maillog_file="$SMF_POSTFIXLOG"
+        postfix start
+        if [ -f /var/log/postfix.log ]; then
+          true
+        else
+          echo "Postfix should log to /var/log/postfix.log"
+          exit 1
+        fi
       fi
     fi
 }

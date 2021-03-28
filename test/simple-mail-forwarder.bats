@@ -202,7 +202,7 @@
     done
 }
 
-@test "test custom postfix logging configuration" {
+@test "test default postfix logging configuration" {
     # Check if not specified variable will result in default configuration
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       true
@@ -210,7 +210,9 @@
       echo "Postfix should use the default configuration"
       exit 1
     fi
+}
 
+@test "test custom postfix logging configuration with an error" {
     # Check if specified variable not starting with /var will result in an error
     SMF_POSTFIXLOG="/starts/not/with/var"
     if [ "$SMF_POSTFIXLOG" == "" ]; then
@@ -224,7 +226,9 @@
         exit 1
       fi
     fi
+}
 
+@test "test custom postfix logging configuration" {
     # Check if postfix can start and logs to the specified file
     SMF_POSTFIXLOG="/var/log/postfix.log"
     if [ "$SMF_POSTFIXLOG" == "" ]; then

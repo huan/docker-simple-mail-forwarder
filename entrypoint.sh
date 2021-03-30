@@ -22,7 +22,6 @@ Environment Variables:
     SMF_SENDERPRIVACY - strips sender's IP, client, and user agent.
     SMF_POSTFIXMAIN_* - configure any postfix main.cf variable
     SMF_POSTFIXMASTER_* - configure any postfix master.cf variable
-    SMF_POSTFIXLOG - configures postfix logging configuration, see http://www.postfix.org/MAILLOG_README.html
 
 this creates a new smtp server which listens on port 25,
 forward all email from
@@ -198,21 +197,6 @@ function start_postfix {
         postconf -e smtp_header_checks=pcre:/etc/postfix/sender_header_filter.pcre
     fi
 
-    echo "Postfix logging configuration"
-    if [ -z "$SMF_POSTFIXLOG" ]; then
-      echo "Postfix will use the default logging configuration: /dev/stdout"
-    else
-      if [[ $SMF_POSTFIXLOG != "/var"* ]]; then
-        echo "SMF_POSTFIXLOG must be a directory path starting with \"/var\""
-        exit 1
-      else
-        echo "Postfix will log to: $SMF_POSTFIXLOG"
-        mkdir -p "$(dirname "$SMF_POSTFIXLOG")"
-        postconf maillog_file="$SMF_POSTFIXLOG"
-        postfix upgrade-configuration
-      fi
-    fi
-
     postfix start
 
     # migrating older single-domain DKIM (/var/db/dkim/default.*) to /var/db/dkim/$HOSTNAME/default.*
@@ -290,6 +274,7 @@ function start_postfix {
         OPT_VALUE=${!e}
         postconf -P "${OPT_NAME}=${OPT_VALUE}"
     done
+    postfix upgrade-configuration
 }
 
 #

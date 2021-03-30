@@ -199,7 +199,7 @@ function start_postfix {
     fi
 
     echo "Postfix logging configuration"
-    if [ "$SMF_POSTFIXLOG" == "" ]; then
+    if [ -z "$SMF_POSTFIXLOG" ]; then
       echo "Postfix will use the default logging configuration: /dev/stdout"
     else
       if [[ $SMF_POSTFIXLOG != "/var"* ]]; then

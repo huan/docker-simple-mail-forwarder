@@ -274,6 +274,7 @@ function start_postfix {
         OPT_VALUE=${!e}
         postconf -P "${OPT_NAME}=${OPT_VALUE}"
     done
+    postfix upgrade-configuration
 }
 
 #

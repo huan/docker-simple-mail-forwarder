@@ -251,7 +251,7 @@ SMF will strip the sender's IP, client, and user agent headers when the `SMF_SEN
 Custom postfix configuration
 ----------------------------
 
-SMF allows to use environment variables to add or change lines to postfix `main.cf` and `master.cf` configuration files.
+SMF allows using environment variables to add or change lines to postfix `main.cf` and `master.cf` configuration files.
 
 - `SMF_POSTFIXMAIN_*` variables will edit postfix `main.cf` entries.
   - Format: `SMF_POSTFIXMAIN_option_name=value`
@@ -261,7 +261,16 @@ SMF allows to use environment variables to add or change lines to postfix `main.
   - Format: `SMF_POSTFIXMASTER_service__name__type__parameter_name=value` Please note the double underscore `__` to differentiate service and type (which require a `/` as separation symbol) and the single underscore `_` used only by parameter names.
   - Example: `SMF_POSTFIXMASTER_submission__inet__smtpd__recipient_restrictions=permit_mynetworks,permit_sasl_authenticated,reject` will call `postconf -P submission/inet/smtpd/recipient_restrictions=permit_mynetworks,permit_sasl_authenticated,reject` and add the option.
 
+### Logging
+The default log configuration of postfix is sending all log entries to `/dev/stdout`. Because file logs are important in some cases, SMF allows overriding the default log configuration of postfix.
 
+- `SMF_POSTFIXLOG` will edit postfix logging configuration
+  - Format: `SMF_POSTFIXLOG=value`
+  - Example: `SMF_POSTFIXLOG=/var/log/postfix.log` will call `postconf maillog_file="/var/log/postfix.log"`
+  
+Attention: The logfile path must start with "/var".
+
+When you wish to rotate logs, look at the `postfix logrotate` command in the [official documentation](http://www.postfix.org/MAILLOG_README.html#logrotate).
 
 Helper Scripts
 --------------------

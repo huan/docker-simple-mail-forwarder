@@ -204,6 +204,7 @@
 
 @test "test default postfix logging configuration" {
     # Check if not specified variable will result in default configuration
+    SMF_POSTFIXLOG=
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       true
     else

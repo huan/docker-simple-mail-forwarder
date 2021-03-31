@@ -202,6 +202,8 @@
     done
 }
 
+SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
+
 @test "test default postfix logging configuration" {
     # Check if not specified variable will result in default configuration
     SMF_POSTFIXLOG=
@@ -254,3 +256,5 @@
       fi
     fi
 }
+
+SMF_POSTFIXLOG="$SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION"

@@ -202,8 +202,11 @@
     done
 }
 
+SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
+
 @test "test default postfix logging configuration" {
     # Check if not specified variable will result in default configuration
+    SMF_POSTFIXLOG=
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       true
     else
@@ -230,7 +233,7 @@
 
 @test "test custom postfix logging configuration" {
     # Check if postfix can start and logs to the specified file
-    SMF_POSTFIXLOG="/var/log/postfix.log"
+    SMF_POSTFIXLOG="/var/log/postfix/postfix.log"
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       echo "Postfix should not use the default configuration"
       exit 1
@@ -244,12 +247,14 @@
         postconf maillog_file="$SMF_POSTFIXLOG"
         postfix upgrade-configuration
         postfix start
-        if [ -f /var/log/postfix.log ]; then
+        if [ -f /var/log/postfix/postfix.log ]; then
           true
         else
-          echo "Postfix should log to /var/log/postfix.log"
+          echo "Postfix should log to /var/log/postfix/postfix.log"
           exit 1
         fi
       fi
     fi
 }
+
+SMF_POSTFIXLOG="$SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION"

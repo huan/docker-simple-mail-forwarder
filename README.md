@@ -87,6 +87,9 @@ Quick Test
 
 Tested by [BATS(Bash Automated Testing System)](https://github.com/sstephenson/bats), a bash implementation of [TAP(Test Anything Protol)]( http://testanything.org).
 
+Attention: The tests do all sorts of things to your environment, so you should never run this in production!
+In general, the execution of a test may result in the environment being left in a different state than it was before.
+
 How to run:
 
 ```bash

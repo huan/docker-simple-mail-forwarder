@@ -230,21 +230,23 @@ SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
     fi
 }
 
-    SMF_POSTFIXLOG="/var/log/postfix/postfix.log"
-    if [ "$SMF_POSTFIXLOG" == "" ]; then
 @test "custom postfix logging configuration" {
+    local TEST_SMF_POSTFIXLOG="/var/log/postfix/postfix.log"
+
+    if [ "$TEST_SMF_POSTFIXLOG" == "" ]; then
       echo "Postfix should not use the default configuration"
       exit 1
     else
-      if [[ $SMF_POSTFIXLOG != "/var"* ]]; then
+      if [[ $TEST_SMF_POSTFIXLOG != "/var"* ]]; then
         echo "Script should recognize that variable starts with /var"
         exit 1
       else
         postfix stop
-        mkdir -p "$(dirname "$SMF_POSTFIXLOG")"
-        postconf maillog_file="$SMF_POSTFIXLOG"
+        mkdir -p "$(dirname "$TEST_SMF_POSTFIXLOG")"
+        postconf maillog_file="$TEST_SMF_POSTFIXLOG"
         postfix upgrade-configuration
         postfix start
+
         if [ -f /var/log/postfix/postfix.log ]; then
           true
         else

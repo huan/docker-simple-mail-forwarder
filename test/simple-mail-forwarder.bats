@@ -247,10 +247,17 @@
         postfix start
 
         if [ -f /var/log/postfix/postfix.log ]; then
-          true
+          local TEST_FAILED=false
         else
           echo "Postfix should log to /var/log/postfix/postfix.log"
-          exit 1
+          local TEST_FAILED=true
+        fi
+
+        postfix stop
+        postconf maillog_file="$SMF_POSTFIXLOG"
+
+        if $TEST_FAILED; then
+           exit 1
         fi
       fi
     fi

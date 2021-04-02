@@ -231,7 +231,7 @@
 }
 
 @test "custom postfix logging configuration" {
-    local TEST_SMF_POSTFIXLOG="/var/log/postfix/postfix.log"
+    local TEST_SMF_POSTFIXLOG="/var/log/postfix.log"
 
     if [ "$TEST_SMF_POSTFIXLOG" == "" ]; then
       echo "Postfix should not use the default configuration"

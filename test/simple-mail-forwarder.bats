@@ -204,8 +204,8 @@
 
 SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
 @test "default postfix logging configuration" {
+    local SMF_POSTFIXLOG=
 
-    SMF_POSTFIXLOG=
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       true
     else
@@ -214,8 +214,9 @@ SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
     fi
 }
 
-    SMF_POSTFIXLOG="/starts/not/with/var"
 @test "wrong postfix logging configuration" {
+    local SMF_POSTFIXLOG="/starts/not/with/var"
+
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       echo "Postfix should not use the default configuration"
       exit 1

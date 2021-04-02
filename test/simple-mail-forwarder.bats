@@ -203,8 +203,8 @@
 }
 
 SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
+@test "default postfix logging configuration" {
 
-@test "test default postfix logging configuration" {
     SMF_POSTFIXLOG=
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       true
@@ -214,8 +214,8 @@ SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
     fi
 }
 
-@test "test custom postfix logging configuration with an error" {
     SMF_POSTFIXLOG="/starts/not/with/var"
+@test "wrong postfix logging configuration" {
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       echo "Postfix should not use the default configuration"
       exit 1
@@ -229,9 +229,9 @@ SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
     fi
 }
 
-@test "test custom postfix logging configuration" {
     SMF_POSTFIXLOG="/var/log/postfix/postfix.log"
     if [ "$SMF_POSTFIXLOG" == "" ]; then
+@test "custom postfix logging configuration" {
       echo "Postfix should not use the default configuration"
       exit 1
     else

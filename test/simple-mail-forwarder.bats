@@ -206,7 +206,6 @@
 @test "default postfix logging configuration" {
     local SMF_POSTFIXLOG=
 
-
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       true
     else
@@ -264,5 +263,3 @@
       fi
     fi
 }
-
-SMF_POSTFIXLOG="$SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION"

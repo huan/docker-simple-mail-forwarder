@@ -42,9 +42,11 @@ function start_postfix {
     bash /app/init-openssl.sh
 
     #
-    # Start PostSRSd
+    # Start PostSRSd if SMF_SRS is set
     #
-    bash /app/init-postsrsd.sh
+    [ $SMF_SSR = "" ] || {
+      bash /app/init-postsrsd.sh
+    }
 
     #
     # Set virtual user maping

@@ -57,6 +57,9 @@ WORKDIR /app
 COPY install/init-openssl.sh /app/init-openssl.sh
 RUN bash -n /app/init-openssl.sh && chmod +x /app/init-openssl.sh
 
+COPY install/init-postsrsd.sh /app/init-postsrsd.sh
+RUN bash -n /app/init-postsrsd.sh && chmod +x /app/init-postsrsd.sh
+
 COPY install/postfix.sh /etc/services.d/postfix/run
 RUN bash -n /etc/services.d/postfix/run && chmod +x /etc/services.d/postfix/run
 

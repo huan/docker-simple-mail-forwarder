@@ -44,9 +44,9 @@ function start_postfix {
     #
     # Start PostSRSd if SMF_SRS is set
     #
-    [ $SMF_SSR = "" ] || {
+    if [ ! $SMF_SRS = "" ]; then 
       bash /app/init-postsrsd.sh
-    }
+    fi
 
     #
     # Set virtual user maping

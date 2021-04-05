@@ -44,7 +44,7 @@ function start_postfix {
     #
     # Start PostSRSd if SMF_SRS is set
     #
-    if [ ! $SMF_SRS = "" ]; then 
+    if [ $SMF_SRS = "true" ]; then 
       bash /app/init-postsrsd.sh
     fi
 

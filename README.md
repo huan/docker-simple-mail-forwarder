@@ -275,10 +275,10 @@ When you wish to rotate logs, look at the `postfix logrotate` command in the [of
 
 Enable SRS (Sender Rewriting Scheme)
 ------------------------------------
+SRS is required if the sender uses SPF for verification. If SRS is not enabled, SPF verification will fail. ([Additional Informations to SRS](https://www.infradead.org/rpr.html))
 
-SRS is needed, if the sender user SPF for verification. If SRS is not set, the SPF-Check will fail. [Additional Informations to SRS](https://www.infradead.org/rpr.html)
-You can enable SRS by setting the environment variable `SMF_SRS=true`. This will start PostSRSd inside the Container. The Secret is automatically created and the Domain is set to `$SMF_DOMAIN`.
-All you need to do now is set the following environment variables:
+You can enable SRS by setting the environment variable `SMF_SRS=true`. This will start PostSRSd inside the container. The secret is automatically created and the domain is set to `SMF_DOMAIN`. Now you just need to set the following environment variables for Postfix:
+
 ```bash
 SMF_POSTFIXMAIN_sender_canonical_maps=tcp:localhost:10001
 SMF_POSTFIXMAIN_sender_canonical_classes=envelope_sender

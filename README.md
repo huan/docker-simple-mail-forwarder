@@ -443,11 +443,15 @@ Cloud Requirement
 [![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/6)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/6)
 [![contributor](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/images/7)](https://sourcerer.io/fame/huan/huan/docker-simple-mail-forwarder/links/7)
 
-## AUTHOR
+## Author
 
-[Huan LI (李卓桓)](http://linkedin.com/in/zixia) <zixia@zixia.net>
+- [Huan LI (李卓桓)](http://linkedin.com/in/zixia) <zixia@zixia.net> (Creator of SMF)
 
 [![Profile of Huan LI (李卓桓) on StackOverflow](https://stackexchange.com/users/flair/265499.png)](https://stackexchange.com/users/265499)
+
+## MAINTAINERS
+
+- Stefan Dimitrov [@dimitrovs](https://github.com/dimitrovs)
 
 ## COPYRIGHT & LICENSE
 

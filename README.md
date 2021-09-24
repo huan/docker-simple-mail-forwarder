@@ -242,6 +242,9 @@ It is highly advised to mount `/var/db/dkim/` folder to host, so generated keypa
 docker run -e SMF_CONFIG -p 25:25 -v $(pwd)/dkim:/var/db/dkim/ zixia/simple-mail-forwarder
 ```
 
+SMF allows using environment variables to change the size of the DKIM key:
+- `SMF_DKIM_KEYSIZE` will set the keysize of the generated DKIM key (setting `opendkim-genkey -b $SMF_DKIM_KEYSIZE`). Defaults to `2048`.
+
 Stripping sender details
 ------------------------
 

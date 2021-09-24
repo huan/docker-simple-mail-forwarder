@@ -240,8 +240,11 @@ function start_postfix {
         # generates new keys only if they are not already present
         if [ ! -f /var/db/dkim/${virtualDomain}/default.private ]; then
             mkdir -p /var/db/dkim/${virtualDomain}
-            echo "OpenDKIM: Keys for ${virtualDomain} not found, generating..."
-            opendkim-genkey -b 2048 -d ${virtualDomain} -D /var/db/dkim/${virtualDomain} -s default -v
+            if [ -z "$SMF_DKIM_KEYSIZE" ]; then
+                SMF_DKIM_KEYSIZE=2048
+            fi
+            echo "OpenDKIM: Keys for ${virtualDomain} not found, generating witk keysize ${SMF_DKIM_KEYSIZE}..."
+            opendkim-genkey -b ${SMF_DKIM_KEYSIZE} -d ${virtualDomain} -D /var/db/dkim/${virtualDomain} -s default -v
         fi
 
         chmod 400 /var/db/dkim/${virtualDomain}/default.private

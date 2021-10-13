@@ -33,6 +33,8 @@ Voice from Users
 
 > @Czocher: It's at least a timesaver if not a lifesaver. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/50#issue-427317446)
 
+> @StrangePeanut: I am so glad to have found SMF. Many thanks for this brilliant solution to email forwarding. [link](https://github.com/huan/docker-simple-mail-forwarder/issues/111)
+
 What is Simple Mail Forwarder (SMF)?
 ------------------------------------
 

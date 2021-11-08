@@ -202,11 +202,10 @@
     done
 }
 
-SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
 
-@test "test default postfix logging configuration" {
-    # Check if not specified variable will result in default configuration
-    SMF_POSTFIXLOG=
+@test "default postfix logging configuration" {
+    local SMF_POSTFIXLOG=
+
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       true
     else
@@ -215,9 +214,9 @@ SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
     fi
 }
 
-@test "test custom postfix logging configuration with an error" {
-    # Check if specified variable not starting with /var will result in an error
-    SMF_POSTFIXLOG="/starts/not/with/var"
+@test "wrong postfix logging configuration" {
+    local SMF_POSTFIXLOG="/starts/not/with/var"
+
     if [ "$SMF_POSTFIXLOG" == "" ]; then
       echo "Postfix should not use the default configuration"
       exit 1
@@ -231,30 +230,36 @@ SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION="$SMF_POSTFIXLOG"
     fi
 }
 
-@test "test custom postfix logging configuration" {
-    # Check if postfix can start and logs to the specified file
-    SMF_POSTFIXLOG="/var/log/postfix/postfix.log"
-    if [ "$SMF_POSTFIXLOG" == "" ]; then
+@test "custom postfix logging configuration" {
+    local TEST_SMF_POSTFIXLOG="/var/log/postfix/postfix.log"
+
+    if [ "$TEST_SMF_POSTFIXLOG" == "" ]; then
       echo "Postfix should not use the default configuration"
       exit 1
     else
-      if [[ $SMF_POSTFIXLOG != "/var"* ]]; then
+      if [[ $TEST_SMF_POSTFIXLOG != "/var"* ]]; then
         echo "Script should recognize that variable starts with /var"
         exit 1
       else
         postfix stop
-        mkdir -p "$(dirname "$SMF_POSTFIXLOG")"
-        postconf maillog_file="$SMF_POSTFIXLOG"
+        mkdir -p "$(dirname "$TEST_SMF_POSTFIXLOG")"
+        postconf maillog_file="$TEST_SMF_POSTFIXLOG"
         postfix upgrade-configuration
         postfix start
+
         if [ -f /var/log/postfix/postfix.log ]; then
-          true
+          local TEST_FAILED=false
         else
           echo "Postfix should log to /var/log/postfix/postfix.log"
-          exit 1
+          local TEST_FAILED=true
+        fi
+
+        postfix stop
+        postconf maillog_file="$SMF_POSTFIXLOG"
+
+        if $TEST_FAILED; then
+           exit 1
         fi
       fi
     fi
 }
-
-SMF_POSTFIXLOG="$SMF_POSTFIXLOG_BEFORE_TEST_EXECUTION"

@@ -89,32 +89,40 @@ Quick Test
 
 Tested by [BATS(Bash Automated Testing System)](https://github.com/sstephenson/bats), a bash implementation of [TAP(Test Anything Protol)]( http://testanything.org).
 
+Attention: The tests do all sorts of things to your environment, so you should never run this in production!
+In general, the execution of a test may result in the environment being left in a different state than it was before.
+
 How to run:
 
 ```bash
 $ docker run zixia/simple-mail-forwarder test
 >> exec bats test
-1..20
-ok 1 confirm hostname pretend to work.
-ok 2 confirm hwclock pretend to work.
-ok 3 service postfix could start/stop right.
-ok 4 SMF_CONFIG exist
-ok 5 SMF_DOMAIN exist
-ok 6 virtual maping source is set
-ok 7 virtual maping data is set
-ok 8 virtual maping db is set
-ok 9 system hostname FQDN resolvable
-ok 10 postfix myhostname FQDN & resolvable
-ok 11 check other hostname setting
-ok 12 confirm postfix is running
-ok 13 confirm port 25 is open
-ok 14 crond is running
-ok 15 ESMTP STATTLS supported
-ok 16 ESMTP AUTH supported
-ok 17 ESMTP STARTTLS supported
-ok 18 create user testi@testo.com by password test
-ok 19 ESMTP AUTH by testi@testo.com/test
-ok 20 ESMTP TLS AUTH by testi@testo.com/test
+1..25
+ok 1 postfix service installed
+ok 2 SMF_CONFIG exist
+ok 3 SMF_DOMAIN exist
+ok 4 virtual maping source is set
+ok 5 virtual maping data is set
+ok 6 virtual maping db is set
+ok 7 system hostname FQDN resolvable
+ok 8 postfix myhostname FQDN & resolvable
+ok 9 check other hostname setting
+ok 10 confirm postfix is running
+ok 11 confirm port 25 is open
+ok 12 crond is running # skip skip this for 0.3.0 -> 0.4.0
+ok 13 ESMTP STATTLS supported
+ok 14 ESMTP AUTH supported
+ok 15 ESMTP STARTTLS connect ok
+ok 16 create user testi@testo.com by password test
+ok 17 ESMTP AUTH by testi@testo.com/test
+ok 18 ESMTP TLS AUTH by testi@testo.com/test
+ok 19 deleting test user testi@testo.com
+ok 20 test DKIM keys # skip This test will fail on docker build workflow
+ok 21 test custom main.cf entries
+ok 22 test custom master.cf entries
+ok 23 default postfix logging configuration
+ok 24 wrong postfix logging configuration
+ok 25 custom postfix logging configuration
 ```
 
 You are all set! :-]

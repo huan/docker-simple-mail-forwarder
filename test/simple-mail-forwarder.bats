@@ -62,6 +62,43 @@
     [ "`cat /etc/mailname`" = "`cat /etc/hostname`" ]
 }
 
+@test "if 2 certs, confirm both have the same domain(s) & CN" {
+    # If there are two certs present make sure they have the same domain(s) & CN
+    if [[ -f /etc/postfix/cert/smtp.ec.cert && -f /etc/postfix/cert/smtp.cert ]]; then
+        ec_cert_subject=`openssl x509 -noout -subject -in /etc/postfix/cert/smtp.ec.cert`
+        rsa_cert_subject=`openssl x509 -noout -subject -in /etc/postfix/cert/smtp.cert`
+        ec_cert_cn=`perl -e 'print join "\n", @cn = $ARGV[0] =~ /(?<=CN\s=\s).*/g;' "$ec_cert_subject" | sort -`
+        rsa_cert_cn=`perl -e 'print join "\n", @cn = $ARGV[0] =~ /(?<=CN\s=\s).*/g;' "$rsa_cert_subject" | sort -`
+
+        ec_cert=`openssl x509 -noout -text -in /etc/postfix/cert/smtp.ec.cert`
+        rsa_cert=`openssl x509 -noout -text -in /etc/postfix/cert/smtp.cert`
+        ec_cert_domains=`perl -e 'print join "\n", @domains = $ARGV[0] =~ /(?<=DNS:)[^,|$|\s|\n]*(?=,|$|\s|\n)/g;' "$ec_cert" | sort -`
+        rsa_cert_domains=`perl -e 'print join "\n", @domains = $ARGV[0] =~ /(?<=DNS:)[^,|$|\s|\n]*(?=,|$|\s|\n)/g;' "$rsa_cert" | sort -`
+
+        # Do the certificates have matching CN information?
+        [[ $ec_cert_cn == $rsa_cert_cn ]]
+
+        # Do the certificates have mathing domain information?
+        [[ $ec_cert_domains == $rsa_cert_domains ]]
+    fi;
+}
+
+@test "if 2 certs, confirm both are CA signed or both are self-signed (no mixing)" {
+    # If there are two certs present make sure they are both self-signed or both CA signed
+    if [[ -f /etc/postfix/cert/smtp.ec.cert && -f /etc/postfix/cert/smtp.cert ]]; then
+        ec_cert_subject=`openssl x509 -noout -subject -in /etc/postfix/cert/smtp.ec.cert | grep -o [^subject=].*`
+        ec_cert_issuer=`openssl x509 -noout -issuer -in /etc/postfix/cert/smtp.ec.cert | grep -o [^issuer=].*`
+        ec_cert_self_signed=$(expr "$ec_cert_subject" == "$ec_cert_issuer")
+
+        rsa_cert_subject=`openssl x509 -noout -subject -in /etc/postfix/cert/smtp.cert | grep -o [^subject=].*`
+        rsa_cert_issuer=`openssl x509 -noout -issuer -in /etc/postfix/cert/smtp.cert | grep -o [^issuer=].*`
+        rsa_cert_self_signed=$(expr "$rsa_cert_subject" == "$rsa_cert_issuer")
+
+        # Are they both CA signed or both self signed?
+        [ $ec_cert_self_signed = $rsa_cert_self_signed ]
+    fi;
+}
+
 @test "confirm postfix is running" {
     processNum=$(ps | grep -v grep | grep /usr/libexec/postfix/master | wc -l)
     [ $processNum -gt 0 ]

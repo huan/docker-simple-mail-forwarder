@@ -732,6 +732,20 @@ smtpd_tls_exclude_ciphers =
         ADH-DES-CBC-SHA
         DES-CBC-SHA
         SEED-SHA
+        aNULL
+        LOW
+        EXP
+        MEDIUM
+        ADH
+        AECDH
+        MD5
+        DSS
+        ECDSA
+        CAMELLIA128
+        3DES
+        CAMELLIA256
+        RSA+AES
+        eNULL
 
 # Diffie-Hellman Parameters for Perfect Forward Secrecy
 # Can be created with:

@@ -356,6 +356,7 @@ else
     echo ">> END SMF_CONFIG_FILE found. value:[$SMF_CONFIG_FILE]"
     echo ">> INSERT config file into config var"
     SMF_CONFIG=$(cat /$SMF_CONFIG_FILE | tr '\n' ';')
+    export SMF_CONFIG
 fi
 
 if [ "" == "$SMF_CONFIG" ]

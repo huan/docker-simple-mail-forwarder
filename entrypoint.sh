@@ -352,6 +352,8 @@ fi
 
 if [ "" == "$SMF_CONFIG_FILE" ]; then
     echo ">> ENV SMF_CONFIG_FILE not set."
+elif [ ! -f "$SMF_CONFIG_FILE" ]; then
+    echo ">> $SMF_CONFIG_FILE doesn't exists, skipping reading it."
 else
     echo ">> END SMF_CONFIG_FILE found. value:[$SMF_CONFIG_FILE]"
     echo ">> INSERT config file into config var"

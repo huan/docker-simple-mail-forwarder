@@ -4,7 +4,7 @@
 #
 set -e
 
-OWNER="zixia"
+OWNER="jaydouble"
 NAME="simple-mail-forwarder"
 IMAGE_NAME="$OWNER/$NAME"
 

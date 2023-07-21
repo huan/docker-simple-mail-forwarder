@@ -1,8 +1,8 @@
-FROM alpine:3.12
+FROM alpine:3
 LABEL maintainer="Huan LI <zixia@zixia.net>"
 
-ENV BATS_VERSION 1.2.1
-ENV S6_VERSION 2.1.0.0
+ENV BATS_VERSION 1.10.0
+ENV S6_VERSION 3.1.5.0
 
 ## Install System
 
@@ -11,7 +11,6 @@ RUN apk add --update --no-cache \
         coreutils \
         curl \
         cyrus-sasl \
-        cyrus-sasl-plain \
         cyrus-sasl-login \
         ca-certificates \
         drill \
@@ -46,6 +45,7 @@ COPY install/sender_header_filter.pcre /etc/postfix/sender_header_filter.pcre
 RUN cat /dev/null > /etc/postfix/aliases && newaliases \
     && echo simple-mail-forwarder.com > /etc/hostname \
     && mkdir -p /run/opendkim && chown opendkim:opendkim /run/opendkim \
+    && mkdir -p /etc/sasl2/ \
     && echo test | saslpasswd2 -p test@test.com \
     && chown postfix /etc/sasl2/sasldb2 \
     && saslpasswd2 -d test@test.com

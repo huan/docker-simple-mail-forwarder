@@ -339,6 +339,11 @@ Bug
 ---
 Github Issue - https://github.com/huan/docker-simple-mail-forwarder/issues
 
+Useful Articles
+---------------
+
+1. [How to use docker to forward emails sent to your domain to your email (works for Gmail)](https://webapplicationconsultant.com/docker/how-to-use-docker-to-forward-emails-sent-to-your-domain-to-your-email-works-for-gmail/)
+
 Changelog
 ---------
 

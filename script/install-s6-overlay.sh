@@ -35,5 +35,4 @@ esac
 
 URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}.tar.gz"
 
-curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-amd64.tar.gz \
-  | tar xzf - -C /
+curl -L -s ${URL} | tar xzf - -C /

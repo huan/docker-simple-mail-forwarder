@@ -25,7 +25,7 @@ case $(uname -m) in
     ARCH=x86
     ;;
   x86_64)
-    ARCH=amd64
+    ARCH=x86_64
     ;;
   *)
     echo "ARCH not supported: $ARCH"
@@ -33,7 +33,6 @@ case $(uname -m) in
     ;;
 esac
 
-URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}.tar.gz"
-
-curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-amd64.tar.gz \
-  | tar xzf - -C /
+URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}.tar.xz"
+curl -L -s $URL \
+  | tar -xJf - -C /

@@ -17,6 +17,7 @@ $ docker run -p 25:25 \\
 Environment Variables:
     SMF_DOMAIN - mail server hostname. use tutum/docker hostname if omitted.
     SMF_CONFIG - mail forward addresses mapping list.
+    SMF_CONFIG_FILE - file name that contain forward adresses mapping list.
     SMF_MYNETWORKS - configure relaying from trusted IPs, see http://www.postfix.org/postconf.5.html#mynetworks
     SMF_RELAYHOST - configure a relayhost
     SMF_SENDERPRIVACY - strips sender's IP, client, and user agent.
@@ -347,6 +348,17 @@ then
     echo ">> ENV SMF_DOMAIN not set."
 else
     echo ">> END SMF_DOMAIN found. value:[$SMF_DOMAIN]"
+fi
+
+if [ "" == "$SMF_CONFIG_FILE" ]; then
+    echo ">> ENV SMF_CONFIG_FILE not set."
+elif [ ! -f "$SMF_CONFIG_FILE" ]; then
+    echo ">> $SMF_CONFIG_FILE doesn't exists, skipping reading it."
+else
+    echo ">> END SMF_CONFIG_FILE found. value:[$SMF_CONFIG_FILE]"
+    echo ">> INSERT config file into config var"
+    SMF_CONFIG=$(cat /$SMF_CONFIG_FILE | tr '\n' ';')
+    export SMF_CONFIG
 fi
 
 if [ "" == "$SMF_CONFIG" ]

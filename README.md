@@ -172,6 +172,22 @@ You can also forward all emails received by testi@testo.com to multiple destinat
 export SMF_CONFIG='testi@testo.com:test1@test.com|test2@test.com|test3@test.com'
 ```
 
+### `SMF_CONFIG_FILE` Examples
+
+If you want to have a config file instead of a config variable
+You can add it like:
+```bash
+cat <EOF > forwards
+testi@testo.com:test1@test.com|test2@test.com|test3@test.com
+from@testi.com:to@testo.com:ThisIsPassword
+EOF
+```
+
+And then run it:
+```bash
+docker run -e SMF_CONFIG_FILE=/forwards -v $(pwd)/forwards:/forwards -p 25:25  zixia/simple-mail-forwarder
+```
+
 ### `SMF_RELAYHOST` Examples
 
 Here's how to configure a relayhost/smarthost to use for forwarding mail.
@@ -189,6 +205,8 @@ If the `SMF_RELAYHOST` require authentication,
 ```bash
 export SMF_RELAYAUTH='username@relayhost.com:RelayHostPassword'
 ```
+
+
 
 TLS (SSL) Certificates
 --------------------
